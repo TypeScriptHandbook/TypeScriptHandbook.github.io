@@ -1,2 +1,1 @@
-# TypeScriptHandbook
-for Experienced Developers
+# TypeScript Handbook for Experienced Developers
