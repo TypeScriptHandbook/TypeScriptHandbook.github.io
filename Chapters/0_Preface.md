@@ -24,7 +24,7 @@ Because of this, we acknowledged (at least I think we did) that the learning cur
 
 JS/TS has a syntax that, upon first glance, looks familiar enough that we thought we could cargo-cult our way through.
 But as I started working into the Effect docs, I found them casually using things that were really quite puzzling.
-After delving into a few of these weird features, I had a "we're-not-in-Kansas-anymore" moment (from Wizard of Oz).
+After delving into a few of these weird features, I had a _we're-not-in-Kansas-anymore_ moment (from Wizard of Oz).
 I realized I needed to actually learn this language in depth if I was going to deal with it.
 
 Then I realized Bill and James would also need this information.
