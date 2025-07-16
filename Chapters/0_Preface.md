@@ -1,16 +1,40 @@
 # Preface
 
-The target audience for this book is developers who have a firm grasp of two or more programming languages, but not JavaScript or TypeScript.
-By knowing two or more languages, you've seen similarities and differences between languages, and can thus absorb TypeScript through the structure used in this handbook.
-The goal is to quickly give the experienced programmer a tour of the language, including all the odd and obscure bits so you aren't flummoxed when you see them in practice.
+This book is for developers who have a firm grasp of two or more programming languages, but not JavaScript or TypeScript.
+The goal is to quickly give the experienced programmer a tour of the language,
+including all the odd and obscure bits so you aren't flummoxed when you see them in practice.
 
-I vibe-wrote this book using ChatGPT.
+Because you know two or more languages, you've seen similarities and differences between languages.
+From experience, you know the concepts and what to expect from a language, you just don't know the details of how TypeScript does it.
+
+I vibe-wrote this book using ChatGPT, as an experiment.
 I started with the book's structure and chapter outlines, then generated each chapter one at a time.
 This required asking for a lot of expansions and corrections and regularly required hand-adjustments.
+It was a lot easier than without an LLM, and to be honest, it would have seemed too big and distracting without that help.
+However, it still took effort, editing, reviewing, and LLM coaching.
+
+## Inception
+
+Bill Frasure, James Ward and I worked for four years on _Effect Oriented Programming_, and we're still trying to figure out how to explain those concepts clearly.
+When the team working on the TypeScript Effect library reached out and asked that we translate the book to this new language and library, we were hesitant.
+None of us knew TypeScript (TS), and although the library was based on ZEO (which we used in the book), 
+there were a lot of foreign ideas in the language and Effect library.
+JavaScript (JS) has a ... checkered past, and TypeScript is a compromise language to make transition easier for JavaScript programmers.
+Because of this, we acknowledged (at least I think we did) that the learning curve would be bigger than we might expect.
+
+JS/TS has a syntax that, upon first glance, looks familiar enough that we thought we could cargo-cult our way through.
+But as I started working into the Effect docs, I found them casually using things that were really quite puzzling.
+After delving into a few of these weird features, I had a "we're-not-in-Kansas-anymore" moment (from Wizard of Oz).
+I realized I needed to actually learn this language if I was going to deal with it.
+
+Then I realized Bill and James would also need this information.
+I wondered if I could herd ChatGPT into creating the book that the three of us needed.
+If I could get that acceleration from an LLM, I might as well start and see how it goes.
+After I started, I remembered that writing a book is a very effective way for me to learn a language.
 
 ## Structure
 
-The book is organized as follows:
+Here is the book outline:
 
 ### Section 1: Context and Philosophy
 
@@ -118,7 +142,7 @@ The book is organized as follows:
 #### Chapter 4.4: Type-Level Programming
 
 * Simulating logic in the type system
-* Common type-level algorithms (e.g. DeepPartial, Flatten)
+* Common type-level algorithms (e.g., DeepPartial, Flatten)
 
 ---
 
