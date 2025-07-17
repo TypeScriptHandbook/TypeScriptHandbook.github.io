@@ -109,13 +109,10 @@ Here is the book outline:
 * Constraint-based design
 * Type defaults and inference quirks
 
-#### Chapter 3.4: Conditional Types and Mapped Types
+#### Chapter 3.4: Type Transformations
 
 * Conditional types, `infer`, and recursion
 * Mapped types with modifiers (`+readonly`, `-?`, etc.)
-
-#### Chapter 3.5: Template Literal Types and Key Remapping
-
 * Dynamic keys and string pattern types
 * `keyof`, `typeof`, and remapping
 
