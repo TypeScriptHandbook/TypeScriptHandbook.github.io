@@ -14,6 +14,17 @@ console.log(greet.prototype) // { constructor: [Function: greet] }
 const instance = new greet() // TypeError: greet is not a constructor
 ```
 
+This is different from the function’s own prototype (as in `Object.getPrototypeOf(fn)`); 
+it is instead the object that will be assigned as the `[[Prototype]]` of any instance created using `new`.
+
+```js
+function Thing() {}
+console.log(typeof Thing.prototype) // "object"
+console.log(Thing.prototype.constructor === Thing) // true
+```
+
+The prototype is used only when you invoke the function with `new`, to assign as the new object's internal prototype (`[[Prototype]]`).
+
 Classes have prototypes associated with their constructors:
 
 ```js
@@ -38,21 +49,20 @@ console.log(typeof c.prototype) // undefined
 
 `Car.prototype` is the object assigned as the prototype of instances created using `new greet()`.
 
-Only constructor functions have a `.prototype`. 
+Only functions intended as constructors have a `.prototype` property. 
 The `.prototype` is a property on `Car`, not on `c`.
 
-Only functions (intended as constructors) have a `.prototype` property. 
-Instances created with `new` do not. 
+Instances created with `new` do not have a `.prototype` property.
 Instead, their internal `[[Prototype]]` (visible via `Object.getPrototypeOf(instance)`) points to the constructor's `.prototype`.
 
-Arrow functions *do not* have a `.prototype` property:
+Arrow functions do not have a `.prototype` property:
 
 ```js
 const arrow = () => {}
 console.log(arrow.prototype) // undefined
 ```
 
-Methods (defined inside objects or classes) also _do not_ have their own `.prototype` property:
+Methods (defined inside objects or classes) also do not have their own `.prototype` property:
 
 ```js
 const obj = {
