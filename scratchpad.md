@@ -1,79 +1,63 @@
-## Template Literal Types
-
-Template literal types enable constructing new string literal types by concatenating or interpolating string literals:
-
-```ts
-// Combine literal types:
-type Lang = "en" | "fr"
-type FileExtension = ".json" | ".txt"
-type Filename = `${Lang}${FileExtension}`
-
-const file: Filename = "en.json" // OK
-```
-
-You can use `infer` and `extends` with template literals to extract and manipulate parts of string types:
+Every _function_ in JavaScript is an object.
+Regular top-level functions (not arrow functions or methods) each have a default `.prototype` property:
 
 ```ts
-type ExtractLang<T> = T extends `${infer L}.${string}` ? L : never
-
-type Lang1 = ExtractLang<"en.json"> // "en"
-type Lang2 = ExtractLang<"fr.txt"> // "fr"
-```
-
-This allows the type system to analyze string structures at compile time.
-
-## `keyof` and Indexed Access Types
-
-The `keyof` operator produces a union of the keys of a type:
-
-```ts
-type Person = {
-  name: string
-  age: number
+function greet(name) {
+  return `Hello, ${name}`
 }
 
-type PersonKeys = keyof Person // "name" | "age"
+console.log(greet("Alice")) // Hello, Alice
+
+console.log(typeof greet) // "function"
+console.log(greet.prototype) // { constructor: [Function: greet] }
+
+const instance = new greet() // TypeError: greet is not a constructor
 ```
 
-You can access the type of a specific property using indexed access:
+Classes have prototypes associated with their constructors:
 
-```ts
-type AgeType = Person["age"] // number
-```
-
-If used with `keyof`, you can define generic utility types:
-
-```ts
-type ValueOf<T> = T[keyof T]
-type PersonValues = ValueOf<Person> // string | number
-```
-
-## `typeof` and `as const`
-
-You can use `typeof` to get the type of a value:
-
-```ts
-const config = {
-  host: "localhost",
-  port: 8080
+```js
+function Car(make, model) {
+  this.make = make
+  this.model = model
 }
 
-type ConfigType = typeof config
-// Equivalent to:
-// type ConfigType = { host: string; port: number }
+Car.prototype.describe = function () {
+  return `${this.make} ${this.model}`
+}
+
+const c = new Car("Toyota", "Camry")
+
+console.log(c.describe()) // Toyota Camry
+console.log(c instanceof Car) // true
+console.log(Car.prototype) // Car: {}
+console.log(Object.getPrototypeOf(c)) // Car: {}
+console.log(Object.getPrototypeOf(c) === Car.prototype) // true
+console.log(typeof c.prototype) // undefined
 ```
 
-When combined with `as const`, you can preserve literal types:
+`Car.prototype` is the object assigned as the prototype of instances created using `new greet()`.
 
-```ts
-const status = {
-  loading: "loading",
-  success: "success"
-} as const
+Only constructor functions have a `.prototype`. 
+The `.prototype` is a property on `Car`, not on `c`.
 
-// Without `as const`, values would widen to string
-// With `as const`, they retain literal values
+Only functions (intended as constructors) have a `.prototype` property. 
+Instances created with `new` do not. 
+Instead, their internal `[[Prototype]]` (visible via `Object.getPrototypeOf(instance)`) points to the constructor's `.prototype`.
 
-type Status = typeof status[keyof typeof status] // "loading" | "success"
+Arrow functions *do not* have a `.prototype` property:
+
+```js
+const arrow = () => {}
+console.log(arrow.prototype) // undefined
+```
+
+Methods (defined inside objects or classes) also _do not_ have their own `.prototype` property:
+
+```js
+const obj = {
+  method() {}
+}
+console.log(obj.method.prototype) // undefined
 ```
 
