@@ -28,13 +28,14 @@ def generate_outline(directory: Path) -> str:
 
         headers = extract_headers(md_file.read_text(encoding="utf-8"))
         title = extract_title(headers) or "(untitled)"
-        outline_lines.append(f"\n### Chapter {chapter_num}: {title}")
+        outline_lines.append(f"\n### Chapter {chapter_num}: {title}\n")
 
         for header in headers:
             if header.startswith("# "):
                 continue  # already used as title
             level = header.count("#")
             heading_text = header.lstrip("#").strip()
+            level = level - 2
             indent = "  " * level
             outline_lines.append(f"{indent}- {heading_text}")
 
