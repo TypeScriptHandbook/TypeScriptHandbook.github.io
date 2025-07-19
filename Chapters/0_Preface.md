@@ -9,52 +9,44 @@ From experience, you know the concepts and what to expect from a language, you j
 
 I vibe-wrote this book using ChatGPT, as an experiment.
 I started with the book's structure and chapter outlines, then generated each chapter one at a time.
-This required asking for a lot of expansions and corrections and regularly required hand-adjustments.
+This required asking for a lot of expansions and corrections and regularly required hand-adjustments, as well as rewriting and reorganizing.
 It was a lot easier than without an LLM, and to be honest, it would have seemed too big and distracting without that help.
 However, it still took effort, editing, reviewing, and LLM coaching.
 
 ## Inception
 
 Bill Frasure, James Ward and I worked for four years on _Effect Oriented Programming_, and we're still trying to figure out how to explain those concepts clearly.
-When the team working on the TypeScript Effect library reached out and asked that we translate the book to this new language and library, we were hesitant.
-None of us knew TypeScript (TS), and although the library was based on ZEO (which we used in the book), 
-there were a lot of foreign ideas in the language and Effect library.
+When the team working on the TypeScript Effect library reached out and asked that we translate the book to this new language and library, we hesitated.
+None of us knew TypeScript (TS), and although the Effect library is based on ZEO (which we used in the book), 
+there were a lot of foreign ideas in the language and library.
 JavaScript (JS) has a ... checkered past, and TypeScript is a compromise language to make transition easier for JavaScript programmers.
 Because of this, we acknowledged (at least I think we did) that the learning curve would be bigger than we might expect.
 
 JS/TS has a syntax that, upon first glance, looks familiar enough that we thought we could cargo-cult our way through.
-But as I started working into the Effect docs, I found them casually using things that were really quite puzzling.
-After delving into a few of these weird features, I had a _we're-not-in-Kansas-anymore_ moment (from Wizard of Oz).
-I realized I needed to actually learn this language in depth if I was going to deal with it.
+But as I started working into the Effect docs, I found them casually using features that were really quite puzzling.
+After delving into a few of these, I had a _we're-not-in-Kansas-anymore_ moment (from Wizard of Oz).
+I realized we needed to actually learn this language in depth.
 
-Then I realized Bill and James would also need this information.
 I wondered if I could herd ChatGPT into creating the book that the three of us needed.
 If I could get that acceleration from an LLM, I might as well start and see how it goes.
 After I started, I remembered that writing a book is a very effective way for me to learn a language.
 
-## Structure
+## Outline
 
-Here is the book outline:
+[ When done, replace with auto-generated overview based on the actual chapters ]
 
-### Section 1: Context and Philosophy
-
-#### Chapter 1.1: JavaScript: The TypeScript Substrate
+### Chapter 1: Context and Philosophy
 
 * A brief (and honest) overview of JavaScript for outsiders
 * The good, the bad, and the quirky
 * Why TypeScript had to exist
-
-#### Chapter 1.2: The Rise of TypeScript
-
-* From superset to superstar
+* The Rise of TypeScript: From superset to superstar
 * Influences (e.g. C#, Java, ML)
 * Key design goals and tradeoffs
-
-#### Chapter 1.3: Structural Typing vs. Nominal Typing
-
-* What structural typing really means
-* Advantages and caveats
-* Mental models for navigating the system
+* Structural Typing vs. Nominal Typing
+  * What structural typing really means
+  * Advantages and caveats
+  * Mental models for navigating the system
 
 ---
 
