@@ -37,11 +37,12 @@ def extract_chapter_number(filename):
 def generate_sidebar():
     """Generate _sidebar.md from chapters in ./Chapters directory."""
 
-    chapters_dir = Path('./Chapters')
+    chapters_dir = Path('./docs/Chapters')
     docs_dir = Path('./docs')
 
     if not chapters_dir.exists():
         print(f"Error: {chapters_dir} directory not found!")
+        print(f"Make sure you have moved the Chapters folder to docs/Chapters")
         return
 
     if not docs_dir.exists():
@@ -65,8 +66,8 @@ def generate_sidebar():
 
     for filepath in sorted_files:
         title = extract_title_from_markdown(filepath)
-        # Path relative to docs directory
-        relative_path = f"../Chapters/{filepath.name}"
+        # Path relative to docs directory (Chapters is now inside docs)
+        relative_path = f"Chapters/{filepath.name}"
 
         # Format: * [Title](path)
         sidebar_line = f"* [{title}]({relative_path})"
