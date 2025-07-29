@@ -11,4 +11,4 @@
 * [Union and Intersection Types](Chapters/10.md)
 * [Generics](Chapters/11.md)
 * [Type Transformations](Chapters/12.md)
-* [Artificial Nominative Typing](Chapters/13.md)
+* [Artificial Nominal Typing](Chapters/13.md)
