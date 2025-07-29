@@ -1,0 +1,2 @@
+- Active voice
+- All examples should successfully compile and run (if, for example, a user pastes the example into a playground, they shouldn't get unexpected errors)
