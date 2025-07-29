@@ -1,2 +1,3 @@
+- Make all examples complete so they can be copied and run
 - Active voice
-- All examples should successfully compile and run (if, for example, a user pastes the example into a playground, they shouldn't get unexpected errors)
+- Watch for phrases like "let you" that can be removed
