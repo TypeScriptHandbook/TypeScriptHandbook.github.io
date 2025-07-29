@@ -4,14 +4,13 @@ TypeScript Example Tester
 Extracts code blocks from markdown files and tests them with TypeScript compiler
 """
 
-import os
-import re
-import subprocess
-import tempfile
-import shutil
-from pathlib import Path
 import json
+import re
+import shutil
+import subprocess
 import sys
+from datetime import datetime
+from pathlib import Path
 
 
 class ExampleTester:
@@ -322,6 +321,43 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         print(f"\n📊 Results: {success_count}/{len(self.examples)} examples ran successfully")
         return success_count == len(self.examples)
 
+    def create_consolidated_file(self):
+        """Create a single file containing all extracted examples for easy review"""
+        consolidated_path = Path(".") / "test_all.txt"
+
+        with open(consolidated_path, 'w', encoding='utf-8') as f:
+            f.write("=" * 80 + "\n")
+            f.write("TYPESCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE\n")
+            f.write("=" * 80 + "\n\n")
+            f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write(f"Total examples: {len(self.examples)}\n\n")
+
+            # Group by chapter for better organization
+            chapters = {}
+            for example in self.examples:
+                chapter = example['chapter']
+                if chapter not in chapters:
+                    chapters[chapter] = []
+                chapters[chapter].append(example)
+
+            for chapter_name in sorted(chapters.keys()):
+                chapter_examples = chapters[chapter_name]
+
+                f.write("=" * 80 + "\n")
+                f.write(f"CHAPTER: {chapter_name.upper()}\n")
+                f.write("=" * 80 + "\n\n")
+
+                for i, example in enumerate(chapter_examples, 1):
+                    f.write("-" * 40 + "\n")
+                    f.write(f"Example {i:02d} (Original #{example['number']})\n")
+                    f.write(f"File: {example['filename']}\n")
+                    f.write("-" * 40 + "\n")
+                    f.write(example['code'])
+                    f.write("\n\n")
+
+        print(f"📝 Created consolidated file: {consolidated_path}")
+        return consolidated_path
+
     def cleanup(self):
         """Remove node_modules but keep the test files"""
         node_modules = self.temp_dir / "node_modules"
@@ -331,7 +367,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         else:
             print(f"📁 Test directory preserved: {self.temp_dir}")
 
-    def test_all(self, cleanup=True):
+    def test_all(self, cleanup=True, create_consolidated=False):
         """Run the complete test suite"""
         print(f"🔍 Extracting examples from: {self.book_dir}")
         print(f"📁 Using test directory: {self.temp_dir}")
@@ -340,6 +376,11 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             # Step 1: Extract and create test files
             self.create_test_files()
             print(f"📄 Extracted {len(self.examples)} examples")
+
+            # Step 1.5: Create consolidated file if requested
+            if create_consolidated:
+                self.create_consolidated_file()
+                return True  # Just create the file and exit
 
             # Step 2: Install dependencies
             if not self.install_dependencies():
@@ -366,13 +407,18 @@ def main():
     parser.add_argument('--temp-dir', help='Directory for test files (default: ./test)')
     parser.add_argument('--no-cleanup', action='store_true', help='Keep node_modules directory')
     parser.add_argument('--type-check-only', action='store_true', help='Only run type checking')
+    parser.add_argument('--consolidated', action='store_true', help='Create consolidated test_all.txt file and exit')
 
     args = parser.parse_args()
 
     tester = ExampleTester(args.book_dir, args.temp_dir)
 
     try:
-        if args.type_check_only:
+        if args.consolidated:
+            tester.create_test_files()
+            tester.create_consolidated_file()
+            success = True
+        elif args.type_check_only:
             tester.create_test_files()
             tester.install_dependencies()
             success = tester.type_check_examples()
