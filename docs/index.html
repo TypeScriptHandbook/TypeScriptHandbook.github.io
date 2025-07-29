@@ -5,6 +5,7 @@
   <title>TypeScript Handbook for Experienced Programmers</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="TypeScript Handbook by Bruce Eckel">
+  <meta name="description" content="A comprehensive guide to TypeScript">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
@@ -34,10 +35,11 @@
     name: 'TypeScript Handbook',
     repo: 'https://github.com/TypeScriptHandbook/TypeScriptHandbook.github.io',
     homepage: 'README.md',
+    homepage: 'docs/README.md',
     loadSidebar: true,
     autoHeader: true,
     subMaxLevel: 3,
-    // basePath: '../',  // Important: tells Docsify to look in parent directory for Chapters
+    basePath: './',  // Look in the same directory as docs folder
     search: {
       placeholder: 'Search chapters...',
       noData: 'No results found.',
@@ -60,6 +62,7 @@
           // Add edit link to each page (only for chapter files)
           if (vm.route.file && vm.route.file.startsWith('Chapters/')) {
             var url = 'https://github.com/BruceEckel/TypeScriptHandbook/edit/main/' + vm.route.file;
+            var url = 'https://github.com/yourusername/TypeScriptHandbook/edit/main/' + vm.route.file;
             var editHtml = '<div style="text-align: right; margin-bottom: 1em; font-size: 0.9em;">';
             editHtml += '<a href="' + url + '" target="_blank">📝 Edit this chapter on GitHub</a>';
             editHtml += '</div>\n\n';
