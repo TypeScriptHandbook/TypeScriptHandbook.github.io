@@ -2,7 +2,7 @@
 TYPESCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE
 ================================================================================
 
-Generated: 2025-07-29 13:17:22
+Generated: 2025-07-29 13:23:27
 Total examples: 219
 Include errors: True
 
