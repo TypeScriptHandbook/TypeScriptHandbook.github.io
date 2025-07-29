@@ -1,2 +1,2 @@
 # TypeScript Handbook for Experienced Developers
-## Bruce Eckel
+## [Bruce Eckel](https://www.mindviewllc.com/)
