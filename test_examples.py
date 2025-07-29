@@ -202,7 +202,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
 
     def wrap_code_if_needed(self, code):
         """Add any necessary wrapping to make code valid TypeScript"""
-        lines = code.strip().split('\n')
+        _ = code.strip().split('\n')
 
         # Don't wrap anything - let TypeScript handle conflicts with module resolution
         # Each file is isolated so there shouldn't be conflicts within a single file
@@ -321,16 +321,55 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         print(f"\n📊 Results: {success_count}/{len(self.examples)} examples ran successfully")
         return success_count == len(self.examples)
 
-    def create_consolidated_file(self):
+    def create_consolidated_file(self, include_errors=False):
         """Create a single file containing all extracted examples for easy review"""
         consolidated_path = Path(".") / "test_all.txt"
+
+        # Run type checking if errors are requested
+        type_check_output = ""
+        if include_errors:
+            print("Running type check to capture errors...")
+            if not self.install_dependencies():
+                type_check_output = "ERROR: Could not install TypeScript dependencies"
+            else:
+                # Capture type check output
+                npx_commands = ['npx', 'npx.cmd', 'npx.exe']
+
+                for npx_cmd in npx_commands:
+                    try:
+                        result = subprocess.run([npx_cmd, 'tsc'],
+                                                cwd=self.temp_dir,
+                                                capture_output=True,
+                                                text=True,
+                                                shell=True)
+
+                        if result.returncode == 0:
+                            type_check_output = "✅ All examples type check successfully!"
+                        else:
+                            type_check_output = f"❌ Type checking failed:\n{result.stdout}\n{result.stderr}"
+                        break
+
+                    except FileNotFoundError:
+                        continue
+
+                if not type_check_output:
+                    type_check_output = "ERROR: Could not run TypeScript compiler"
 
         with open(consolidated_path, 'w', encoding='utf-8') as f:
             f.write("=" * 80 + "\n")
             f.write("TYPESCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE\n")
             f.write("=" * 80 + "\n\n")
             f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-            f.write(f"Total examples: {len(self.examples)}\n\n")
+            f.write(f"Total examples: {len(self.examples)}\n")
+            f.write(f"Include errors: {include_errors}\n\n")
+
+            # Add type check results if requested
+            if include_errors and type_check_output:
+                f.write("=" * 80 + "\n")
+                f.write("TYPE CHECK RESULTS\n")
+                f.write("=" * 80 + "\n")
+                f.write(type_check_output)
+                f.write("\n\n")
 
             # Group by chapter for better organization
             chapters = {}
@@ -345,12 +384,14 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
 
                 f.write("=" * 80 + "\n")
                 f.write(f"CHAPTER: {chapter_name.upper()}\n")
+                f.write(f"Examples: {len(chapter_examples)}\n")
                 f.write("=" * 80 + "\n\n")
 
                 for i, example in enumerate(chapter_examples, 1):
                     f.write("-" * 40 + "\n")
                     f.write(f"Example {i:02d} (Original #{example['number']})\n")
                     f.write(f"File: {example['filename']}\n")
+                    f.write(f"Source: {example['source_file']}\n")
                     f.write("-" * 40 + "\n")
                     f.write(example['code'])
                     f.write("\n\n")
@@ -367,7 +408,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         else:
             print(f"📁 Test directory preserved: {self.temp_dir}")
 
-    def test_all(self, cleanup=True, create_consolidated=False):
+    def test_all(self, cleanup=True, create_consolidated=False, include_errors=False):
         """Run the complete test suite"""
         print(f"🔍 Extracting examples from: {self.book_dir}")
         print(f"📁 Using test directory: {self.temp_dir}")
@@ -379,7 +420,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
 
             # Step 1.5: Create consolidated file if requested
             if create_consolidated:
-                self.create_consolidated_file()
+                self.create_consolidated_file(include_errors)
                 return True  # Just create the file and exit
 
             # Step 2: Install dependencies
@@ -408,6 +449,8 @@ def main():
     parser.add_argument('--no-cleanup', action='store_true', help='Keep node_modules directory')
     parser.add_argument('--type-check-only', action='store_true', help='Only run type checking')
     parser.add_argument('--consolidated', action='store_true', help='Create consolidated test_all.txt file and exit')
+    parser.add_argument('--include-errors', action='store_true',
+                        help='Include TypeScript error output in consolidated file')
 
     args = parser.parse_args()
 
@@ -416,7 +459,7 @@ def main():
     try:
         if args.consolidated:
             tester.create_test_files()
-            tester.create_consolidated_file()
+            tester.create_consolidated_file(args.include_errors)
             success = True
         elif args.type_check_only:
             tester.create_test_files()
