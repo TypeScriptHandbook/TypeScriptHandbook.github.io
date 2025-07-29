@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TypeScript Handbook for Experienced Programmers</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="TypeScript Handbook by Bruce Eckel">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <style>
+    /* Custom styling for book layout */
+    .sidebar-nav > ul > li > a {
+      font-weight: bold;
+    }
+    .sidebar-nav ul li ul li a {
+      padding-left: 30px;
+    }
+    /* Make the main content area wider for reading */
+    .content {
+      padding-left: 0;
+    }
+    /* Style for chapter navigation */
+    .docsify-pagination-container {
+      margin-top: 2em;
+      padding-top: 1em;
+      border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+<div id="app">Loading your TypeScript Handbook...</div>
+<script>
+  window.$docsify = {
+    name: 'TypeScript Handbook',
+    repo: 'https://github.com/BruceEckel/TypeScriptHandbook',
+    homepage: 'README.md',
+    loadSidebar: true,
+    autoHeader: true,
+    subMaxLevel: 3,
+    basePath: '../',  // Important: tells Docsify to look in parent directory for Chapters
+    search: {
+      placeholder: 'Search chapters...',
+      noData: 'No results found.',
+      depth: 3
+    },
+    pagination: {
+      previousText: '← Previous Chapter',
+      nextText: 'Next Chapter →',
+      crossChapter: true,
+      crossChapterText: true,
+    },
+    copyCode: {
+      buttonText: 'Copy',
+      errorText: 'Error',
+      successText: 'Copied!'
+    },
+    plugins: [
+      function(hook, vm) {
+        hook.beforeEach(function (html) {
+          // Add edit link to each page (only for chapter files)
+          if (vm.route.file && vm.route.file.startsWith('Chapters/')) {
+            var url = 'https://github.com/BruceEckel/TypeScriptHandbook/edit/main/' + vm.route.file;
+            var editHtml = '<div style="text-align: right; margin-bottom: 1em; font-size: 0.9em;">';
+            editHtml += '<a href="' + url + '" target="_blank">📝 Edit this chapter on GitHub</a>';
+            editHtml += '</div>\n\n';
+            return editHtml + html;
+          }
+          return html;
+        });
+
+        hook.doneEach(function() {
+          // Add reading time estimate
+          var content = document.querySelector('.content');
+          if (content) {
+            var text = content.innerText || content.textContent || '';
+            var words = text.trim().split(/\s+/).length;
+            var readingTime = Math.ceil(words / 200); // 200 words per minute
+
+            var timeElement = document.querySelector('.reading-time');
+            if (!timeElement && words > 100) {
+              timeElement = document.createElement('div');
+              timeElement.className = 'reading-time';
+              timeElement.style.cssText = 'font-size: 0.8em; color: #666; margin-bottom: 1em; font-style: italic;';
+              timeElement.innerHTML = '📖 ' + readingTime + ' min read';
+
+              var firstH1 = content.querySelector('h1');
+              if (firstH1 && firstH1.nextSibling) {
+                firstH1.parentNode.insertBefore(timeElement, firstH1.nextSibling);
+              }
+            }
+          }
+        });
+      }
+    ]
+  }
+</script>
+<!-- Docsify v4 -->
+<script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+<!-- Search plugin -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+<!-- Pagination plugin -->
+<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+<!-- Copy to clipboard -->
+<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+<!-- Zoom images -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+<!-- Syntax highlighting for TypeScript -->
+<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+</body>
+</html>
