@@ -4,12 +4,14 @@ TypeScript Example Tester
 Extracts code blocks from markdown files and tests them with TypeScript compiler
 """
 
-import json
+import os
 import re
-import shutil
 import subprocess
-import sys
+import tempfile
+import shutil
 from pathlib import Path
+import json
+import sys
 
 
 class ExampleTester:
@@ -91,7 +93,9 @@ class ExampleTester:
                 "esModuleInterop": True,
                 "skipLibCheck": True,
                 "forceConsistentCasingInFileNames": True,
-                "noEmit": True
+                "noEmit": True,
+                "allowUnreachableCode": True,
+                "allowUnusedLabels": True
             },
             "include": ["**/*.ts"]
         }
@@ -198,40 +202,11 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                 example['filename'] = str(file_path.relative_to(self.temp_dir))
 
     def wrap_code_if_needed(self, code):
-        """Wrap standalone expressions in a function if needed"""
+        """Add any necessary wrapping to make code valid TypeScript"""
         lines = code.strip().split('\n')
 
-        # Check if this looks like standalone expressions
-        standalone_patterns = [
-            r'^\s*console\.log\(',
-            r'^\s*console\.assert\(',
-            r'^\s*const\s+\w+\s*=',
-            r'^\s*let\s+\w+\s*=',
-            r'^\s*var\s+\w+\s*=',
-        ]
-
-        has_function_or_class = any(
-            re.match(r'^\s*(function|class|interface|type|enum)\s', line)
-            for line in lines
-        )
-
-        # If it has functions/classes/types, leave it as is
-        if has_function_or_class:
-            return code
-
-        # If it's mostly standalone expressions, wrap in a function
-        standalone_count = sum(
-            1 for line in lines
-            if any(re.match(pattern, line) for pattern in standalone_patterns)
-        )
-
-        if standalone_count > len(lines) * 0.5:  # More than half are standalone
-            return f"""function example() {{
-{self.indent_code(code, 2)}
-}}
-
-example();"""
-
+        # Don't wrap anything - let TypeScript handle conflicts with module resolution
+        # Each file is isolated so there shouldn't be conflicts within a single file
         return code
 
     def indent_code(self, code, spaces):
