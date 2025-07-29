@@ -1,0 +1,3614 @@
+================================================================================
+TYPESCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE
+================================================================================
+
+Generated: 2025-07-29 13:17:22
+Total examples: 219
+Include errors: True
+
+================================================================================
+TYPE CHECK RESULTS
+================================================================================
+❌ Type checking failed:
+01/example_01.ts(11,7): error TS2451: Cannot redeclare block-scoped variable 'point'.
+03/example_01.ts(5,10): error TS2393: Duplicate function implementation.
+03/example_01.ts(6,15): error TS2454: Variable 'x' is used before being assigned.
+03/example_02.ts(6,10): error TS2393: Duplicate function implementation.
+03/example_03.ts(5,10): error TS2393: Duplicate function implementation.
+03/example_04.ts(5,10): error TS2393: Duplicate function implementation.
+03/example_05.ts(5,5): error TS2451: Cannot redeclare block-scoped variable 'count'.
+03/example_06.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'name'.
+03/example_07.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+03/example_08.ts(5,10): error TS2393: Duplicate function implementation.
+03/example_09.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'total'.
+03/example_09.ts(11,10): error TS2393: Duplicate function implementation.
+03/example_12.ts(5,11): error TS2300: Duplicate identifier 'User'.
+03/example_12.ts(7,3): error TS2687: All declarations of 'name' must have identical modifiers.
+03/example_12.ts(11,10): error TS2393: Duplicate function implementation.
+03/example_13.ts(5,6): error TS2300: Duplicate identifier 'Status'.
+03/example_13.ts(5,6): error TS2567: Enum declarations can only merge with namespace or other enum declarations.
+03/example_13.ts(8,6): error TS2300: Duplicate identifier 'EventHandler'.
+03/example_15.ts(12,16): error TS2304: Cannot find name 'generateId'.
+03/example_15.ts(16,34): error TS2307: Cannot find module './user' or its corresponding type declarations.
+03/example_17.ts(22,51): error TS2339: Property 'type' does not exist on type 'never'.
+03/example_18.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'numbers'.
+03/example_18.ts(18,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+03/example_18.ts(24,5): error TS2451: Cannot redeclare block-scoped variable 'count'.
+03/example_19.ts(8,7): error TS2451: Cannot redeclare block-scoped variable 'total'.
+03/example_20.ts(5,13): error TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
+03/example_20.ts(6,13): error TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
+03/example_21.ts(16,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+03/example_21.ts(20,7): error TS2451: Cannot redeclare block-scoped variable 'config'.
+03/example_21.ts(21,21): error TS2339: Property 'port' does not exist on type '{ timeout: number; }'.
+03/example_22.ts(5,11): error TS2300: Duplicate identifier 'User'.
+03/example_22.ts(19,6): error TS2339: Property 'processPayment' does not exist on type '{ name: string; age: number; }'.
+03/example_23.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+03/example_23.ts(6,9): error TS2451: Cannot redeclare block-scoped variable 'name'.
+03/example_23.ts(8,7): error TS2451: Cannot redeclare block-scoped variable 'numbers'.
+03/example_23.ts(9,8): error TS2451: Cannot redeclare block-scoped variable 'first'.
+03/example_25.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'config'.
+03/example_25.ts(11,6): error TS2300: Duplicate identifier 'Config'.
+03/example_26.ts(11,28): error TS2345: Argument of type '"apiUrl"' is not assignable to parameter of type '"timeout"'.
+03/example_30.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'fruits'.
+03/example_30.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'first'.
+03/example_31.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+03/example_31.ts(7,7): error TS2451: Cannot redeclare block-scoped variable 'value'.
+03/example_31.ts(7,15): error TS7053: Element implicitly has an 'any' type because expression of type '"score"' can't be used to index type '{ name: string; age: number; }'.
+  Property 'score' does not exist on type '{ name: string; age: number; }'.
+03/example_33.ts(5,6): error TS2300: Duplicate identifier 'Partial'.
+03/example_33.ts(9,6): error TS2300: Duplicate identifier 'PartialUser'.
+03/example_34.ts(6,6): error TS2300: Duplicate identifier 'RGB'.
+03/example_34.ts(8,7): error TS2451: Cannot redeclare block-scoped variable 'point'.
+03/example_34.ts(9,7): error TS2451: Cannot redeclare block-scoped variable 'color'.
+03/example_36.ts(5,10): error TS2451: Cannot redeclare block-scoped variable 'processUser'.
+04/example_01.ts(27,30): error TS7041: The containing arrow function captures the global value of 'this'.
+04/example_01.ts(27,36): error TS2339: Property 'name' does not exist on type 'typeof globalThis'.
+04/example_02.ts(6,6): error TS2339: Property 'title' does not exist on type '{}'.
+04/example_02.ts(7,6): error TS2339: Property 'author' does not exist on type '{}'.
+04/example_03.ts(5,13): error TS2339: Property 'author' does not exist on type '{}'.
+04/example_05.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+04/example_05.ts(12,23): error TS2339: Property 'greet' does not exist on type '{ name: string; age: number; }'.
+04/example_06.ts(5,20): error TS2339: Property 'greet' does not exist on type '{ name: string; age: number; }'.
+04/example_07.ts(5,6): error TS2300: Duplicate identifier 'Point'.
+04/example_07.ts(7,7): error TS2300: Duplicate identifier 'Circle'.
+05/example_01.ts(5,10): error TS2393: Duplicate function implementation.
+05/example_01.ts(5,10): error TS2451: Cannot redeclare block-scoped variable 'greet'.
+05/example_02.ts(7,10): error TS2451: Cannot redeclare block-scoped variable 'add'.
+05/example_03.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'greet'.
+05/example_04.ts(7,7): error TS2451: Cannot redeclare block-scoped variable 'add'.
+05/example_05.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'greet'.
+05/example_06.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'numbers'.
+05/example_07.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'processUser'.
+05/example_07.ts(5,35): error TS2304: Cannot find name 'ProcessedUser'.
+05/example_07.ts(6,21): error TS2304: Cannot find name 'validateUser'.
+05/example_07.ts(7,22): error TS2552: Cannot find name 'normalizeUser'. Did you mean 'normalized'?
+05/example_07.ts(8,10): error TS2304: Cannot find name 'transformUser'.
+05/example_09.ts(5,1): error TS2554: Expected 2 arguments, but got 1.
+05/example_10.ts(5,10): error TS2393: Duplicate function implementation.
+05/example_10.ts(5,10): error TS2451: Cannot redeclare block-scoped variable 'log'.
+05/example_11.ts(5,33): error TS1016: A required parameter cannot follow an optional parameter.
+05/example_12.ts(5,10): error TS2393: Duplicate function implementation.
+05/example_13.ts(5,10): error TS2393: Duplicate function implementation.
+05/example_19.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'add'.
+05/example_19.ts(12,7): error TS2451: Cannot redeclare block-scoped variable 'result'.
+05/example_20.ts(5,6): error TS2300: Duplicate identifier 'Logger'.
+05/example_24.ts(17,7): error TS2451: Cannot redeclare block-scoped variable 'count'.
+05/example_24.ts(18,7): error TS2451: Cannot redeclare block-scoped variable 'name'.
+05/example_25.ts(6,10): error TS2300: Duplicate identifier 'process'.
+05/example_25.ts(6,10): error TS2393: Duplicate function implementation.
+05/example_25.ts(7,10): error TS2300: Duplicate identifier 'process'.
+05/example_25.ts(7,10): error TS2393: Duplicate function implementation.
+05/example_25.ts(8,10): error TS2300: Duplicate identifier 'process'.
+05/example_25.ts(8,10): error TS2393: Duplicate function implementation.
+05/example_25.ts(13,10): error TS2300: Duplicate identifier 'process'.
+05/example_25.ts(13,10): error TS2393: Duplicate function implementation.
+05/example_26.ts(5,11): error TS2300: Duplicate identifier 'User'.
+05/example_26.ts(22,12): error TS2304: Cannot find name 'findById'.
+05/example_26.ts(25,12): error TS2304: Cannot find name 'findByEmail'.
+05/example_26.ts(27,10): error TS2304: Cannot find name 'findByPartial'.
+05/example_26.ts(31,18): error TS1375: 'await' expressions are only allowed at the top level of a file when that file is a module, but this file has no imports or exports. Consider adding an empty 'export {}' to make this file a module.
+05/example_26.ts(32,21): error TS1375: 'await' expressions are only allowed at the top level of a file when that file is a module, but this file has no imports or exports. Consider adding an empty 'export {}' to make this file a module.
+05/example_26.ts(33,15): error TS1375: 'await' expressions are only allowed at the top level of a file when that file is a module, but this file has no imports or exports. Consider adding an empty 'export {}' to make this file a module.
+05/example_27.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+05/example_27.ts(12,18): error TS2339: Property 'greet' does not exist on type '{ name: string; age: number; }'.
+05/example_27.ts(14,22): error TS2339: Property 'greet' does not exist on type '{ name: string; age: number; }'.
+05/example_28.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+05/example_28.ts(8,26): error TS7041: The containing arrow function captures the global value of 'this'.
+05/example_28.ts(8,31): error TS2339: Property 'name' does not exist on type 'typeof globalThis'.
+05/example_28.ts(12,18): error TS2339: Property 'greet' does not exist on type '{ name: string; age: number; }'.
+05/example_30.ts(22,1): error TS2684: The 'this' context of type 'void' is not assignable to method's 'this' of type 'Database'.
+05/example_31.ts(24,7): error TS2451: Cannot redeclare block-scoped variable 'result'.
+05/example_32.ts(5,7): error TS2300: Duplicate identifier 'EventHandler'.
+05/example_34.ts(15,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+05/example_36.ts(5,6): error TS2300: Duplicate identifier 'EventHandler'.
+05/example_36.ts(7,17): error TS2314: Generic type 'EventHandler' requires 1 type argument(s).
+05/example_36.ts(11,17): error TS2314: Generic type 'EventHandler' requires 1 type argument(s).
+05/example_37.ts(6,10): error TS2393: Duplicate function implementation.
+05/example_37.ts(11,10): error TS2393: Duplicate function implementation.
+05/example_38.ts(5,38): error TS2552: Cannot find name 'Configuration'. Did you mean 'RTCConfiguration'?
+05/example_38.ts(6,29): error TS2304: Cannot find name 'ConfigObject'.
+05/example_38.ts(6,44): error TS2304: Cannot find name 'Configuration'.
+05/example_38.ts(7,50): error TS2304: Cannot find name 'Configuration'.
+05/example_38.ts(8,41): error TS2552: Cannot find name 'Configuration'. Did you mean 'RTCConfiguration'?
+05/example_39.ts(6,10): error TS2393: Duplicate function implementation.
+05/example_39.ts(11,10): error TS2393: Duplicate function implementation.
+05/example_40.ts(6,10): error TS2391: Function implementation is missing or not immediately following the declaration.
+05/example_40.ts(9,10): error TS2391: Function implementation is missing or not immediately following the declaration.
+06/example_01.ts(5,7): error TS2300: Duplicate identifier 'Point'.
+06/example_02.ts(5,7): error TS2300: Duplicate identifier 'User'.
+06/example_04.ts(5,7): error TS2300: Duplicate identifier 'Config'.
+06/example_04.ts(9,27): error TS2693: 'Config' only refers to a type, but is being used as a value here.
+06/example_04.ts(10,24): error TS2693: 'Config' only refers to a type, but is being used as a value here.
+06/example_05.ts(6,14): error TS2693: 'Point' only refers to a type, but is being used as a value here.
+06/example_05.ts(9,7): error TS2451: Cannot redeclare block-scoped variable 'p'.
+06/example_06.ts(5,7): error TS2300: Duplicate identifier 'Circle'.
+06/example_06.ts(9,7): error TS2451: Cannot redeclare block-scoped variable 'c'.
+06/example_06.ts(9,11): error TS2554: Expected 2 arguments, but got 0.
+06/example_07.ts(5,7): error TS2300: Duplicate identifier 'Logger'.
+06/example_07.ts(9,16): error TS2693: 'Logger' only refers to a type, but is being used as a value here.
+06/example_07.ts(13,16): error TS2693: 'Logger' only refers to a type, but is being used as a value here.
+06/example_07.ts(17,21): error TS2693: 'Logger' only refers to a type, but is being used as a value here.
+06/example_08.ts(13,7): error TS2451: Cannot redeclare block-scoped variable 's'.
+06/example_10.ts(12,7): error TS2300: Duplicate identifier 'Dog'.
+06/example_10.ts(19,7): error TS2451: Cannot redeclare block-scoped variable 'a'.
+06/example_11.ts(5,16): error TS2300: Duplicate identifier 'Shape'.
+06/example_11.ts(13,7): error TS2300: Duplicate identifier 'Square'.
+06/example_14.ts(5,6): error TS2300: Duplicate identifier 'Position'.
+06/example_16.ts(5,11): error TS2300: Duplicate identifier 'Person'.
+06/example_18.ts(5,6): error TS2300: Duplicate identifier 'Shape'.
+06/example_18.ts(6,6): error TS2300: Duplicate identifier 'Circle'.
+06/example_19.ts(5,11): error TS2300: Duplicate identifier 'User'.
+06/example_19.ts(7,3): error TS2687: All declarations of 'name' must have identical modifiers.
+06/example_19.ts(7,3): error TS2717: Subsequent property declarations must have the same type.  Property 'name' must be of type 'string', but here has type 'string | undefined'.
+06/example_19.ts(10,10): error TS2393: Duplicate function implementation.
+06/example_21.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'name'.
+06/example_22.ts(5,11): error TS2300: Duplicate identifier 'Config'.
+06/example_24.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'scores'.
+06/example_26.ts(11,3): error TS2411: Property 'debug' of type 'boolean' is not assignable to 'string' index type 'string'.
+06/example_27.ts(5,6): error TS2300: Duplicate identifier 'Point'.
+06/example_28.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'p'.
+06/example_28.ts(5,32): error TS2353: Object literal may only specify known properties, and 'z' does not exist in type 'Point'.
+06/example_29.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'p'.
+07/example_01.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'scores'.
+07/example_01.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'names'.
+07/example_02.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'fruits'.
+07/example_02.ts(10,7): error TS2451: Cannot redeclare block-scoped variable 'first'.
+07/example_03.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'names'.
+07/example_03.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'scores'.
+07/example_03.ts(14,32): error TS2349: This expression is not callable.
+  Type 'Number' has no call signatures.
+07/example_04.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'names'.
+07/example_06.ts(5,6): error TS2300: Duplicate identifier 'RGB'.
+07/example_06.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'color'.
+07/example_08.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'point'.
+07/example_08.ts(7,22): error TS2339: Property 'coords' does not exist on type '{ x: number; y: number; z: number; }'.
+07/example_10.ts(5,15): error TS2451: Cannot redeclare block-scoped variable 'value'.
+07/example_11.ts(5,6): error TS2300: Duplicate identifier 'Response'.
+07/example_11.ts(6,7): error TS2740: Type 'string[]' is missing the following properties from type 'Response': headers, ok, redirected, status, and 12 more.
+07/example_11.ts(7,7): error TS2740: Type '(string | number)[]' is missing the following properties from type 'Response': headers, ok, redirected, status, and 12 more.
+07/example_13.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'rgb'.
+07/example_14.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'rgb'.
+08/example_02.ts(5,6): error TS2567: Enum declarations can only merge with namespace or other enum declarations.
+08/example_03.ts(5,6): error TS2567: Enum declarations can only merge with namespace or other enum declarations.
+08/example_03.ts(10,24): error TS2339: Property 'Yes' does not exist on type '{ new (body?: BodyInit | null | undefined, init?: ResponseInit | undefined): Response; prototype: Response; error(): Response; json(data: any, init?: ResponseInit | undefined): Response; redirect(url: string | URL, status?: number | undefined): Response; }'.
+08/example_04.ts(11,7): error TS2451: Cannot redeclare block-scoped variable 'c'.
+08/example_06.ts(5,6): error TS2300: Duplicate identifier 'Role'.
+08/example_07.ts(5,6): error TS2300: Duplicate identifier 'Role'.
+08/example_08.ts(6,6): error TS2300: Duplicate identifier 'MyEnum'.
+08/example_09.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'keys'.
+08/example_09.ts(6,6): error TS2300: Duplicate identifier 'MyEnum'.
+08/example_09.ts(8,7): error TS2451: Cannot redeclare block-scoped variable 'MyEnumValues'.
+08/example_09.ts(8,29): error TS2322: Type 'MyEnum' is not assignable to type 'string | number | symbol'.
+08/example_09.ts(10,14): error TS2322: Type 'MyEnum' is not assignable to type 'string | number | symbol'.
+08/example_11.ts(7,7): error TS2451: Cannot redeclare block-scoped variable 'ColorEnum'.
+08/example_12.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'ColorEnum'.
+08/example_13.ts(5,10): error TS2393: Duplicate function implementation.
+08/example_14.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'keys'.
+08/example_14.ts(7,7): error TS2451: Cannot redeclare block-scoped variable 'MyEnumValues'.
+08/example_14.ts(10,6): error TS2300: Duplicate identifier 'MyEnum'.
+08/example_15.ts(5,10): error TS2393: Duplicate function implementation.
+08/example_15.ts(11,10): error TS1355: A 'const' assertions can only be applied to references to enum members, or string, number, boolean, array, or object literals.
+09/example_01.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'name'.
+09/example_04.ts(6,6): error TS2300: Duplicate identifier 'Dog'.
+09/example_04.ts(8,15): error TS2451: Cannot redeclare block-scoped variable 'pet'.
+09/example_04.ts(13,7): error TS2339: Property 'bark' does not exist on type 'Dog'.
+09/example_05.ts(5,7): error TS2300: Duplicate identifier 'Circle'.
+09/example_05.ts(8,7): error TS2300: Duplicate identifier 'Square'.
+09/example_05.ts(13,7): error TS2451: Cannot redeclare block-scoped variable 'shape'.
+09/example_05.ts(13,32): error TS2554: Expected 2 arguments, but got 0.
+09/example_05.ts(18,53): error TS2339: Property 'side' does not exist on type 'never'.
+09/example_06.ts(5,6): error TS2300: Duplicate identifier 'Status'.
+09/example_06.ts(7,15): error TS2451: Cannot redeclare block-scoped variable 'status'.
+09/example_07.ts(12,15): error TS2451: Cannot redeclare block-scoped variable 'pet'.
+09/example_07.ts(14,12): error TS2345: Argument of type 'Dog | Cat' is not assignable to parameter of type 'Fish | Bird'.
+  Type 'Dog' is not assignable to type 'Fish | Bird'.
+09/example_07.ts(17,7): error TS2339: Property 'fly' does not exist on type 'Dog | Cat'.
+  Property 'fly' does not exist on type 'Dog'.
+09/example_08.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'numbers'.
+10/example_01.ts(5,6): error TS2300: Duplicate identifier 'Status'.
+10/example_01.ts(7,5): error TS2322: Type '"loading"' is not assignable to type 'Status'.
+10/example_01.ts(8,1): error TS2322: Type '"success"' is not assignable to type 'Status'.
+10/example_01.ts(9,1): error TS2322: Type '"done"' is not assignable to type 'Status'.
+10/example_02.ts(7,10): error TS2393: Duplicate function implementation.
+10/example_02.ts(7,10): error TS2451: Cannot redeclare block-scoped variable 'log'.
+10/example_03.ts(5,6): error TS2300: Duplicate identifier 'Position'.
+10/example_03.ts(10,7): error TS2451: Cannot redeclare block-scoped variable 'point'.
+10/example_04.ts(8,11): error TS2300: Duplicate identifier 'A'.
+10/example_04.ts(9,11): error TS2300: Duplicate identifier 'B'.
+10/example_04.ts(12,7): error TS2451: Cannot redeclare block-scoped variable 'value'.
+10/example_05.ts(5,6): error TS2300: Duplicate identifier 'A'.
+10/example_05.ts(6,6): error TS2300: Duplicate identifier 'B'.
+10/example_05.ts(7,6): error TS2300: Duplicate identifier 'C'.
+10/example_05.ts(16,25): error TS2353: Object literal may only specify known properties, and 'value' does not exist in type 'C'.
+10/example_07.ts(5,6): error TS2300: Duplicate identifier 'Circle'.
+10/example_07.ts(10,6): error TS2300: Duplicate identifier 'Square'.
+10/example_07.ts(15,6): error TS2300: Duplicate identifier 'Shape'.
+10/example_07.ts(17,10): error TS2393: Duplicate function implementation.
+10/example_07.ts(17,30): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+10/example_07.ts(18,17): error TS2339: Property 'kind' does not exist on type 'Shape'.
+10/example_07.ts(20,30): error TS2339: Property 'radius' does not exist on type 'Shape'.
+10/example_07.ts(22,20): error TS2339: Property 'size' does not exist on type 'Shape'.
+10/example_07.ts(22,33): error TS2339: Property 'size' does not exist on type 'Shape'.
+10/example_07.ts(26,7): error TS2451: Cannot redeclare block-scoped variable 'c'.
+10/example_07.ts(26,20): error TS2353: Object literal may only specify known properties, and 'kind' does not exist in type 'Shape'.
+10/example_07.ts(27,7): error TS2451: Cannot redeclare block-scoped variable 's'.
+10/example_07.ts(27,20): error TS2353: Object literal may only specify known properties, and 'kind' does not exist in type 'Shape'.
+10/example_07.ts(29,18): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(shape: Shape): number', gave the following error.
+    Argument of type 'Circle' is not assignable to parameter of type 'Shape'.
+      Type 'Circle' is missing the following properties from type 'Shape': color, describe
+  Overload 2 of 2, '(shape: Shape): number', gave the following error.
+    Argument of type 'Circle' is not assignable to parameter of type 'Shape'.
+      Type 'Circle' is missing the following properties from type 'Shape': color, describe
+10/example_07.ts(30,18): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(shape: Shape): number', gave the following error.
+    Argument of type 'Service' is not assignable to parameter of type 'Shape'.
+      Type 'Service' is missing the following properties from type 'Shape': color, area, describe
+  Overload 2 of 2, '(shape: Shape): number', gave the following error.
+    Argument of type 'Service' is not assignable to parameter of type 'Shape'.
+      Type 'Service' is missing the following properties from type 'Shape': color, area, describe
+10/example_08.ts(5,10): error TS2393: Duplicate function implementation.
+10/example_08.ts(6,17): error TS2339: Property 'kind' does not exist on type 'Shape'.
+10/example_08.ts(8,30): error TS2339: Property 'radius' does not exist on type 'Shape'.
+10/example_08.ts(10,20): error TS2339: Property 'size' does not exist on type 'Shape'.
+10/example_08.ts(10,33): error TS2339: Property 'size' does not exist on type 'Shape'.
+10/example_08.ts(12,13): error TS2322: Type 'Shape' is not assignable to type 'never'.
+10/example_09.ts(5,6): error TS2300: Duplicate identifier 'Person'.
+10/example_09.ts(15,7): error TS2322: Type '{ name: string; birthdate: Date; }' is not assignable to type 'PersonWithBirthdate'.
+  Property 'age' is missing in type '{ name: string; birthdate: Date; }' but required in type 'Person'.
+10/example_11.ts(5,6): error TS2300: Duplicate identifier 'A'.
+10/example_11.ts(6,6): error TS2300: Duplicate identifier 'B'.
+10/example_11.ts(7,6): error TS2300: Duplicate identifier 'C'.
+10/example_12.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'shape'.
+11/example_01.ts(9,7): error TS2451: Cannot redeclare block-scoped variable 'a'.
+11/example_02.ts(5,6): error TS2300: Duplicate identifier 'Box'.
+11/example_02.ts(9,7): error TS2451: Cannot redeclare block-scoped variable 'stringBox'.
+11/example_02.ts(10,7): error TS2451: Cannot redeclare block-scoped variable 'numberBox'.
+11/example_03.ts(5,14): error TS2364: The left-hand side of an assignment expression must be a variable or a property access.
+11/example_06.ts(5,6): error TS2300: Duplicate identifier 'Response'.
+11/example_06.ts(9,24): error TS2353: Object literal may only specify known properties, and 'data' does not exist in type 'Response'.
+11/example_06.ts(10,11): error TS2315: Type 'Response' is not generic.
+11/example_07.ts(9,7): error TS2451: Cannot redeclare block-scoped variable 'result'.
+11/example_08.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'config'.
+11/example_09.ts(9,7): error TS2451: Cannot redeclare block-scoped variable 'stringBox'.
+11/example_10.ts(8,7): error TS2322: Type 'Printer<string>' is not assignable to type 'Printer<unknown>'.
+  Type 'unknown' is not assignable to type 'string'.
+11/example_12.ts(5,6): error TS2300: Duplicate identifier 'Box'.
+11/example_12.ts(7,5): error TS2451: Cannot redeclare block-scoped variable 'numberBox'.
+11/example_13.ts(13,11): error TS2428: All declarations of 'Transformer' must have identical type parameters.
+11/example_13.ts(14,3): error TS2300: Duplicate identifier 'transform'.
+12/example_02.ts(6,6): error TS2300: Duplicate identifier 'A'.
+12/example_02.ts(7,6): error TS2300: Duplicate identifier 'B'.
+12/example_03.ts(5,6): error TS2300: Duplicate identifier 'A'.
+12/example_03.ts(6,6): error TS2300: Duplicate identifier 'B'.
+12/example_03.ts(11,10): error TS2352: Conversion of type '{ kind: string; }' to type 'SelectType<T>' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+12/example_10.ts(5,6): error TS2300: Duplicate identifier 'Person'.
+12/example_13.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'config'.
+12/example_14.ts(5,7): error TS2451: Cannot redeclare block-scoped variable 'status'.
+12/example_14.ts(10,6): error TS2300: Duplicate identifier 'Status'.
+12/example_15.ts(10,6): error TS2300: Duplicate identifier 'PartialOptions'.
+12/example_16.ts(6,6): error TS2300: Duplicate identifier 'PartialOptions'.
+12/example_17.ts(18,6): error TS2300: Duplicate identifier 'User'.
+12/example_17.ts(19,6): error TS2300: Duplicate identifier 'PartialUser'.
+12/example_22.ts(10,6): error TS2300: Duplicate identifier 'Person'.
+13/example_01.ts(7,6): error TS2300: Duplicate identifier 'Robot'.
+13/example_01.ts(12,7): error TS2300: Duplicate identifier 'RobotClass'.
+13/example_01.ts(19,6): error TS2300: Duplicate identifier 'Person'.
+13/example_01.ts(24,35): error TS2353: Object literal may only specify known properties, and 'action' does not exist in type 'Person'.
+13/example_01.ts(32,20): error TS2352: Conversion of type '{ action: () => string; }' to type 'Person' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type '{ action: () => string; }' is missing the following properties from type 'Person': name, age
+13/example_01.ts(38,27): error TS2353: Object literal may only specify known properties, and 'action' does not exist in type 'Person'.
+13/example_01.ts(39,25): error TS2353: Object literal may only specify known properties, and 'action' does not exist in type 'Person'.
+13/example_01.ts(43,25): error TS2353: Object literal may only specify known properties, and 'action' does not exist in type 'Person'.
+13/example_01.ts(44,3): error TS2741: Property 'age' is missing in type 'Robot' but required in type 'Person'.
+13/example_01.ts(45,3): error TS2741: Property 'age' is missing in type 'RobotClass' but required in type 'Person'.
+13/example_01.ts(48,7): error TS2451: Cannot redeclare block-scoped variable 'robots'.
+13/example_01.ts(55,3): error TS2741: Property 'action' is missing in type 'Person' but required in type 'Robot'.
+13/example_01.ts(55,3): error TS2352: Conversion of type '{ name: string; action: () => string; }' to type 'Person' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'age' is missing in type '{ name: string; action: () => string; }' but required in type 'Person'.
+13/example_02.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'log'.
+13/example_02.ts(8,6): error TS2300: Duplicate identifier 'Robot'.
+13/example_02.ts(14,7): error TS2300: Duplicate identifier 'RobotClass'.
+13/example_02.ts(20,6): error TS2300: Duplicate identifier 'Person'.
+13/example_02.ts(68,3): error TS2352: Conversion of type '{ kind: string; name: string; }' to type 'Robot' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'action' is missing in type '{ kind: string; name: string; }' but required in type 'Robot'.
+13/example_02.ts(69,3): error TS2352: Conversion of type '{ kind: string; action: () => string; }' to type 'Robot' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'name' is missing in type '{ kind: string; action: () => string; }' but required in type 'Robot'.
+13/example_02.ts(75,11): error TS2353: Object literal may only specify known properties, and 'kind' does not exist in type 'Robot'.
+13/example_02.ts(84,7): error TS2451: Cannot redeclare block-scoped variable 'robots'.
+13/example_02.ts(91,32): error TS2554: Expected 1-2 arguments, but got 3.
+13/example_02.ts(115,13): error TS2339: Property 'kind' does not exist on type 'Person | Robot'.
+  Property 'kind' does not exist on type 'Person'.
+13/example_02.ts(117,11): error TS2345: Argument of type 'Person | Robot' is not assignable to parameter of type 'string'.
+  Type 'Person' is not assignable to type 'string'.
+13/example_02.ts(120,11): error TS2345: Argument of type 'Person | Robot' is not assignable to parameter of type 'string'.
+  Type 'Person' is not assignable to type 'string'.
+13/example_02.ts(123,11): error TS2345: Argument of type 'Person | Robot' is not assignable to parameter of type 'string'.
+  Type 'Person' is not assignable to type 'string'.
+13/example_02.ts(150,44): error TS2554: Expected 1-2 arguments, but got 3.
+
+
+
+================================================================================
+CHAPTER: 01
+Examples: 2
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 01\example_01.ts
+Source: docs\Chapters\01.md
+----------------------------------------
+type Point2D = { x: number; y: number }
+
+function logPoint(p: Point2D) {
+  console.log(`${p.x}, ${p.y}`)
+}
+
+const point = { x: 10, y: 20, z: 30 }
+logPoint(point) // OK! `z` is just extra
+
+----------------------------------------
+Example 02 (Original #2)
+File: 01\example_02.ts
+Source: docs\Chapters\01.md
+----------------------------------------
+type UserId = string & { readonly brand: unique symbol }
+type ProductId = string & { readonly brand: unique symbol }
+
+================================================================================
+CHAPTER: 02
+Examples: 15
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 02\example_01.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+let str: string = "hello"
+console.log(typeof str) // "string"
+
+let num: number = 42
+console.log(typeof num) // "number"
+
+let bool: boolean = true
+console.log(typeof bool) // "boolean"
+
+let big: bigint = 123n
+console.log(typeof big) // "bigint"
+
+let sym: symbol = Symbol("s")
+console.log(typeof sym) // "symbol"
+
+let undef: undefined = undefined
+console.log(typeof undef) // "undefined"
+
+let nul: null = null
+console.log(typeof nul) // "object" (confusing!)
+
+----------------------------------------
+Example 02 (Original #2)
+File: 02\example_02.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+let data: any = 123
+data.toUpperCase() // no error, even if wrong
+
+----------------------------------------
+Example 03 (Original #3)
+File: 02\example_03.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+function getRandomValue(): unknown {
+  return Math.random() > 0.5 ? "hello" : 42
+}
+
+let userInput: unknown = getRandomValue()
+
+if (typeof userInput === "string") {
+  console.log(userInput.toUpperCase())
+}
+
+----------------------------------------
+Example 04 (Original #4)
+File: 02\example_04.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+function displayMessage(message: string): void {
+  console.log(message)
+}
+
+----------------------------------------
+Example 05 (Original #5)
+File: 02\example_05.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+function throwError(): never {
+  throw new Error("fail")
+}
+
+----------------------------------------
+Example 06 (Original #6)
+File: 02\example_06.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+let direction: "left" | "right" | "center" = "left"
+
+----------------------------------------
+Example 07 (Original #7)
+File: 02\example_07.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+type SuccessResult = { status: "ok"; data: string }
+type FailureResult = { status: "error"; message: string }
+type ApiResult = SuccessResult | FailureResult
+
+function handleApiResult(result: ApiResult) {
+  if (result.status === "ok") {
+    console.log(result.data) // TypeScript knows this is SuccessResult
+  } else {
+    console.error(result.message) // TypeScript knows this is FailureResult
+  }
+}
+
+----------------------------------------
+Example 08 (Original #8)
+File: 02\example_08.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+const appTheme = "dark" // type is "dark"
+
+----------------------------------------
+Example 09 (Original #9)
+File: 02\example_09.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+let pageTheme = "dark" // type is string
+
+----------------------------------------
+Example 10 (Original #10)
+File: 02\example_10.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+const itemCount = 5 // inferred as number
+
+----------------------------------------
+Example 11 (Original #11)
+File: 02\example_11.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+const currentMood = "happy"       // inferred as "happy"
+let loadingStatus = "loading"     // inferred as string
+
+----------------------------------------
+Example 12 (Original #12)
+File: 02\example_12.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+type UserID = `user-${number}`
+
+----------------------------------------
+Example 13 (Original #13)
+File: 02\example_13.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+type ProductID = `product-${number}`
+
+function fetchProduct(id: ProductID) {
+  return `Fetching product with ID: ${id}`
+}
+
+console.log(fetchProduct("product-42"))  // OK
+// fetchProduct("item-42") // Error: Argument of type '"item-42"' is not assignable to parameter of type 'ProductID'
+
+----------------------------------------
+Example 14 (Original #14)
+File: 02\example_14.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+type SystemRole = "admin" | "editor"
+type RoleBasedID = `${SystemRole}-${number}`
+
+const editorIdentifier: RoleBasedID = "editor-7"  // OK
+// const badIdentifier: RoleBasedID = "user-5"       // Error: "user" is not assignable to type 'SystemRole'
+
+----------------------------------------
+Example 15 (Original #15)
+File: 02\example_15.ts
+Source: docs\Chapters\02.md
+----------------------------------------
+type ServicePrefix = "api" | "db"
+type ResourceName = "user" | "product"
+type ServiceEndpoint = `/${ServicePrefix}/${ResourceName}`
+
+const userEndpoint: ServiceEndpoint = "/api/user"     // OK
+const productEndpoint: ServiceEndpoint = "/db/product" // OK
+// const invalidEndpoint: ServiceEndpoint = "/web/order"    // Error
+
+================================================================================
+CHAPTER: 03
+Examples: 38
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 03\example_01.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+function demo() {
+  console.log(x) // undefined (not an error!)
+  var x = 5
+  console.log(x) // 5
+}
+
+----------------------------------------
+Example 02 (Original #2)
+File: 03\example_02.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+// JavaScript internally rewrites the above as:
+function demo() {
+  var x // hoisted declaration
+  console.log(x) // undefined
+  x = 5 // assignment remains here
+  console.log(x) // 5
+}
+
+----------------------------------------
+Example 03 (Original #3)
+File: 03\example_03.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+function processItems() {
+  for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 100) // Always prints 3!
+  }
+  console.log(i) // 3 (i leaked out of the loop)
+}
+
+----------------------------------------
+Example 04 (Original #4)
+File: 03\example_04.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+function processItems() {
+  for (let i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 100) // Prints 0, 1, 2
+  }
+  // console.log(i) // Error: i is not defined outside the loop
+}
+
+----------------------------------------
+Example 05 (Original #5)
+File: 03\example_05.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+let count = 1
+count++ // OK
+if (true) {
+  let count = 10 // Different variable, shadows outer count
+  console.log(count) // 10
+}
+console.log(count) // 2
+
+----------------------------------------
+Example 06 (Original #6)
+File: 03\example_06.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const name = "Alice"
+// name = "Bob" // Error: Cannot assign to const variable
+
+----------------------------------------
+Example 07 (Original #7)
+File: 03\example_07.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const user = { name: "Alice", age: 30 }
+user.age = 31 // OK: mutating the object
+// user = { name: "Bob", age: 25 } // Error: cannot reassign
+
+----------------------------------------
+Example 08 (Original #8)
+File: 03\example_08.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+function calculateTax(amount: number, rate: number): number {
+  return amount * rate
+}
+
+----------------------------------------
+Example 09 (Original #9)
+File: 03\example_09.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const total = calculateTotal(100, 0.08) // Works
+
+function calculateTotal(subtotal: number, taxRate: number): number {
+  return subtotal + calculateTax(subtotal, taxRate)
+}
+
+function calculateTax(amount: number, rate: number): number {
+  return amount * rate
+}
+
+----------------------------------------
+Example 10 (Original #10)
+File: 03\example_10.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+class BankAccount {
+  private balance: number
+  
+  constructor(initialBalance: number) {
+    this.balance = initialBalance
+  }
+  
+  deposit(amount: number): void {
+    this.balance += amount
+  }
+  
+  getBalance(): number {
+    return this.balance
+  }
+}
+
+const account = new BankAccount(1000)
+account.deposit(250)
+console.log(account.getBalance()) // 1250
+
+----------------------------------------
+Example 11 (Original #11)
+File: 03\example_11.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+class SavingsAccount extends BankAccount {
+  private interestRate: number
+  
+  constructor(initialBalance: number, rate: number) {
+    super(initialBalance) // Call parent constructor
+    this.interestRate = rate
+  }
+  
+  applyInterest(): void {
+    const interest = this.getBalance() * this.interestRate
+    this.deposit(interest)
+  }
+}
+
+----------------------------------------
+Example 12 (Original #12)
+File: 03\example_12.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+interface User {
+  id: number
+  name: string
+  email: string
+}
+
+function createUser(userData: User): User {
+  return { ...userData, id: Math.floor(Math.random() * 10000) }
+}
+
+----------------------------------------
+Example 13 (Original #13)
+File: 03\example_13.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+type Status = "pending" | "approved" | "rejected"
+type UserWithStatus = User & { status: Status }
+
+type EventHandler<T> = (event: T) => void
+
+----------------------------------------
+Example 14 (Original #14)
+File: 03\example_14.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+enum OrderStatus {
+  Pending,
+  Processing,
+  Shipped,
+  Delivered
+}
+
+function updateOrder(orderId: string, status: OrderStatus): void {
+  console.log(`Order ${orderId} is now ${OrderStatus[status]}`)
+}
+
+----------------------------------------
+Example 15 (Original #15)
+File: 03\example_15.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+// user.ts
+export interface User {
+  id: number
+  name: string
+}
+
+export function createUser(name: string): User {
+  return { id: generateId(), name }
+}
+
+// main.ts
+import { User, createUser } from "./user"
+
+const newUser: User = createUser("Alice")
+
+----------------------------------------
+Example 16 (Original #16)
+File: 03\example_16.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+function processOrder(order: { status: string }): void {
+  if (order.status === "pending") {
+    console.log("Validating order...")
+  } else if (order.status === "approved") {
+    console.log("Fulfilling order...")
+  } else {
+    console.log(`Unknown status: ${order.status}`)
+  }
+}
+
+----------------------------------------
+Example 17 (Original #17)
+File: 03\example_17.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+type UserAction = 
+  | { type: "login"; credentials: string }
+  | { type: "logout"; userId: string }
+  | { type: "updateProfile"; userId: string; data: any }
+
+function handleUserAction(action: UserAction): void {
+  switch (action.type) {
+    case "login":
+      console.log(`Authenticating with ${action.credentials}`)
+      break
+    case "logout":
+      console.log(`Clearing session for user ${action.userId}`)
+      break
+    case "updateProfile":
+      console.log(`Updating profile for user ${action.userId}`)
+      break
+    default:
+      throw new Error(`Unhandled action: ${action.type}`)
+  }
+}
+
+----------------------------------------
+Example 18 (Original #18)
+File: 03\example_18.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const numbers = [1, 2, 3, 4, 5]
+
+// Traditional for loop
+for (let i = 0; i < numbers.length; i++) {
+  console.log(numbers[i])
+}
+
+// for...of iterates over values
+for (const number of numbers) {
+  console.log(number)
+}
+
+// for...in iterates over keys (avoid with arrays)
+const user = { name: "Alice", age: 30 }
+for (const key in user) {
+  console.log(`${key}: ${user[key as keyof typeof user]}`)
+}
+
+// while and do-while loops
+let count = 0
+while (count < 5) {
+  console.log(count)
+  count++
+}
+
+----------------------------------------
+Example 19 (Original #19)
+File: 03\example_19.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const subtotal = 100
+const taxRate = 0.08
+const tax = subtotal * taxRate
+const total = subtotal + tax
+
+let balance = 1000
+balance += 250  // balance = balance + 250
+balance *= 1.02 // apply 2% interest
+
+----------------------------------------
+Example 20 (Original #20)
+File: 03\example_20.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+console.log(5 == "5")  // true (type coercion)
+console.log(5 === "5") // false (strict equality)
+
+// Always prefer strict equality
+function isValidId(id: unknown): id is number {
+  return typeof id === "number" && id > 0
+}
+
+----------------------------------------
+Example 21 (Original #21)
+File: 03\example_21.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+// Add missing helper function
+function checkUserPermission(): boolean {
+  return Math.random() > 0.5 // Simulate permission check
+}
+
+// Boolean logic
+const isAuthenticated = true
+const hasPermission = checkUserPermission()
+const canAccess = isAuthenticated && hasPermission
+
+// Short-circuit evaluation for default values
+const user = { name: "", age: 30 }
+const username = user.name || "Anonymous"
+
+// Nullish coalescing for more precise defaults
+const config = { timeout: 5000 }
+const port = config.port ?? 3000 // Only replaces null/undefined, not 0 or ""
+
+----------------------------------------
+Example 22 (Original #22)
+File: 03\example_22.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+interface User {
+  profile?: {
+    address?: {
+      street: string
+      city: string
+    }
+  }
+}
+
+function getCity(user: User): string | undefined {
+  return user.profile?.address?.city
+}
+
+// Works with method calls too
+user.processPayment?.()
+
+----------------------------------------
+Example 23 (Original #23)
+File: 03\example_23.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const user = { name: "Alice", age: 30, email: "alice@example.com" }
+const { name, ...otherProps } = user
+
+const numbers = [1, 2, 3, 4, 5]
+const [first, second, ...rest] = numbers
+
+----------------------------------------
+Example 24 (Original #24)
+File: 03\example_24.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const originalUser = { name: "Alice", age: 30 }
+const updatedUser = { ...originalUser, age: 31 }
+
+const moreNumbers = [...numbers, 6, 7, 8]
+
+----------------------------------------
+Example 25 (Original #25)
+File: 03\example_25.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const config = {
+  apiUrl: "https://api.example.com",
+  timeout: 5000,
+  retries: 3
+}
+
+type Config = typeof config
+// Equivalent to: { apiUrl: string; timeout: number; retries: number }
+
+----------------------------------------
+Example 26 (Original #26)
+File: 03\example_26.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+type ConfigKeys = keyof Config // "apiUrl" | "timeout" | "retries"
+
+function getConfigValue<K extends keyof Config>(key: K): Config[K] {
+  return config[key]
+}
+
+const url = getConfigValue("apiUrl") // TypeScript knows this is string
+
+----------------------------------------
+Example 27 (Original #27)
+File: 03\example_27.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const element = document.getElementById("myInput") as HTMLInputElement
+element.value = "new value" // TypeScript knows this is an input element
+
+----------------------------------------
+Example 28 (Original #28)
+File: 03\example_28.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+function isString(value: unknown): value is string {
+  return typeof value === "string"
+}
+
+function processValue(value: unknown): void {
+  if (isString(value)) {
+    console.log(value.toUpperCase()) // TypeScript knows value is string
+  }
+}
+
+----------------------------------------
+Example 29 (Original #29)
+File: 03\example_29.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+type Colors = "red" | "green" | "blue"
+
+const palette = {
+  primary: "red",
+  secondary: "green",
+  accent: "blue"
+} satisfies Record<string, Colors>
+
+// palette.primary is still inferred as "red", not Colors
+
+----------------------------------------
+Example 30 (Original #30)
+File: 03\example_30.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const fruits = ["apple", "banana", "cherry"]
+const first = fruits[0]
+
+----------------------------------------
+Example 31 (Original #31)
+File: 03\example_31.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+const propertyName = "score"
+const user = { name: "Alice", score: 95 }
+const value = user[propertyName] // 95
+
+----------------------------------------
+Example 32 (Original #32)
+File: 03\example_32.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+interface StringDictionary {
+  [key: string]: string
+}
+
+const translations: StringDictionary = {
+  hello: "hola",
+  goodbye: "adiós"
+}
+
+----------------------------------------
+Example 33 (Original #33)
+File: 03\example_33.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+type Partial<T> = {
+  [K in keyof T]?: T[K]
+}
+
+type PartialUser = Partial<User>
+// All properties become optional
+
+----------------------------------------
+Example 34 (Original #34)
+File: 03\example_34.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+type Coordinates = [number, number]
+type RGB = [red: number, green: number, blue: number]
+
+const point: Coordinates = [10, 20]
+const color: RGB = [255, 128, 0]
+
+----------------------------------------
+Example 35 (Original #35)
+File: 03\example_35.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+async function fetchUserData(id: string): Promise<User> {
+  try {
+    const response = await fetch(`/api/users/${id}`)
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+    }
+    return await response.json()
+  } catch (error) {
+    console.error("Failed to fetch user:", error)
+    throw error // Re-throw for caller to handle
+  } finally {
+    console.log("Fetch attempt completed")
+  }
+}
+
+----------------------------------------
+Example 36 (Original #36)
+File: 03\example_36.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+function processUser(user: { isActive: boolean }): void {
+  if (!user.isActive) {
+    return // Early exit for inactive users
+  }
+  // Continue processing active user
+  console.log("Updating last seen...")
+  console.log("Sending welcome email...")
+}
+
+----------------------------------------
+Example 37 (Original #37)
+File: 03\example_37.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+function findFirstEven(numbers: number[]): number | undefined {
+  for (const num of numbers) {
+    if (num % 2 !== 0) {
+      continue // Skip odd numbers
+    }
+    if (num > 100) {
+      break // Stop if we find a large even number
+    }
+    return num // Return first small even number
+  }
+  return undefined
+}
+
+----------------------------------------
+Example 38 (Original #38)
+File: 03\example_38.ts
+Source: docs\Chapters\03.md
+----------------------------------------
+interface DatabaseConnection {
+  connect(): void
+}
+
+class DatabaseConnection {
+  constructor(private config: any) {}
+  connect(): void {
+    console.log("Connected to database")
+  }
+}
+
+// Type-safe configuration with runtime validation
+interface DatabaseConfig {
+  host: string
+  port: number
+  ssl: boolean
+  credentials?: {
+    username: string
+    password: string
+  }
+}
+
+function createConnection(config: DatabaseConfig): DatabaseConnection {
+  // Runtime validation
+  if (!config.host || config.port <= 0) {
+    throw new Error("Invalid database configuration")
+  }
+  
+  // Safe property access with defaults
+  const connectionString = `${config.host}:${config.port}`
+  const useSSL = config.ssl ?? false
+  const auth = config.credentials && {
+    user: config.credentials.username,
+    pass: config.credentials.password
+  }
+  
+  // Type-safe object construction
+  return new DatabaseConnection({
+    connectionString,
+    ssl: useSSL,
+    ...auth && { authentication: auth }
+  })
+}
+
+================================================================================
+CHAPTER: 04
+Examples: 7
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 04\example_01.ts
+Source: docs\Chapters\04.md
+----------------------------------------
+// Method shorthand (ES6)
+const person1 = {
+  name: "Alice",
+  greet() {
+    // 'this' refers to the 'person1' object:
+    return `Hello, I'm ${this.name}` 
+  }
+}
+console.log(person1.greet()) // Hello, I'm Alice
+
+// Traditional function property
+const person2 = {
+  name: "Bob",
+  greet: function () {
+    return `Hello, I'm ${this.name}`
+  }
+}
+console.log(person2.greet()) // Hello, I'm Bob
+
+// Arrow function (not recommended for methods)
+const person3 = {
+  name: "Charlie",
+  greet: () => `Hello, I'm ${this?.name}`
+}
+console.log(person3.greet()) // Hello, I'm undefined
+
+----------------------------------------
+Example 02 (Original #2)
+File: 04\example_02.ts
+Source: docs\Chapters\04.md
+----------------------------------------
+const book = {}
+book.title = "1984"
+book.author = "George Orwell"
+console.log(book) // { title: "1984", author: "George Orwell" }
+
+----------------------------------------
+Example 03 (Original #3)
+File: 04\example_03.ts
+Source: docs\Chapters\04.md
+----------------------------------------
+delete book.author
+console.log(book) // { title: "1984" }
+
+----------------------------------------
+Example 04 (Original #4)
+File: 04\example_04.ts
+Source: docs\Chapters\04.md
+----------------------------------------
+const o = { a: 1, b: 2 }
+console.log(Object.entries(o)) // [['a', 1], ['b', 2]]
+console.log(Object.keys(o))    // ['a', 'b']
+console.log(Object.values(o))  // [1, 2]
+
+----------------------------------------
+Example 05 (Original #5)
+File: 04\example_05.ts
+Source: docs\Chapters\04.md
+----------------------------------------
+const user = {
+  name: "Sam",
+  greet() {
+    return `Hello, ${this.name}`
+  }
+}
+
+const greetRef = user.greet
+console.log(greetRef()) // Hello, undefined
+
+----------------------------------------
+Example 06 (Original #6)
+File: 04\example_06.ts
+Source: docs\Chapters\04.md
+----------------------------------------
+const bound = user.greet.bind(user)
+console.log(bound()) // Hello, Sam
+
+----------------------------------------
+Example 07 (Original #7)
+File: 04\example_07.ts
+Source: docs\Chapters\04.md
+----------------------------------------
+type Point = { x: number; y: number };
+
+class Circle {
+  constructor(public center: Point, public radius: number) {}
+  
+  area(): number {
+    return Math.PI * this.radius ** 2;
+  }
+}
+
+const circle = new Circle({ x: 2, y: 2 }, 7);
+
+================================================================================
+CHAPTER: 05
+Examples: 40
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 05\example_01.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function greet(name: string): string {
+  return `Hello, ${name}!`
+}
+
+----------------------------------------
+Example 02 (Original #2)
+File: 05\example_02.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+console.log(add(2, 3)) // Works: prints 5
+
+function add(x: number, y: number): number {
+  return x + y
+}
+
+----------------------------------------
+Example 03 (Original #3)
+File: 05\example_03.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+const greet = function(name: string): string {
+  return `Hello, ${name}!`
+}
+
+----------------------------------------
+Example 04 (Original #4)
+File: 05\example_04.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+console.log(add(2, 3)) // Error: Cannot access 'add' before initialization
+
+const add = function(x: number, y: number): number {
+  return x + y
+}
+
+----------------------------------------
+Example 05 (Original #5)
+File: 05\example_05.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+const greet = (name: string): string => `Hello, ${name}!`
+
+----------------------------------------
+Example 06 (Original #6)
+File: 05\example_06.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+const numbers = [1, 2, 3, 4, 5]
+const doubled = numbers.map(n => n * 2)
+const evens = numbers.filter(n => n % 2 === 0)
+
+----------------------------------------
+Example 07 (Original #7)
+File: 05\example_07.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+const processUser = (user: User): ProcessedUser => {
+  const validated = validateUser(user)
+  const normalized = normalizeUser(validated)
+  return transformUser(normalized)
+}
+
+----------------------------------------
+Example 08 (Original #8)
+File: 05\example_08.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function divide(dividend: number, divisor: number): number {
+  return dividend / divisor
+}
+
+----------------------------------------
+Example 09 (Original #9)
+File: 05\example_09.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+divide(10) // Error: Expected 2 arguments, but got 1
+
+----------------------------------------
+Example 10 (Original #10)
+File: 05\example_10.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function log(message: string, userId?: string): void {
+  if (userId) {
+    console.log(`[${userId}] ${message}`)
+  } else {
+    console.log(message)
+  }
+}
+
+log("System started") // OK
+log("User logged in", "user123") // OK
+
+----------------------------------------
+Example 11 (Original #11)
+File: 05\example_11.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function bad(optional?: string, required: number) {} // Error
+function good(required: number, optional?: string) {} // OK
+
+----------------------------------------
+Example 12 (Original #12)
+File: 05\example_12.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function greet(name = "Guest"): string {
+  return `Hello, ${name}`
+}
+
+greet() // "Hello, Guest"
+greet("Alice") // "Hello, Alice"
+
+----------------------------------------
+Example 13 (Original #13)
+File: 05\example_13.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function createUser(name: string, role: string = "user", active: boolean = true) {
+  return { name, role, active }
+}
+
+----------------------------------------
+Example 14 (Original #14)
+File: 05\example_14.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+// These are equivalent:
+function greet1(name: string = "Guest"): string { return `Hello, ${name}` }
+function greet2(name?: string): string { return `Hello, ${name || "Guest"}` }
+
+----------------------------------------
+Example 15 (Original #15)
+File: 05\example_15.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function sum(...values: number[]): number {
+  return values.reduce((total, value) => total + value, 0)
+}
+
+sum(1, 2, 3) // 6
+sum(10, 20, 30, 40) // 100
+
+----------------------------------------
+Example 16 (Original #16)
+File: 05\example_16.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function logWithLevel(level: string, ...messages: string[]): void {
+  console.log(`[${level}]`, ...messages)
+}
+
+logWithLevel("INFO", "System", "started", "successfully")
+// Output: [INFO] System started successfully
+
+----------------------------------------
+Example 17 (Original #17)
+File: 05\example_17.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function createRecord<T>(id: string, ...data: T[]): Record<string, T[]> {
+  return { [id]: data }
+}
+
+const userRecord = createRecord("users", "Alice", "Bob", "Charlie")
+// { users: ["Alice", "Bob", "Charlie"] }
+
+----------------------------------------
+Example 18 (Original #18)
+File: 05\example_18.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+type MathOperation = (x: number, y: number) => number
+type StringProcessor = (input: string) => string
+type Predicate<T> = (value: T) => boolean
+
+----------------------------------------
+Example 19 (Original #19)
+File: 05\example_19.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+const add: MathOperation = (x, y) => x + y
+const multiply: MathOperation = (x, y) => x * y
+
+function applyOperation(op: MathOperation, a: number, b: number): number {
+  return op(a, b)
+}
+
+const result = applyOperation(multiply, 5, 3) // 15
+
+----------------------------------------
+Example 20 (Original #20)
+File: 05\example_20.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+type Logger = (message: string, level?: string) => void
+
+const consoleLogger: Logger = (message, level = "INFO") => {
+  console.log(`[${level}] ${message}`)
+}
+
+----------------------------------------
+Example 21 (Original #21)
+File: 05\example_21.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+type Formatter = (template: string, ...args: unknown[]) => string
+
+const formatter: Formatter = (template, ...args) => {
+  return template.replace(/{(\d+)}/g, (match, index) => {
+    return String(args[parseInt(index)] ?? match)
+  })
+}
+
+formatter("Hello {0}, you have {1} messages", "Alice", 5)
+// "Hello Alice, you have 5 messages"
+
+----------------------------------------
+Example 22 (Original #22)
+File: 05\example_22.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+type Transform<T, U> = (value: T) => U
+type Composer = <A, B, C>(f: Transform<B, C>, g: Transform<A, B>) => Transform<A, C>
+
+const compose: Composer = (f, g) => (value) => f(g(value))
+
+const addOne = (x: number) => x + 1
+const double = (x: number) => x * 2
+const addOneThenDouble = compose(double, addOne)
+
+console.log(addOneThenDouble(3)) // 8 (3 + 1 = 4, then 4 * 2 = 8)
+
+----------------------------------------
+Example 23 (Original #23)
+File: 05\example_23.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function makeDate(timestamp: number): Date
+function makeDate(year: number, month: number, day: number): Date
+function makeDate(a: number, b?: number, c?: number): Date {
+  if (b !== undefined && c !== undefined) {
+    return new Date(a, b - 1, c) // month is 0-indexed
+  }
+  return new Date(a)
+}
+
+const date1 = makeDate(1640995200000) // from timestamp
+const date2 = makeDate(2024, 1, 15)   // from year, month, day
+
+----------------------------------------
+Example 24 (Original #24)
+File: 05\example_24.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function getValue(key: "count"): number
+function getValue(key: "name"): string
+function getValue(key: "active"): boolean
+function getValue(key: string): number | string | boolean {
+  const config = {
+    count: 42,
+    name: "TypeScript",
+    active: true
+  }
+  return config[key as keyof typeof config]
+}
+
+const count = getValue("count")   // TypeScript knows this is number
+const name = getValue("name")     // TypeScript knows this is string
+const active = getValue("active") // TypeScript knows this is boolean
+
+----------------------------------------
+Example 25 (Original #25)
+File: 05\example_25.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+// Using overloads (more verbose):
+function process(input: string): string
+function process(input: number): number
+function process(input: string | number): string | number {
+  return typeof input === "string" ? input.toUpperCase() : input * 2
+}
+
+// Using union types (simpler):
+function process(input: string | number): string | number {
+  return typeof input === "string" ? input.toUpperCase() : input * 2
+}
+
+----------------------------------------
+Example 26 (Original #26)
+File: 05\example_26.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+interface User {
+  id: number
+  name: string
+  email: string
+}
+
+// Find by ID
+function findUser(id: number): Promise<User | null>
+// Find by email
+function findUser(email: string): Promise<User | null>
+// Find by partial match
+function findUser(criteria: Partial<User>): Promise<User[]>
+// Implementation
+function findUser(
+  criteria: number | string | Partial<User>
+): Promise<User | User[] | null> {
+  if (typeof criteria === "number") {
+    return findById(criteria)
+  }
+  if (typeof criteria === "string") {
+    return findByEmail(criteria)
+  }
+  return findByPartial(criteria)
+}
+
+// Usage shows clear intent:
+const userById = await findUser(123)           // Promise<User | null>
+const userByEmail = await findUser("a@b.com")  // Promise<User | null>
+const users = await findUser({ name: "Alice" }) // Promise<User[]>
+
+----------------------------------------
+Example 27 (Original #27)
+File: 05\example_27.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+const user = {
+  name: "Alice",
+  greet() {
+    return `Hello, I'm ${this.name}`
+  }
+}
+
+console.log(user.greet()) // "Hello, I'm Alice"
+
+const greetFn = user.greet
+console.log(greetFn()) // "Hello, I'm undefined" (this is lost)
+
+----------------------------------------
+Example 28 (Original #28)
+File: 05\example_28.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+const user = {
+  name: "Alice",
+  greet: () => {
+    return `Hello, I'm ${this.name}` // `this` refers to outer scope, not user
+  }
+}
+
+console.log(user.greet()) // "Hello, I'm undefined"
+
+----------------------------------------
+Example 29 (Original #29)
+File: 05\example_29.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+class Timer {
+  private count = 0
+  
+  start() {
+    // Arrow function preserves `this` from the Timer instance
+    setInterval(() => {
+      this.count++
+      console.log(`Count: ${this.count}`)
+    }, 1000)
+  }
+}
+
+----------------------------------------
+Example 30 (Original #30)
+File: 05\example_30.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+interface Database {
+  query(sql: string): any[]
+}
+
+function executeQuery(this: Database, sql: string): any[] {
+  return this.query(sql)
+}
+
+const db: Database = {
+  query(sql: string) {
+    console.log(`Executing: ${sql}`)
+    return []
+  }
+}
+
+// Must call with correct `this` context:
+executeQuery.call(db, "SELECT * FROM users") // OK
+executeQuery("SELECT * FROM users") // Error: The 'this' context is missing
+
+----------------------------------------
+Example 31 (Original #31)
+File: 05\example_31.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+class Calculator {
+  private result = 0
+  
+  add(value: number) {
+    this.result += value
+    return this
+  }
+  
+  multiply(value: number) {
+    this.result *= value
+    return this
+  }
+  
+  getValue() {
+    return this.result
+  }
+}
+
+const calc = new Calculator()
+const result = calc.add(5).multiply(2).getValue() // 10
+
+----------------------------------------
+Example 32 (Original #32)
+File: 05\example_32.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+class EventHandler {
+  private count = 0
+  
+  handleClick() {
+    this.count++
+    console.log(`Clicked ${this.count} times`)
+  }
+  
+  setup() {
+    // Bind the method to preserve `this`
+    document.addEventListener("click", this.handleClick.bind(this))
+    
+    // Or use an arrow function
+    document.addEventListener("click", () => this.handleClick())
+  }
+}
+
+----------------------------------------
+Example 33 (Original #33)
+File: 05\example_33.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function logMessage(message: string): void {
+  console.log(message)
+  // No explicit return, or return without value
+}
+
+function processAsync(data: unknown[]): void {
+  data.forEach(item => {
+    // Process each item
+    console.log(item)
+  })
+  return // OK: returning nothing from void function
+}
+
+----------------------------------------
+Example 34 (Original #34)
+File: 05\example_34.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function findItem<T>(items: T[], predicate: (item: T) => boolean): T | undefined {
+  for (const item of items) {
+    if (predicate(item)) {
+      return item
+    }
+  }
+  return undefined // Explicit return of undefined
+}
+
+// The return type clearly shows undefined is a possible outcome
+const user = findItem(users, u => u.id === 123) // User | undefined
+
+----------------------------------------
+Example 35 (Original #35)
+File: 05\example_35.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+// void functions can return undefined, but callers shouldn't use the result
+const voidFn = (): void => {
+  return undefined // OK
+}
+
+const result1 = voidFn() // result1 has type void (not useful)
+
+// undefined functions explicitly return undefined as a value
+const undefinedFn = (): undefined => {
+  return undefined // Required
+}
+
+const result2 = undefinedFn() // result2 has type undefined (can be checked)
+
+if (result2 === undefined) {
+  // This check makes sense
+}
+
+----------------------------------------
+Example 36 (Original #36)
+File: 05\example_36.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+type EventHandler = () => void
+
+const handler1: EventHandler = () => {
+  return "some value" // OK: return value is ignored
+}
+
+const handler2: EventHandler = () => {
+  console.log("handling event")
+  // No return statement - also OK
+}
+
+// Both work as event handlers because the return value is ignored
+document.addEventListener("click", handler1)
+document.addEventListener("click", handler2)
+
+----------------------------------------
+Example 37 (Original #37)
+File: 05\example_37.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+// Less specific:
+function processData(data: any): any {
+  return data.map((item: any) => item.value)
+}
+
+// More specific:
+function processData<T extends { value: unknown }>(data: T[]): unknown[] {
+  return data.map(item => item.value)
+}
+
+// Even better with concrete types when possible:
+function processUsers(users: User[]): string[] {
+  return users.map(user => user.name)
+}
+
+----------------------------------------
+Example 38 (Original #38)
+File: 05\example_38.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+function configure(options: string): Configuration
+function configure(options: ConfigObject): Configuration
+function configure(key: string, value: unknown): Configuration
+function configure(...args: unknown[]): Configuration {
+  // Implementation handles all cases
+}
+
+----------------------------------------
+Example 39 (Original #39)
+File: 05\example_39.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+// Mutating (less predictable):
+function addToList<T>(list: T[], item: T): void {
+  list.push(item)
+}
+
+// Non-mutating (more predictable):
+function addToList<T>(list: readonly T[], item: T): T[] {
+  return [...list, item]
+}
+
+----------------------------------------
+Example 40 (Original #40)
+File: 05\example_40.ts
+Source: docs\Chapters\05.md
+----------------------------------------
+// Unclear:
+function calculate(a: number, b: number, c: boolean): number
+
+// Clear:
+function calculateTotal(subtotal: number, taxRate: number, includeTax: boolean): number
+
+================================================================================
+CHAPTER: 06
+Examples: 29
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 06\example_01.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+class Point {
+  // Constructor shorthand automatically defines and assigns fields
+  constructor(public x: number, public y: number) {}
+  toString(): string {
+    return `(${this.x}, ${this.y})`
+  }
+}
+
+----------------------------------------
+Example 02 (Original #2)
+File: 06\example_02.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+class User {
+  constructor(public name: string, public age: number) {}
+}
+
+const u1 = new User("Alice", 30)
+
+----------------------------------------
+Example 03 (Original #3)
+File: 06\example_03.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+class LegacyUser {
+  name: string
+  age: number
+  constructor(name: string, age: number) {
+    this.name = name
+    this.age = age
+  }
+}
+
+const u2 = new LegacyUser("Bob", 45)
+
+----------------------------------------
+Example 04 (Original #4)
+File: 06\example_04.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+class Config {
+  constructor(public env: string = "dev", public debug?: boolean) {}
+}
+
+const defaultConfig = new Config()
+const prodConfig = new Config("prod", true)
+
+----------------------------------------
+Example 05 (Original #5)
+File: 06\example_05.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+function createPoint(x: number, y: number) {
+  return new Point(x, y)
+}
+
+const p = createPoint(10, 20)
+
+----------------------------------------
+Example 06 (Original #6)
+File: 06\example_06.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+class Circle {
+  radius = 1
+}
+
+const c = new Circle()
+console.log(c.radius) // 1
+
+c.radius = 2
+console.log(c.radius) // 2
+
+----------------------------------------
+Example 07 (Original #7)
+File: 06\example_07.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+class Logger {
+  private constructor(public level: string) {}
+
+  static createDebug(): Logger {
+    return new Logger("debug")
+  }
+
+  static createInfo(): Logger {
+    return new Logger("info")
+  }
+}
+
+const debugLogger = Logger.createDebug()
+
+----------------------------------------
+Example 08 (Original #8)
+File: 06\example_08.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+class Service {
+  constructor(private fetcher: () => Promise<string>) {}
+
+  async getData() {
+    return await this.fetcher()
+  }
+}
+
+const s = new Service(() => Promise.resolve("fetched data"))
+s.getData().then(console.log) // "fetched data"
+
+----------------------------------------
+Example 09 (Original #9)
+File: 06\example_09.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+class SecretPoint {
+  constructor(private x: number, private y: number) {}
+  reveal(): string {
+    return `(${this.x}, ${this.y})`
+  }
+}
+
+----------------------------------------
+Example 10 (Original #10)
+File: 06\example_10.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+class Animal {
+  constructor(public name: string) {}
+  speak(): void {
+    console.log(`${this.name} makes a sound.`)
+  }
+}
+
+class Dog extends Animal {
+  speak(): void {
+    console.log(`${this.name} barks.`)
+  }
+}
+
+// Upcasting and dynamic binding
+const a: Animal = new Dog("Rover")
+a.speak() // "Rover barks."
+
+----------------------------------------
+Example 11 (Original #11)
+File: 06\example_11.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+abstract class Shape {
+  constructor(public color: string) {}
+  abstract area(): number
+  describe(): string {
+    return `A ${this.color} shape.`
+  }
+}
+
+class Square extends Shape {
+  constructor(color: string, public size: number) {
+    super(color)
+  }
+  area(): number {
+    return this.size * this.size
+  }
+}
+
+----------------------------------------
+Example 12 (Original #12)
+File: 06\example_12.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+interface Printable {
+  toString(): string
+}
+
+class NamedCoordinate implements Printable {
+  constructor(public x: number, public y: number, public label: string) {}
+  toString(): string {
+    return `${this.label}: (${this.x}, ${this.y})`
+  }
+}
+
+----------------------------------------
+Example 13 (Original #13)
+File: 06\example_13.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+type Movable = {
+  move(dx: number, dy: number): void
+}
+
+class MovablePosition implements Movable {
+  constructor(public x: number, public y: number) {}
+  move(dx: number, dy: number) {
+    this.x += dx
+    this.y += dy
+  }
+}
+
+----------------------------------------
+Example 14 (Original #14)
+File: 06\example_14.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+type Position = {
+  x: number
+  y: number
+}
+
+----------------------------------------
+Example 15 (Original #15)
+File: 06\example_15.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+function printPosition(pt: Position) {
+  console.log(`(${pt.x}, ${pt.y})`)
+}
+
+----------------------------------------
+Example 16 (Original #16)
+File: 06\example_16.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+interface Person {
+  name: string
+  age: number
+}
+
+type PersonAlias = {
+  name: string
+  age: number
+}
+
+----------------------------------------
+Example 17 (Original #17)
+File: 06\example_17.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+interface ColoredPoint extends Position {
+  color: string
+}
+
+const cp: ColoredPoint = { x: 1, y: 2, color: "red" }
+
+----------------------------------------
+Example 18 (Original #18)
+File: 06\example_18.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+type Shape = { kind: string }
+type Circle = Shape & { radius: number }
+
+----------------------------------------
+Example 19 (Original #19)
+File: 06\example_19.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+interface User {
+  id: number
+  name?: string
+}
+
+function greet(user: User) {
+  if (user.name) {
+    console.log(`Hello, ${user.name}`)
+  } else {
+    console.log("Hello, anonymous user")
+  }
+}
+
+----------------------------------------
+Example 20 (Original #20)
+File: 06\example_20.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+const firstLetter = user.name?.[0] // undefined if name is missing
+
+----------------------------------------
+Example 21 (Original #21)
+File: 06\example_21.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+const name = user.name ?? "Guest"
+
+----------------------------------------
+Example 22 (Original #22)
+File: 06\example_22.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+interface Config {
+  readonly apiKey: string
+}
+
+----------------------------------------
+Example 23 (Original #23)
+File: 06\example_23.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+interface Dictionary {
+  [key: string]: number
+}
+
+----------------------------------------
+Example 24 (Original #24)
+File: 06\example_24.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+const scores: Dictionary = {
+  alice: 10,
+  bob: 15,
+  charlie: 8
+}
+
+----------------------------------------
+Example 25 (Original #25)
+File: 06\example_25.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+interface NumberArray {
+  [index: number]: number
+}
+
+----------------------------------------
+Example 26 (Original #26)
+File: 06\example_26.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+interface SafeConfig {
+  mode: string
+  [key: string]: string // OK: 'mode' is a string
+}
+
+interface UnsafeConfig {
+  debug: boolean
+  [key: string]: string // Error: 'debug' is boolean, not string
+}
+
+----------------------------------------
+Example 27 (Original #27)
+File: 06\example_27.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+type Point = {
+  x: number
+  y: number
+}
+
+----------------------------------------
+Example 28 (Original #28)
+File: 06\example_28.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+const p: Point = { x: 0, y: 0, z: 3 } // Error: object literal may only specify known properties
+
+----------------------------------------
+Example 29 (Original #29)
+File: 06\example_29.ts
+Source: docs\Chapters\06.md
+----------------------------------------
+const obj = { x: 0, y: 0, z: 3 }
+const p: Point = obj // OK: no excess property check
+
+================================================================================
+CHAPTER: 07
+Examples: 15
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 07\example_01.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+const scores: number[] = [85, 92, 78]
+const names: Array<string> = ["Alice", "Bob", "Carol"]
+
+----------------------------------------
+Example 02 (Original #2)
+File: 07\example_02.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+const fruits = ["apple", "banana", "cherry"]
+fruits[0]                      // access by index
+fruits.push("date")            // add to the end
+const last = fruits.pop()      // remove last item
+fruits.unshift("elderberry")   // add to the beginning
+const first = fruits.shift()   // remove first item
+
+fruits.forEach((fruit) => console.log(fruit))  // iterate with forEach
+
+----------------------------------------
+Example 03 (Original #3)
+File: 07\example_03.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+const names: string[] = ["Alice", "Bob", "Carol"]
+const scores: number[] = [85, 92, 78]
+
+const upper: string[] = names.map((n: string): string => n.toUpperCase())
+console.log(upper) // ["ALICE", "BOB", "CAROL"]
+
+const filtered: string[] = names.filter((n: string): boolean => n.startsWith("A"))
+console.log(filtered) // ["Alice"]
+
+const summary: number = scores.reduce((sum: number, score: number): number => sum + score, 0)
+console.log(summary) // 255
+
+const report: string = names
+  .map((name: string, i: number): string => `${i + 1}. ${name}`)
+  .sort()
+  .slice(0, 2)
+  .join("\n") // join lines into a single string
+
+console.log(report)
+// Output:
+// 1. Alice
+// 2. Bob
+
+----------------------------------------
+Example 04 (Original #4)
+File: 07\example_04.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+const names = ["Alice", "Bob", "Carol"]
+
+const flattened = names.flatMap((name) => name.split(""))
+console.log(flattened) // ['A', 'l', 'i', 'c', 'e', 'B', 'o', 'b']
+
+const found = names.find((name) => name.length > 3)
+console.log(found) // "Alice"
+
+function isShortName(value: string): value is string {
+  return value.length <= 3
+}
+
+const shortNames = names.filter(isShortName)
+console.log(shortNames) // ["Bob"]
+
+const hasShort = names.some(isShortName)
+console.log(hasShort) // true if any name is short
+
+const allShort = names.every(isShortName)
+console.log(allShort) // true if all names are short
+
+const sorted = [...names].sort((a, b) => a.localeCompare(b))
+console.log(sorted) // alphabetically sorted copy
+
+// Traverse the array with a for...of loop:
+for (const name of names) {
+  console.log(name.toUpperCase())
+}
+
+----------------------------------------
+Example 05 (Original #5)
+File: 07\example_05.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+const values: (string | number)[] = ["high", 1, "low", 2]
+
+----------------------------------------
+Example 06 (Original #6)
+File: 07\example_06.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+type RGB = [red: number, green: number, blue: number]
+const color: RGB = [255, 128, 0]
+
+----------------------------------------
+Example 07 (Original #7)
+File: 07\example_07.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+function printPair([x, y]: [number, number]) {
+  console.log(`(${x}, ${y})`)
+}
+
+printPair([3, 4])
+
+----------------------------------------
+Example 08 (Original #8)
+File: 07\example_08.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+type LabeledPair = { label: string; coords: [number, number] }
+const point: LabeledPair = { label: "origin", coords: [0, 0] }
+const [x, y] = point.coords
+
+----------------------------------------
+Example 09 (Original #9)
+File: 07\example_09.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+const entry: [string, number] = ["age", 42]
+
+----------------------------------------
+Example 10 (Original #10)
+File: 07\example_10.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+const [label, value] = entry
+
+----------------------------------------
+Example 11 (Original #11)
+File: 07\example_11.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+type Response = [string, number?]
+const res1: Response = ["OK"]
+const res2: Response = ["Created", 201]
+
+----------------------------------------
+Example 12 (Original #12)
+File: 07\example_12.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+const keywords: readonly string[] = ["async", "await"]
+
+const locked = ["on", "off"] as const
+// locked has type: readonly ["on", "off"]
+
+const response = { status: "OK", code: 200 } as const
+// response.status is type "OK", not string
+// response.code is type 200, not number
+
+function logKeywords(values: readonly string[]) {
+  values.forEach(console.log)
+  // values.push("new") // Error: cannot modify a readonly array
+}
+
+logKeywords(keywords)
+
+----------------------------------------
+Example 13 (Original #13)
+File: 07\example_13.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+const rgb = [0, 0, 0] as const
+console.log(rgb) // [0, 0, 0]
+
+----------------------------------------
+Example 14 (Original #14)
+File: 07\example_14.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+const rgb: readonly [number, number, number] = [0, 0, 0]
+
+----------------------------------------
+Example 15 (Original #15)
+File: 07\example_15.ts
+Source: docs\Chapters\07.md
+----------------------------------------
+function printAll(items: ReadonlyArray<string>) {
+  for (const item of items) console.log(item)
+}
+
+================================================================================
+CHAPTER: 08
+Examples: 15
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 08\example_01.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right
+}
+
+const move = Direction.Left
+console.log(move) // 2
+
+----------------------------------------
+Example 02 (Original #2)
+File: 08\example_02.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+enum Status {
+  Ready = 1,
+  Waiting = 3,
+  Finished = 5
+}
+
+----------------------------------------
+Example 03 (Original #3)
+File: 08\example_03.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+enum Response {
+  Yes = "YES",
+  No = "NO"
+}
+
+const reply = Response.Yes
+console.log(reply) // "YES"
+
+----------------------------------------
+Example 04 (Original #4)
+File: 08\example_04.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+const enum Color {
+  Red,
+  Green,
+  Blue
+}
+
+const c = Color.Green // Inlined as `1`
+
+----------------------------------------
+Example 05 (Original #5)
+File: 08\example_05.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+const ROLES = ["admin", "user", "guest"] as const
+
+----------------------------------------
+Example 06 (Original #6)
+File: 08\example_06.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+type Role = typeof ROLES[number]
+
+----------------------------------------
+Example 07 (Original #7)
+File: 08\example_07.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+type Role = "admin" | "user" | "guest"
+
+----------------------------------------
+Example 08 (Original #8)
+File: 08\example_08.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+// Not valid; doesn't create a runtime enum
+type MyEnum = {
+    [K in 'A' | 'B' | 'C']: K 
+}
+
+----------------------------------------
+Example 09 (Original #9)
+File: 08\example_09.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+const keys = ['A', 'B', 'C'] as const
+type MyEnum = (typeof keys)[number] // "A" | "B" | "C"
+
+const MyEnumValues: { [K in MyEnum]: K } = Object.fromEntries(
+  keys.map(k => [k, k])
+) as { [K in MyEnum]: K }
+
+----------------------------------------
+Example 10 (Original #10)
+File: 08\example_10.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+export const MyEnum = {
+  A: 'A',
+  B: 'B',
+  C: 'C'
+} as const
+
+export type MyEnum = keyof typeof MyEnum // "A" | "B" | "C"
+export type MyEnumValue = typeof MyEnum[MyEnum] // "A" | "B" | "C"
+
+----------------------------------------
+Example 11 (Original #11)
+File: 08\example_11.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+type Keys = 'Red' | 'Green' | 'Blue'
+
+const ColorEnum: { [K in Keys]: K } = {
+  Red: 'Red',
+  Green: 'Green',
+  Blue: 'Blue'
+}
+
+----------------------------------------
+Example 12 (Original #12)
+File: 08\example_12.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+const ColorEnum: { [K in Keys]: number } = {
+  Red: 0,
+  Green: 1,
+  Blue: 2
+}
+
+----------------------------------------
+Example 13 (Original #13)
+File: 08\example_13.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+function createEnumFromKeys<const T extends readonly string[]>(
+  keys: T
+): { [K in T[number]]: K } {
+  return Object.fromEntries(keys.map(k => [k, k])) as { [K in T[number]]: K }
+}
+
+----------------------------------------
+Example 14 (Original #14)
+File: 08\example_14.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+const keys = ['A', 'B', 'C'] as const
+
+const MyEnumValues = createEnumFromKeys(keys)
+// const MyEnumValues: { A: "A"; B: "B"; C: "C" }
+
+type MyEnum = keyof typeof MyEnumValues
+// type MyEnum = "A" | "B" | "C"
+
+----------------------------------------
+Example 15 (Original #15)
+File: 08\example_15.ts
+Source: docs\Chapters\08.md
+----------------------------------------
+function createEnumFromKeys<const T extends readonly string[]>(
+  keys: T
+): { readonly [K in T[number]]: K } {
+  const result = Object.fromEntries(keys.map(k => [k, k])) as {
+    [K in T[number]]: K
+  }
+  return result as const
+}
+
+================================================================================
+CHAPTER: 09
+Examples: 9
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 09\example_01.ts
+Source: docs\Chapters\09.md
+----------------------------------------
+let age = 42 // inferred as number
+const name = "Alice" // inferred as "Alice" (literal type)
+
+----------------------------------------
+Example 02 (Original #2)
+File: 09\example_02.ts
+Source: docs\Chapters\09.md
+----------------------------------------
+function square(x: number) {
+  return x * x // inferred as number
+}
+
+----------------------------------------
+Example 03 (Original #3)
+File: 09\example_03.ts
+Source: docs\Chapters\09.md
+----------------------------------------
+function print(value: string | number) {
+  if (typeof value === "string") {
+    console.log(value.toUpperCase()) // narrowed to string
+  } else {
+    console.log(value.toFixed(2)) // narrowed to number
+  }
+}
+
+----------------------------------------
+Example 04 (Original #4)
+File: 09\example_04.ts
+Source: docs\Chapters\09.md
+----------------------------------------
+type Cat = { meow: () => void }
+type Dog = { bark: () => void }
+
+declare const pet: Cat | Dog
+
+if ("meow" in pet) {
+  pet.meow() // narrowed to Cat
+} else {
+  pet.bark() // narrowed to Dog
+}
+
+----------------------------------------
+Example 05 (Original #5)
+File: 09\example_05.ts
+Source: docs\Chapters\09.md
+----------------------------------------
+class Circle {
+  radius = 1
+}
+class Square {
+  side = 2
+}
+
+// Constructed instances:
+const shape: Circle | Square = new Circle()
+
+if (shape instanceof Circle) {
+  console.log("Constructed Circle with radius", shape.radius)
+} else {
+  console.log("Constructed Square with side", shape.side)
+}
+
+// Non-constructed objects with the same shape:
+const pseudoShape = { radius: 10 }
+console.log(pseudoShape instanceof Circle) // false
+
+----------------------------------------
+Example 06 (Original #6)
+File: 09\example_06.ts
+Source: docs\Chapters\09.md
+----------------------------------------
+type Status = "loading" | "success" | "error"
+
+declare const status: Status
+
+if (status === "success") {
+  console.log("Operation successful")
+} else if (status === "error") {
+  console.log("Operation failed")
+}
+
+----------------------------------------
+Example 07 (Original #7)
+File: 09\example_07.ts
+Source: docs\Chapters\09.md
+----------------------------------------
+type Fish = { swim: () => void }
+type Bird = { fly: () => void }
+
+function isFish(pet: Fish | Bird): pet is Fish {
+  return (pet as Fish).swim !== undefined
+}
+
+declare const pet: Fish | Bird
+
+if (isFish(pet)) {
+  pet.swim()
+} else {
+  pet.fly()
+}
+
+----------------------------------------
+Example 08 (Original #8)
+File: 09\example_08.ts
+Source: docs\Chapters\09.md
+----------------------------------------
+const numbers = [1, 2, 3]
+numbers.forEach(n => {
+  console.log(n * 2) // n is inferred as number
+})
+
+----------------------------------------
+Example 09 (Original #9)
+File: 09\example_09.ts
+Source: docs\Chapters\09.md
+----------------------------------------
+window.addEventListener("click", e => {
+  console.log(e.clientX) // e is inferred as MouseEvent
+})
+
+================================================================================
+CHAPTER: 10
+Examples: 12
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 10\example_01.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+type Status = "loading" | "success" | "error"
+
+let current: Status = "loading"
+current = "success" // OK
+current = "done" // Error: not assignable to Status
+
+----------------------------------------
+Example 02 (Original #2)
+File: 10\example_02.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+type StringOrNumber = string | number
+
+function log(value: StringOrNumber) {
+  console.log(value)
+}
+
+----------------------------------------
+Example 03 (Original #3)
+File: 10\example_03.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+type Position = { x: number; y: number }
+type Label = { name: string }
+
+type LabeledPoint = Position & Label
+
+const point: LabeledPoint = {
+  x: 10,
+  y: 20,
+  name: "A"
+}
+
+----------------------------------------
+Example 04 (Original #4)
+File: 10\example_04.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+let input: string | number = "hello"
+input = 42
+
+interface A { a: number }
+interface B { b: string }
+type AB = A & B
+
+const value: AB = {
+  a: 1,
+  b: "text"
+}
+
+----------------------------------------
+Example 05 (Original #5)
+File: 10\example_05.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+type A = { value: string }
+type B = { value: number }
+type C = A & B
+
+// C is inferred as:
+// {
+//   value: string & number
+// }
+
+// Since no value can be both a string and a number at the same time,
+// TypeScript reduces this to `never`:
+const impossible: C = { value: 42 } // Error
+
+----------------------------------------
+Example 06 (Original #6)
+File: 10\example_06.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+// Union of array and function
+let mixed: string[] | (() => string)
+
+mixed = ["a", "b"]
+console.log(mixed[0]) // "a"
+
+mixed = () => "hello"
+console.log(mixed()) // "hello"
+
+interface Metadata {
+  description: string
+}
+
+// Intersection of function with object type
+type CallableWithMeta = Metadata & ((x: number) => number)
+
+const fn: CallableWithMeta = Object.assign(
+  (x: number) => x * 2,
+  { description: "doubles the input" }
+)
+
+
+console.log(fn(5)) // 10
+console.log(fn.description) // "doubles the input"
+
+----------------------------------------
+Example 07 (Original #7)
+File: 10\example_07.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+type Circle = {
+  kind: "circle"
+  radius: number
+}
+
+type Square = {
+  kind: "square"
+  size: number
+}
+
+type Shape = Circle | Square
+
+function area(shape: Shape): number {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2
+    case "square":
+      return shape.size * shape.size
+  }
+}
+
+const c: Shape = { kind: "circle", radius: 3 }
+const s: Shape = { kind: "square", size: 4 }
+
+console.log(area(c)) // 28.274333882308138
+console.log(area(s)) // 16
+
+----------------------------------------
+Example 08 (Original #8)
+File: 10\example_08.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+function area(shape: Shape): number {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2
+    case "square":
+      return shape.size * shape.size
+    default:
+      const _exhaustiveCheck: never = shape
+      return _exhaustiveCheck
+  }
+}
+
+----------------------------------------
+Example 09 (Original #9)
+File: 10\example_09.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+type Person = {
+  name: string
+}
+
+type Birthdate = {
+  birthdate: Date
+}
+
+type PersonWithBirthdate = Person & Birthdate
+
+const individual: PersonWithBirthdate = {
+  name: "Alice",
+  birthdate: new Date("1990-01-01")
+}
+
+----------------------------------------
+Example 10 (Original #10)
+File: 10\example_10.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+type ContactInfo = {
+  email: string
+  phone: string
+}
+
+type Employee = {
+  employeeId: number
+  department: string
+}
+
+type ContactableEmployee = ContactInfo & Employee
+
+const example: ContactableEmployee = {
+  email: "jane@example.com",
+  phone: "555-1234",
+  employeeId: 456,
+  department: "Engineering"
+}
+
+----------------------------------------
+Example 11 (Original #11)
+File: 10\example_11.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+type A = { value: string }
+type B = { value: number }
+type C = A & B // never usable; incompatible
+
+----------------------------------------
+Example 12 (Original #12)
+File: 10\example_12.ts
+Source: docs\Chapters\10.md
+----------------------------------------
+const shape = {
+  kind: "circle",
+  radius: 10
+} as const
+
+================================================================================
+CHAPTER: 11
+Examples: 13
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 11\example_01.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+function identity<T>(value: T): T {
+  return value
+}
+
+const a = identity("hello")  // a: string
+const b = identity(42)       // b: number
+
+----------------------------------------
+Example 02 (Original #2)
+File: 11\example_02.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+type Box<T> = {
+  value: T
+}
+
+const stringBox: Box<string> = { value: "wrapped" }
+const numberBox: Box<number> = { value: 99 }
+
+----------------------------------------
+Example 03 (Original #3)
+File: 11\example_03.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+stringArray: Array<string> = ["a", "b"]
+const numberPromise: Promise<number> = Promise.resolve(1)
+
+class Container<T> {
+  constructor(public value: T) {}
+
+  get(): T {
+    return this.value
+  }
+}
+
+const numberContainer = new Container<number>(123)
+console.log(numberContainer.get()) // 123
+
+const stringContainer = new Container("hello")
+console.log(stringContainer.get()) // "hello"
+
+// Also works with complex types:
+const pointContainer = new Container({ x: 1, y: 2 })
+console.log(pointContainer.get().x) // 1
+
+----------------------------------------
+Example 04 (Original #4)
+File: 11\example_04.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+function lengthOf<T extends { length: number }>(value: T): number {
+  return value.length
+}
+
+lengthOf("hello")        // 5
+lengthOf([1, 2, 3])       // 3
+// lengthOf(42)          // Error: number doesn't have a length
+
+----------------------------------------
+Example 05 (Original #5)
+File: 11\example_05.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+interface HasId<T extends { id: number }> {
+  item: T
+}
+
+const record: HasId<{ id: number; name: string }> = {
+  item: { id: 1, name: "Item" }
+}
+
+----------------------------------------
+Example 06 (Original #6)
+File: 11\example_06.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+type Response<T = string> = {
+  data: T
+}
+
+const r1: Response = { data: "ok" }          // uses default string
+const r2: Response<number> = { data: 200 }   // overrides default
+
+----------------------------------------
+Example 07 (Original #7)
+File: 11\example_07.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+function wrap<T>(value: T): { value: T } {
+  return { value }
+}
+
+const result = wrap("hello")  // inferred as string
+
+// But inference is shallow:
+const complex = wrap({ x: 1 })
+// complex.value.x inferred as number, but not deeply readonly
+
+----------------------------------------
+Example 08 (Original #8)
+File: 11\example_08.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+const config = wrap({ mode: "dark" } as const)
+// Now config.value.mode is the literal type "dark"
+
+----------------------------------------
+Example 09 (Original #9)
+File: 11\example_09.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+type ReadOnlyBox<T> = {
+  readonly value: T
+}
+
+const stringBox: ReadOnlyBox<string> = { value: "hello" }
+const widerBox: ReadOnlyBox<string | number> = stringBox // OK
+
+----------------------------------------
+Example 10 (Original #10)
+File: 11\example_10.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+type Printer<T> = (value: T) => void
+
+const printString: Printer<string> = str => console.log(str)
+const printUnknown: Printer<unknown> = printString // OK
+
+----------------------------------------
+Example 11 (Original #11)
+File: 11\example_11.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+type Handler = (event: MouseEvent) => void
+
+const handleUI: Handler = (event: UIEvent) => {
+  // Error in strictFunctionTypes: UIEvent not assignable to MouseEvent
+}
+
+----------------------------------------
+Example 12 (Original #12)
+File: 11\example_12.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+type Box<T> = { value: T }
+
+let numberBox: Box<number> = { value: 42 }
+// let stringBox: Box<string> = numberBox // Error: Box<string> not assignable to Box<number>
+
+----------------------------------------
+Example 13 (Original #13)
+File: 11\example_13.ts
+Source: docs\Chapters\11.md
+----------------------------------------
+interface Producer<out T> {
+  produce(): T
+}
+
+interface Consumer<in T> {
+  consume(value: T): void
+}
+
+interface Transformer<in out T> {
+  transform(value: T): T
+}
+
+================================================================================
+CHAPTER: 12
+Examples: 22
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 12\example_01.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+// Basic conditional type syntax
+type ConditionalExample<T> = T extends string ? "is string" : "not string"
+
+// Test the conditional type
+type Test1 = ConditionalExample<string>  // "is string"
+type Test2 = ConditionalExample<number>  // "not string"
+
+----------------------------------------
+Example 02 (Original #2)
+File: 12\example_02.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type IsString<T> = T extends string ? true : false
+type A = IsString<string>  // true
+type B = IsString<number>  // false
+
+----------------------------------------
+Example 03 (Original #3)
+File: 12\example_03.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type A = { kind: "A" }
+type B = { kind: "B" }
+
+type SelectType<T> = T extends string ? A : B
+
+function create<T>(value: T): SelectType<T> {
+  return (typeof value === "string"
+    ? { kind: "A" }
+    : { kind: "B" }) as SelectType<T>
+}
+
+const resultString = create("hello") // type A
+const resultNumber = create(123)     // type B
+console.log(resultString) // { kind: "A" }
+console.log(resultNumber) // { kind: "B" }
+
+----------------------------------------
+Example 04 (Original #4)
+File: 12\example_04.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type ElementType<T> = T extends (infer U)[] ? U : T
+
+// Usage:
+type TestArray = ElementType<string[]>   // string
+type TestPrimitive = ElementType<number> // number
+
+----------------------------------------
+Example 05 (Original #5)
+File: 12\example_05.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type ArgumentType<T> = T extends (arg: infer A) => any ? A : never
+
+type Fn = (x: boolean) => void
+type Arg = ArgumentType<Fn>  // boolean
+
+----------------------------------------
+Example 06 (Original #6)
+File: 12\example_06.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type ParametersOf<T> = T extends (...args: infer P) => any ? P : never
+
+type MyFn = (x: string, y: number) => void
+type Params = ParametersOf<MyFn>  // [string, number]
+
+----------------------------------------
+Example 07 (Original #7)
+File: 12\example_07.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type Flatten<T> = T extends (infer U)[] ? Flatten<U> : T
+
+type NestedArray = number[][][]
+type FlatType = Flatten<NestedArray>  // number
+
+----------------------------------------
+Example 08 (Original #8)
+File: 12\example_08.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+// Combine literal types:
+type Lang = "en" | "fr"
+type FileExtension = ".json" | ".txt"
+type Filename = `${Lang}${FileExtension}`
+
+const file: Filename = "en.json" // OK
+
+----------------------------------------
+Example 09 (Original #9)
+File: 12\example_09.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type ExtractLang<T> = T extends `${infer L}.${string}` ? L : never
+
+type Lang1 = ExtractLang<"en.json"> // "en"
+type Lang2 = ExtractLang<"fr.txt">  // "fr"
+
+----------------------------------------
+Example 10 (Original #10)
+File: 12\example_10.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type Person = {
+  name: string
+  age: number
+}
+
+type PersonKeys = keyof Person // "name" | "age"
+
+----------------------------------------
+Example 11 (Original #11)
+File: 12\example_11.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type AgeType = Person["age"] // number
+
+----------------------------------------
+Example 12 (Original #12)
+File: 12\example_12.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type ValueOf<T> = T[keyof T]
+type PersonValues = ValueOf<Person> // string | number
+
+----------------------------------------
+Example 13 (Original #13)
+File: 12\example_13.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+const config = {
+  host: "localhost",
+  port: 8080
+}
+
+type ConfigType = typeof config
+// Equivalent to:
+// type ConfigType = { host: string; port: number }
+
+----------------------------------------
+Example 14 (Original #14)
+File: 12\example_14.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+const status = {
+  loading: "loading",
+  success: "success"
+} as const
+
+type Status = typeof status[keyof typeof status] // "loading" | "success"
+
+----------------------------------------
+Example 15 (Original #15)
+File: 12\example_15.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type Options = {
+  darkMode: boolean
+  fontSize: number
+}
+
+type PartialOptions = {
+  [K in keyof Options]?: Options[K]
+}
+
+----------------------------------------
+Example 16 (Original #16)
+File: 12\example_16.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+// PartialOptions is equivalent to:
+type PartialOptions = {
+  darkMode?: boolean
+  fontSize?: number
+}
+
+----------------------------------------
+Example 17 (Original #17)
+File: 12\example_17.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type MyPartial<T> = {
+  [P in keyof T]?: T[P]
+}
+
+type MyReadonly<T> = {
+  readonly [P in keyof T]: T[P]
+}
+
+type MyRequired<T> = {
+  [P in keyof T]-?: T[P]
+}
+
+// Example usage
+type User = { name: string; age?: number }
+type PartialUser = MyPartial<User>     // { name?: string; age?: number }
+type RequiredUser = MyRequired<User>   // { name: string; age: number }
+type ReadonlyUser = MyReadonly<User>   // { readonly name: string; readonly age?: number }
+
+----------------------------------------
+Example 18 (Original #18)
+File: 12\example_18.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type FullyMutable<T> = {
+  -readonly [P in keyof T]-?: T[P]
+}
+
+----------------------------------------
+Example 19 (Original #19)
+File: 12\example_19.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type PrefixKeys<T> = {
+  [K in keyof T as `prefix_${string & K}`]: T[K]
+}
+
+// Example:
+type Input = { name: string; age: number }
+type Prefixed = PrefixKeys<Input>
+// { prefix_name: string; prefix_age: number }
+
+----------------------------------------
+Example 20 (Original #20)
+File: 12\example_20.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type OnlyStrings<T> = {
+  [K in keyof T as T[K] extends string ? K : never]: T[K]
+}
+
+// Example:
+type Mixed = { a: string; b: number; c: string }
+type StringsOnly = OnlyStrings<Mixed>
+// { a: string; c: string }
+
+----------------------------------------
+Example 21 (Original #21)
+File: 12\example_21.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type EventHandlers<T> = {
+  [K in keyof T & string as `on${Capitalize<K>}`]: () => void
+}
+
+// Example:
+type UI = { click: boolean; focus: boolean }
+type Handlers = EventHandlers<UI>
+// { onClick: () => void; onFocus: () => void }
+
+----------------------------------------
+Example 22 (Original #22)
+File: 12\example_22.ts
+Source: docs\Chapters\12.md
+----------------------------------------
+type NullableFields<T> = {
+  [K in keyof T]: null extends T[K] ? T[K] : T[K] | null
+}
+
+// Example:
+type Person = { name: string; bio: string | null }
+type WithNullable = NullableFields<Person>
+// { name: string | null; bio: string | null }
+
+================================================================================
+CHAPTER: 13
+Examples: 2
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 13\example_01.ts
+Source: docs\Chapters\13.md
+----------------------------------------
+// robot-finder.ts
+
+type Robot  = { 
+  name: string
+  action(): string 
+}
+
+class RobotClass implements Robot {
+  constructor(public name: string, private emits: string) {}
+  action(): string {
+    return this.emits
+  }
+}
+
+type Person = { 
+  name: string
+  action(): string 
+}
+
+const p1: Person = { name: "Bob", action: () => "hi Bob"}
+// Type annotation gives good errors
+// const p2: Person = { name: "Bob"} // Error: action missing
+// const p3: Person = { action: () => "hi Bob"} // Error: name missing
+// const p4: Person = {} // Error: name, action missing
+// const p5: Person = { name: "Bob", action: () => 11 } // Type error
+// Don't use 'as' casting:
+const p6: Person = { name: "Bob"} as Person
+const p7: Person = { action: () => "hi Bob"} as Person
+const p8: Person = {} as Person
+// Although *sometimes* it catches errors:
+// const p9: Person = { name: "Bob", action: () => 11 } as Person
+
+const people: Array<Person> = [
+  { name: "Person Alice", action: () => "talks" },
+  { name: "Person Bob", action: () => "monologues" },
+  // { name: "?", action: 99 },  // Type error
+  // { name: 11, action: () => 42 },  // Type errors
+  // { name: "Alf", action: (x: string) => `${x}` }, // Type error
+  { name: "Robot C3PO", action: () => "informs" },
+  { name: "Robot K2SO", action: () => "pilots" } as Robot,
+  new RobotClass("Robot R2D2", "beeps")
+]
+
+const robots: Array<Robot> = [
+  { name: "Robot C3PO", action: () => "informs" },
+  new RobotClass("Robot R2D2", "beeps"),
+  // { name: 11, action: () => 42 }, // Type error
+  // { name: "?", action: 99 }, // Type error
+  // { name: "K2SO", action: (s: string) => s }, // Type error
+  { name: "Person Alice", action: () => "talks" },
+  { name: "Person Bob", action: () => "monologues" } as Person,
+]
+
+// Only a constructed class object is findable by instanceof:
+robots.forEach((item, index) => {
+  if(item instanceof RobotClass)
+    console.log(`${index}: [instanceof]`, item.name, item.action())
+})
+
+// Structural shape guard for all Robot shapes:
+function isRobot(x: any): x is Robot {
+  return (
+    typeof x === "object" &&
+    x !== null &&
+    typeof x.name === "string" &&
+    typeof x.action === "function" &&
+    x.action.length === 0  // No arguments
+  )
+}
+
+robots.forEach((item, index) => {
+  if (isRobot(item))
+    console.log(`${index}: [isRobot]`, item.name, item.action())
+})
+
+----------------------------------------
+Example 02 (Original #2)
+File: 13\example_02.ts
+Source: docs\Chapters\13.md
+----------------------------------------
+// tagged-robot-finder.ts
+const log = console.log.bind(console)
+
+type Robot = {
+  kind: "robot"
+  name: string
+  action(): string
+}
+
+class RobotClass implements Robot {
+  kind: "robot" = "robot"
+  constructor(public name: string, private emits: string) {}
+  action = (): string => this.emits
+}
+
+type Person = {
+  kind: "person"
+  name: string
+  action(): string
+}
+
+type Spoof = {
+  extra: string
+  action(): string
+  name: string
+  kind: "robot"
+}
+
+// Factory function:
+function makeSpoof(name: string, act: string): Spoof {
+  return {
+    action: () => act + " spoof",
+    name,
+    kind: "robot",
+    extra: "foo"
+  }
+}
+
+// Extend a type with a second type tag:
+type RobotWithBigness = Robot & {
+  bigness: "very"
+}
+
+// Implement extended type:
+class BigRobot implements RobotWithBigness {
+  kind: "robot" = "robot"
+  bigness: "very" = "very"
+  constructor(public name: string, private emits: string) {}
+  action = (): string => this.emits
+}
+
+// Class inheritance:
+class LittleRobot extends RobotClass {}
+
+const badRobots: Array<Robot> = [
+  // All produce type errors:
+  // { kind: "robot", action: () => "informs" }
+  // { kind: "robot", name: "K2SO", action: (x: string) => `${x}` },
+  // { kind: "robot", name: 11, action: () => 42 },
+  // { kind: "person", name: "Alice", action: () => "talks" },
+  // { name: "Morty", action: () => "aw geez" },
+  // Casts succeed, bad Robots:
+  {} as Robot,
+  { kind: "robot", name: "Demolition" } as Robot,
+  { kind: "robot", action: () => "cleans" } as Robot,
+  // 
+]
+
+function* robotGenerator(): Generator<Robot, void, unknown> {
+  yield new RobotClass("R2D2", "beeps")
+  yield { kind: "robot", name: "C3PO", action: () => "informs" }
+  yield makeSpoof("K2SO", "security")
+  // No upcasting allowed for non-constructed objects:
+  // yield { kind:"robot", name: "BB8", action: () => "rolls", bigness:"very" }
+  // Upcasting works with a constructed object:
+  yield new BigRobot("BB8", "rolls")
+  yield new LittleRobot("InsectBot", "flies")
+}
+
+const robots = Array.from(robotGenerator())
+
+// Only a constructed class object is findable by instanceof:
+robots.forEach(r => {
+  // Both checks required, no upcasting for type inheritance,
+  // but class inheritance is covered:
+  if (r instanceof RobotClass || r instanceof BigRobot)
+    log("instanceof:", r.name, r.action())
+})
+
+function show(obj: Record<string, unknown>): string {
+  return Object
+    .entries(obj)
+    .sort(([k1], [k2]) => k2.localeCompare(k1))  // reverse sort keys
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(", ");
+}
+
+// Type guard based only on tag:
+function isTaggedRobot(x: any): x is Robot {
+  return x?.kind === "robot"
+}
+
+// Find Robot objects using trusted discriminant:
+robots.forEach(r => {
+  log(`TaggedRobot [${isTaggedRobot(r)}]: ${show(r)}`)
+})
+    
+
+// Pattern match on discriminant:
+function detect(x: Person | Robot) {
+  switch (x.kind) {
+    case "person":
+      log(x, `detected Person ${x.name}`)
+      break
+    case "robot":
+      log(x, `detected Robot ${x.name}`)
+      break
+    default:
+      log(x, "did not detect Person or Robot")
+  }
+}
+
+robots.forEach(detect)
+
+// Thorough type guard:
+function isExactRobot(value: unknown): value is Robot {
+  if (value instanceof RobotClass) return true
+  if (typeof value !== "object" || value === null) return false
+  const obj = value as Record<string, unknown>
+  if (
+    obj.kind !== "robot" ||
+    typeof obj.name !== "string" ||
+    typeof obj.action !== "function"
+  ) return false
+  // No extra own properties:
+  const ownKeys = Object.keys(obj)
+  const allowedKeys = ["kind", "name", "action"]
+  return (
+    ownKeys.length === allowedKeys.length &&
+    allowedKeys.every(key => ownKeys.includes(key))
+  )
+}
+
+robots
+  .filter(isExactRobot)
+  .forEach(r => log("ExactRobot:", r.name, r.action()))
+
