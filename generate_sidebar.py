@@ -65,8 +65,8 @@ def generate_sidebar():
 
     for filepath in sorted_files:
         title = extract_title_from_markdown(filepath)
-        # Use absolute GitHub path to the raw file
-        relative_path = f"https://raw.githubusercontent.com/TypeScriptHandbook/TypeScriptHandbook.github.io/main/Chapters/{filepath.name}"
+        # Path relative to docs directory
+        relative_path = f"../Chapters/{filepath.name}"
 
         # Format: * [Title](path)
         sidebar_line = f"* [{title}]({relative_path})"
