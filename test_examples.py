@@ -322,34 +322,63 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         # Create chapter directories and files
         self._create_chapter_files(chapters)
 
-    def _get_type_check_output(self) -> str:
-        """Get type check output for consolidated file"""
+    def _get_type_check_output(self) -> tuple[str, list[str]]:
+        """Get type check output for consolidated file and return (output, error_summary)"""
         if not self._discover_commands():
-            return "ERROR: Could not discover npm/npx commands"
+            error = "ERROR: Could not discover npm/npx commands"
+            return error, [error]
 
         print("Installing TypeScript dependencies...")
         try:
             self._run_subprocess('npm', ['install'], check=True)
         except (RuntimeError, subprocess.CalledProcessError) as e:
-            return f"ERROR: Could not install TypeScript dependencies: {e}"
+            error = f"ERROR: Could not install TypeScript dependencies: {e}"
+            return error, [error]
 
         print("Running type check...")
         try:
             result = self._run_subprocess('npx', ['tsc'])
             if result.returncode == 0:
-                return "✅ All examples type check successfully!"
+                return "✅ All examples type check successfully!", []
             else:
-                return f"❌ Type checking failed:\n{result.stdout}\n{result.stderr}"
-        except RuntimeError as e:
-            return f"ERROR: Could not run TypeScript compiler: {e}"
+                # TypeScript errors go to stdout, not stderr
+                full_output = f"❌ Type checking failed:\n{result.stdout}\n{result.stderr}"
 
-    def create_consolidated_file(self, specific_chapters: list[int] | None = None) -> Path:
+                # Extract error summaries for console output from stdout
+                error_lines = []
+                for line in result.stdout.split('\n'):
+                    line = line.strip()
+                    if line and ': error TS' in line:
+                        # Extract just the error message part
+                        # Format: "file(line,col): error TSxxxx: message"
+                        if ': error TS' in line:
+                            parts = line.split(': error TS')
+                            if len(parts) >= 2:
+                                # Get the error code and message
+                                error_part = parts[1]
+                                if ':' in error_part:
+                                    error_code, message = error_part.split(':', 1)
+                                    error_lines.append(f"TS{error_code.strip()}: {message.strip()}")
+                                else:
+                                    error_lines.append(f"TS{error_part.strip()}")
+
+                # If no specific errors found, just indicate there were type errors
+                if not error_lines:
+                    error_lines = ["Type checking failed - see test_all.txt for details"]
+
+                return full_output, error_lines
+
+        except RuntimeError as e:
+            error = f"ERROR: Could not run TypeScript compiler: {e}"
+            return error, [error]
+
+    def create_consolidated_file(self, specific_chapters: list[int] | None = None) -> list[str]:
         """Create a single file containing all extracted examples for easy review"""
         consolidated_path = Path(".") / "test_all.txt"
 
         # Always get type check output
         print("Running type check to capture errors...")
-        type_check_output = self._get_type_check_output()
+        type_check_output, error_summary = self._get_type_check_output()
 
         # Write consolidated file
         with open(consolidated_path, 'w', encoding='utf-8') as f:
@@ -395,7 +424,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                     f.write("\n\n")
 
         print(f"📝 Created consolidated file: {consolidated_path}")
-        return consolidated_path
+        return error_summary
 
     def cleanup(self) -> None:
         """Remove node_modules but keep the test files"""
@@ -416,14 +445,14 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             self.create_test_files(self.config.specific_chapters)
             print(f"📄 Extracted {len(self.examples)} examples")
 
-            # Always create consolidated file
-            self.create_consolidated_file(self.config.specific_chapters)
+            # Always create consolidated file and get error summary
+            error_summary = self.create_consolidated_file(self.config.specific_chapters)
 
             return TestResults(
                 total_examples=len(self.examples),
                 successful_runs=len(self.examples),
-                type_check_passed=True,
-                errors=[]
+                type_check_passed=len(error_summary) == 0,
+                errors=error_summary
             )
 
         finally:
@@ -459,7 +488,17 @@ def main() -> None:
         if success:
             print(f"✅ Successfully processed {results.total_examples} examples and created consolidated file")
         else:
-            print(f"⚠️  Processed {results.total_examples} examples with some issues - check test_all.txt for details")
+            print(f"⚠️  Processed {results.total_examples} examples with some issues:")
+            print(f"   Type check passed: {results.type_check_passed}")
+
+            # Display error summary on console
+            if results.errors:
+                print(f"\n❌ Found {len(results.errors)} error(s):")
+                for i, error in enumerate(results.errors, 1):
+                    # Truncate very long errors for console display
+                    display_error = error[:100] + "..." if len(error) > 100 else error
+                    print(f"   {i:2d}. {display_error}")
+                print(f"\n📄 See test_all.txt for complete details")
 
         sys.exit(0 if success else 1)
 
