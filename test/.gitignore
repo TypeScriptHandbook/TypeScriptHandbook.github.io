@@ -2,6 +2,6 @@
 node_modules/
 package-lock.json
 
-# Generated files that change frequently
+# Generated files
 *.log
 *.tmp

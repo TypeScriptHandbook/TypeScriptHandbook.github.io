@@ -38,10 +38,10 @@ class TestConfig:
     cleanup: bool = True
 
     @classmethod
-    def create(cls, book_dir: str | Path = r".\docs\Chapters",
-               temp_dir: str | Path | None = None,
-               specific_chapters: list[int] | None = None,
-               cleanup: bool = True) -> "TestConfig":
+    def from_args(cls, book_dir: str | Path = r".\docs\Chapters",
+                  temp_dir: str | Path | None = None,
+                  specific_chapters: list[int] | None = None,
+                  cleanup: bool = True) -> "TestConfig":
         """Create TestConfig with path resolution"""
         book_path = Path(book_dir)
 
@@ -63,24 +63,23 @@ class TestConfig:
 class TestResults:
     """Results from running the test suite"""
     total_examples: int
-    successful_runs: int
     type_check_passed: bool
     errors: list[str]
 
     @property
-    def success_rate(self) -> float:
-        """Calculate success rate as percentage"""
-        if self.total_examples == 0:
-            return 0.0
-        return (self.successful_runs / self.total_examples) * 100
+    def success(self) -> bool:
+        """Check if the test run was successful"""
+        return self.type_check_passed and not self.errors
 
-    @property
-    def all_passed(self) -> bool:
-        """Check if all tests passed"""
-        return self.type_check_passed and self.successful_runs == self.total_examples
+
+class CommandNotFoundError(Exception):
+    """Raised when npm or npx commands cannot be found"""
+    pass
 
 
 class ExampleTester:
+    """Main class for extracting and testing TypeScript examples"""
+
     def __init__(self, config: TestConfig) -> None:
         self.config = config
         self.examples: list[TypeScriptExample] = []
@@ -100,11 +99,11 @@ class ExampleTester:
         self._npx_cmd = self._find_working_command(npx_variants)
 
         if not self._npm_cmd:
-            print("npm not found. Please ensure Node.js and npm are properly installed.")
+            print("❌ npm not found. Please ensure Node.js and npm are properly installed.")
             return False
 
         if not self._npx_cmd:
-            print("npx not found. Please ensure Node.js and npm are properly installed.")
+            print("❌ npx not found. Please ensure Node.js and npm are properly installed.")
             return False
 
         print(f"🔧 Using npm: {self._npm_cmd}, npx: {self._npx_cmd}")
@@ -125,12 +124,12 @@ class ExampleTester:
                 continue
         return None
 
-    def _run_subprocess(self, cmd: str, args: list[str], **kwargs) -> subprocess.CompletedProcess[str]:
+    def _run_subprocess(self, cmd_type: str, args: list[str], **kwargs) -> subprocess.CompletedProcess[str]:
         """Run subprocess with guaranteed non-None command"""
         if not self._discover_commands():
-            raise RuntimeError("Could not discover npm/npx commands")
+            raise CommandNotFoundError("Could not discover npm/npx commands")
 
-        command = self._npm_cmd if cmd == 'npm' else self._npx_cmd
+        command = self._npm_cmd if cmd_type == 'npm' else self._npx_cmd
         assert command is not None  # Guaranteed by _discover_commands success
 
         return subprocess.run([command] + args,
@@ -140,21 +139,26 @@ class ExampleTester:
                               shell=True,
                               **kwargs)
 
-    def extract_code_blocks(self, markdown_file: Path) -> list[TypeScriptExample]:
-        """Extract TypeScript code blocks from a markdown file"""
-        with open(markdown_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-
+    def _extract_typescript_blocks(self, content: str) -> list[str]:
+        """Extract TypeScript code blocks from markdown content"""
         pattern = r'```ts\n(.*?)\n```'
         matches = re.findall(pattern, content, re.DOTALL)
+        return [code.strip() for code in matches if code.strip()]
+
+    def extract_code_blocks(self, markdown_file: Path) -> list[TypeScriptExample]:
+        """Extract TypeScript code blocks from a markdown file"""
+        try:
+            with open(markdown_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+        except (OSError, UnicodeDecodeError) as e:
+            print(f"⚠️  Warning: Could not read {markdown_file}: {e}")
+            return []
+
+        code_blocks = self._extract_typescript_blocks(content)
         chapter_name = markdown_file.stem
         examples = []
 
-        for i, code in enumerate(matches, 1):
-            code = code.strip()
-            if not code:
-                continue
-
+        for i, code in enumerate(code_blocks, 1):
             examples.append(TypeScriptExample(
                 chapter=chapter_name,
                 number=i,
@@ -164,25 +168,29 @@ class ExampleTester:
 
         return examples
 
-    def find_markdown_files(self, specific_chapters: list[int] | None = None) -> list[Path]:
+    def find_markdown_files(self) -> list[Path]:
         """Find markdown files, optionally filtered by chapter numbers"""
-        all_files = list(self.config.book_dir.glob("*.md"))
+        try:
+            all_files = list(self.config.book_dir.glob("*.md"))
+        except OSError as e:
+            print(f"❌ Error accessing directory {self.config.book_dir}: {e}")
+            return []
 
-        if not specific_chapters:
+        if not self.config.specific_chapters:
             return all_files
 
         filtered_files = []
-        for chapter_num in specific_chapters:
+        for chapter_num in self.config.specific_chapters:
             chapter_files = [
                 f for f in all_files
                 if f.stem == f"{chapter_num:02d}" or f.stem == str(chapter_num)
             ]
             filtered_files.extend(chapter_files)
+
         return filtered_files
 
-    def _create_config_files(self) -> None:
-        """Create package.json, tsconfig.json, and other config files"""
-        # package.json
+    def _create_package_json(self) -> None:
+        """Create package.json for TypeScript dependencies"""
         package_json = {
             "name": "typescript-book-examples",
             "version": "1.0.0",
@@ -192,10 +200,13 @@ class ExampleTester:
                 "ts-node": "^10.0.0"
             }
         }
-        with open(self.config.temp_dir / "package.json", 'w', encoding='utf-8') as f:
+
+        package_path = self.config.temp_dir / "package.json"
+        with open(package_path, 'w', encoding='utf-8') as f:
             json.dump(package_json, f, indent=2)
 
-        # tsconfig.json
+    def _create_tsconfig(self) -> None:
+        """Create TypeScript configuration file"""
         tsconfig = {
             "compilerOptions": {
                 "target": "ES2020",
@@ -211,15 +222,19 @@ class ExampleTester:
             },
             "include": ["**/*.ts"]
         }
-        with open(self.config.temp_dir / "tsconfig.json", 'w', encoding='utf-8') as f:
+
+        tsconfig_path = self.config.temp_dir / "tsconfig.json"
+        with open(tsconfig_path, 'w', encoding='utf-8') as f:
             json.dump(tsconfig, f, indent=2)
 
+    def _create_support_files(self) -> None:
+        """Create .gitignore and README files"""
         # .gitignore
         gitignore_content = """# Dependencies
 node_modules/
 package-lock.json
 
-# Generated files that change frequently
+# Generated files
 *.log
 *.tmp
 """
@@ -227,34 +242,30 @@ package-lock.json
             f.write(gitignore_content)
 
         # README.md
-        readme_content = """# TypeScript Book Examples Test Directory
+        readme_content = f"""# TypeScript Book Examples Test Directory
+
+Generated on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
 This directory contains automatically extracted TypeScript examples from the book chapters.
 
 ## Structure
-
-test/
-- package.json         # TypeScript dependencies
-- tsconfig.json        # TypeScript compiler configuration
-- chapter01/           # Examples from Chapter 1
-  - example_01.ts
-  - example_02.ts
-  - ...
-- chapter02/           # Examples from Chapter 2
-  - example_01.ts
-  - ...
+- `package.json` - TypeScript dependencies
+- `tsconfig.json` - TypeScript compiler configuration
+- `chapter*/` - Example directories organized by chapter
+- Each chapter contains numbered TypeScript files
 
 ## Usage
-Run the test script from the project root:
-```bash
-python test_examples.py
-```
-
-Each chapter directory contains the extracted code examples from that chapter's markdown file.
 This directory is automatically recreated each time the test script runs.
+See `test_all.txt` in the parent directory for consolidated results.
 """
         with open(self.config.temp_dir / "README.md", 'w', encoding='utf-8') as f:
             f.write(readme_content)
+
+    def _create_config_files(self) -> None:
+        """Create all configuration and support files"""
+        self._create_package_json()
+        self._create_tsconfig()
+        self._create_support_files()
 
     def _create_chapter_files(self, chapters: dict[str, list[TypeScriptExample]]) -> None:
         """Create TypeScript files organized by chapter"""
@@ -263,21 +274,22 @@ This directory is automatically recreated each time the test script runs.
             chapter_dir.mkdir(exist_ok=True)
 
             # Create chapter README
-            chapter_readme = f"""# {chapter_name.title()} Examples
+            readme_content = f"""# {chapter_name.title()} Examples
 
 This directory contains {len(chapter_examples)} examples extracted from {chapter_name}.md
 
 ## Examples:
 """
             for i, example in enumerate(chapter_examples, 1):
-                chapter_readme += f"- `example_{i:02d}.ts` - Example {example.number} from the source\n"
+                readme_content += f"- `example_{i:02d}.ts` - Example {example.number} from the source\n"
 
             with open(chapter_dir / "README.md", 'w', encoding='utf-8') as f:
-                f.write(chapter_readme)
+                f.write(readme_content)
 
             # Create TypeScript files
             for i, example in enumerate(chapter_examples, 1):
                 file_path = chapter_dir / f"example_{i:02d}.ts"
+
                 header = f"""// Extracted from: {example.source_file}
 // Original example number: {example.number}
 // Auto-generated - do not edit directly
@@ -289,7 +301,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                 # Update filename for later reference
                 example.filename = str(file_path.relative_to(self.config.temp_dir))
 
-    def create_test_files(self, specific_chapters: list[int] | None = None) -> None:
+    def create_test_files(self) -> None:
         """Create TypeScript files from extracted examples"""
         # Setup test directory
         if self.config.temp_dir.exists():
@@ -299,39 +311,66 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         self.config.temp_dir.mkdir(exist_ok=True)
         print(f"📁 Created test directory: {self.config.temp_dir}")
 
-        if specific_chapters:
-            print(f"📋 Testing chapters: {', '.join(map(str, specific_chapters))}")
+        if self.config.specific_chapters:
+            chapters_str = ', '.join(map(str, self.config.specific_chapters))
+            print(f"📋 Testing chapters: {chapters_str}")
 
         # Create configuration files
         self._create_config_files()
 
         # Extract examples from markdown files
-        markdown_files = self.find_markdown_files(specific_chapters)
+        markdown_files = self.find_markdown_files()
+        if not markdown_files:
+            print("⚠️  No markdown files found")
+            return
+
         for md_file in markdown_files:
             examples = self.extract_code_blocks(md_file)
             self.examples.extend(examples)
 
+        if not self.examples:
+            print("⚠️  No TypeScript examples found")
+            return
+
         # Group examples by chapter
         chapters: dict[str, list[TypeScriptExample]] = {}
         for example in self.examples:
-            chapter = example.chapter
-            if chapter not in chapters:
-                chapters[chapter] = []
-            chapters[chapter].append(example)
+            if example.chapter not in chapters:
+                chapters[example.chapter] = []
+            chapters[example.chapter].append(example)
 
         # Create chapter directories and files
         self._create_chapter_files(chapters)
 
-    def _get_type_check_output(self) -> tuple[str, list[str]]:
-        """Get type check output for consolidated file and return (output, error_summary)"""
-        if not self._discover_commands():
-            error = "ERROR: Could not discover npm/npx commands"
-            return error, [error]
+    def _parse_typescript_errors(self, output: str) -> list[str]:
+        """Parse TypeScript compiler output to extract error summaries"""
+        error_lines = []
 
+        for line in output.split('\n'):
+            line = line.strip()
+            if line and ': error TS' in line:
+                # Format: "file(line,col): error TSxxxx: message"
+                try:
+                    parts = line.split(': error TS', 1)
+                    if len(parts) >= 2:
+                        error_part = parts[1]
+                        if ':' in error_part:
+                            error_code, message = error_part.split(':', 1)
+                            error_lines.append(f"TS{error_code.strip()}: {message.strip()}")
+                        else:
+                            error_lines.append(f"TS{error_part.strip()}")
+                except (IndexError, ValueError):
+                    # If parsing fails, use the original line
+                    error_lines.append(line)
+
+        return error_lines
+
+    def _run_type_check(self) -> tuple[str, list[str]]:
+        """Run TypeScript compiler and return (full_output, error_summary)"""
         print("Installing TypeScript dependencies...")
         try:
             self._run_subprocess('npm', ['install'], check=True)
-        except (RuntimeError, subprocess.CalledProcessError) as e:
+        except (CommandNotFoundError, subprocess.CalledProcessError) as e:
             error = f"ERROR: Could not install TypeScript dependencies: {e}"
             return error, [error]
 
@@ -341,55 +380,39 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             if result.returncode == 0:
                 return "✅ All examples type check successfully!", []
             else:
-                # TypeScript errors go to stdout, not stderr
-                full_output = f"❌ Type checking failed:\n{result.stdout}\n{result.stderr}"
+                full_output = f"❌ Type checking failed:\n{result.stdout}"
+                if result.stderr:
+                    full_output += f"\n{result.stderr}"
 
-                # Extract error summaries for console output from stdout
-                error_lines = []
-                for line in result.stdout.split('\n'):
-                    line = line.strip()
-                    if line and ': error TS' in line:
-                        # Extract just the error message part
-                        # Format: "file(line,col): error TSxxxx: message"
-                        if ': error TS' in line:
-                            parts = line.split(': error TS')
-                            if len(parts) >= 2:
-                                # Get the error code and message
-                                error_part = parts[1]
-                                if ':' in error_part:
-                                    error_code, message = error_part.split(':', 1)
-                                    error_lines.append(f"TS{error_code.strip()}: {message.strip()}")
-                                else:
-                                    error_lines.append(f"TS{error_part.strip()}")
+                error_summary = self._parse_typescript_errors(result.stdout)
+                if not error_summary:
+                    error_summary = ["Type checking failed - see test_all.txt for details"]
 
-                # If no specific errors found, just indicate there were type errors
-                if not error_lines:
-                    error_lines = ["Type checking failed - see test_all.txt for details"]
+                return full_output, error_summary
 
-                return full_output, error_lines
-
-        except RuntimeError as e:
-            error = f"ERROR: Could not run TypeScript compiler: {e}"
+        except CommandNotFoundError as e:
+            error = f"ERROR: {e}"
             return error, [error]
 
-    def create_consolidated_file(self, specific_chapters: list[int] | None = None) -> list[str]:
-        """Create a single file containing all extracted examples for easy review"""
-        consolidated_path = Path(".") / "test_all.txt"
+    def create_consolidated_file(self) -> list[str]:
+        """Create consolidated file with all examples and type check results"""
+        output_path = Path("test_all.txt")
 
-        # Always get type check output
-        print("Running type check to capture errors...")
-        type_check_output, error_summary = self._get_type_check_output()
+        print("Running type check...")
+        type_check_output, error_summary = self._run_type_check()
 
         # Write consolidated file
-        with open(consolidated_path, 'w', encoding='utf-8') as f:
+        with open(output_path, 'w', encoding='utf-8') as f:
             # Header
             f.write("=" * 80 + "\n")
             f.write("TYPESCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE\n")
             f.write("=" * 80 + "\n\n")
             f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"Total examples: {len(self.examples)}\n")
-            if specific_chapters:
-                f.write(f"Chapters tested: {', '.join(map(str, specific_chapters))}\n")
+
+            if self.config.specific_chapters:
+                chapters_str = ', '.join(map(str, self.config.specific_chapters))
+                f.write(f"Chapters tested: {chapters_str}\n")
             f.write("\n")
 
             # Type check results
@@ -402,10 +425,9 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             # Examples by chapter
             chapters: dict[str, list[TypeScriptExample]] = {}
             for example in self.examples:
-                chapter = example.chapter
-                if chapter not in chapters:
-                    chapters[chapter] = []
-                chapters[chapter].append(example)
+                if example.chapter not in chapters:
+                    chapters[example.chapter] = []
+                chapters[example.chapter].append(example)
 
             for chapter_name in sorted(chapters.keys()):
                 chapter_examples = chapters[chapter_name]
@@ -423,34 +445,40 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                     f.write(example.code)
                     f.write("\n\n")
 
-        print(f"📝 Created consolidated file: {consolidated_path}")
+        print(f"📝 Created consolidated file: {output_path}")
         return error_summary
 
     def cleanup(self) -> None:
-        """Remove node_modules but keep the test files"""
+        """Remove temporary files but keep the test structure"""
         node_modules = self.config.temp_dir / "node_modules"
         if node_modules.exists():
             shutil.rmtree(node_modules)
-            print(f"🧹 Cleaned up node_modules: {node_modules}")
+            print(f"🧹 Cleaned up node_modules")
         else:
             print(f"📁 Test directory preserved: {self.config.temp_dir}")
 
-    def test_all(self) -> TestResults:
+    def run(self) -> TestResults:
         """Run the complete test suite and create consolidated file"""
         print(f"🔍 Extracting examples from: {self.config.book_dir}")
         print(f"📁 Using test directory: {self.config.temp_dir}")
 
         try:
             # Extract and create test files
-            self.create_test_files(self.config.specific_chapters)
+            self.create_test_files()
+            if not self.examples:
+                return TestResults(
+                    total_examples=0,
+                    type_check_passed=False,
+                    errors=["No TypeScript examples found"]
+                )
+
             print(f"📄 Extracted {len(self.examples)} examples")
 
-            # Always create consolidated file and get error summary
-            error_summary = self.create_consolidated_file(self.config.specific_chapters)
+            # Create consolidated file and get error summary
+            error_summary = self.create_consolidated_file()
 
             return TestResults(
                 total_examples=len(self.examples),
-                successful_runs=len(self.examples),
                 type_check_passed=len(error_summary) == 0,
                 errors=error_summary
             )
@@ -460,19 +488,50 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                 self.cleanup()
 
 
+def print_results(results: TestResults) -> None:
+    """Print test results to console"""
+    if results.success:
+        print(f"✅ Successfully processed {results.total_examples} examples")
+    else:
+        print(f"⚠️  Processed {results.total_examples} examples with issues:")
+        print(f"   Type check passed: {results.type_check_passed}")
+
+        if results.errors:
+            print(f"\n❌ Found {len(results.errors)} error(s):")
+            for i, error in enumerate(results.errors, 1):
+                # Truncate very long errors for console display
+                display_error = error[:100] + "..." if len(error) > 100 else error
+                print(f"   {i:2d}. {display_error}")
+            print(f"\n📄 See test_all.txt for complete details")
+
+
 def main() -> None:
+    """Main entry point"""
     import argparse
 
     parser = argparse.ArgumentParser(
-        description='Test TypeScript examples from markdown files and create consolidated output')
-    parser.add_argument('--book-dir', default=r'.\docs\Chapters', help='Directory containing markdown files')
-    parser.add_argument('--temp-dir', help='Directory for test files (default: ./test)')
-    parser.add_argument('--no-cleanup', action='store_true', help='Keep node_modules directory')
-    parser.add_argument('--chapters', type=int, nargs='+', help='Test only specific chapters (e.g., --chapters 1 2 5)')
+        description='Extract TypeScript examples from markdown files and test them',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python test_examples.py                    # Test all chapters
+  python test_examples.py --chapters 1 2 3  # Test specific chapters
+  python test_examples.py --no-cleanup      # Keep temporary files
+        """
+    )
+
+    parser.add_argument('--book-dir', default=r'.\docs\Chapters',
+                        help='Directory containing markdown files (default: %(default)s)')
+    parser.add_argument('--temp-dir',
+                        help='Directory for test files (default: ./test)')
+    parser.add_argument('--no-cleanup', action='store_true',
+                        help='Keep node_modules directory after testing')
+    parser.add_argument('--chapters', type=int, nargs='+',
+                        help='Test only specific chapters (e.g., --chapters 1 2 5)')
 
     args = parser.parse_args()
 
-    config = TestConfig.create(
+    config = TestConfig.from_args(
         book_dir=args.book_dir,
         temp_dir=args.temp_dir,
         specific_chapters=args.chapters,
@@ -482,30 +541,17 @@ def main() -> None:
     tester = ExampleTester(config)
 
     try:
-        results = tester.test_all()
-        success = results.all_passed
-
-        if success:
-            print(f"✅ Successfully processed {results.total_examples} examples and created consolidated file")
-        else:
-            print(f"⚠️  Processed {results.total_examples} examples with some issues:")
-            print(f"   Type check passed: {results.type_check_passed}")
-
-            # Display error summary on console
-            if results.errors:
-                print(f"\n❌ Found {len(results.errors)} error(s):")
-                for i, error in enumerate(results.errors, 1):
-                    # Truncate very long errors for console display
-                    display_error = error[:100] + "..." if len(error) > 100 else error
-                    print(f"   {i:2d}. {display_error}")
-                print(f"\n📄 See test_all.txt for complete details")
-
-        sys.exit(0 if success else 1)
+        results = tester.run()
+        print_results(results)
+        sys.exit(0 if results.success else 1)
 
     except KeyboardInterrupt:
         print("\n⏹️  Processing interrupted")
-        if not args.no_cleanup:
+        if config.cleanup:
             tester.cleanup()
+        sys.exit(1)
+    except Exception as e:
+        print(f"❌ Unexpected error: {e}")
         sys.exit(1)
 
 
