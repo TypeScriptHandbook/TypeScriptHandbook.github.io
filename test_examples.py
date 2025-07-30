@@ -36,12 +36,14 @@ class TestConfig:
     temp_dir: Path
     specific_chapters: list[int] | None = None
     cleanup: bool = True
+    include_all_examples: bool = False
 
     @classmethod
     def from_args(cls, book_dir: str | Path = r".\docs\Chapters",
                   temp_dir: str | Path | None = None,
                   specific_chapters: list[int] | None = None,
-                  cleanup: bool = True) -> "TestConfig":
+                  cleanup: bool = True,
+                  include_all_examples: bool = False) -> "TestConfig":
         """Create TestConfig with path resolution"""
         book_path = Path(book_dir)
 
@@ -55,7 +57,8 @@ class TestConfig:
             book_dir=book_path,
             temp_dir=temp_path,
             specific_chapters=specific_chapters,
-            cleanup=cleanup
+            cleanup=cleanup,
+            include_all_examples=include_all_examples
         )
 
 
@@ -342,15 +345,21 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         # Create chapter directories and files
         self._create_chapter_files(chapters)
 
-    def _parse_typescript_errors(self, output: str) -> list[str]:
-        """Parse TypeScript compiler output to extract error summaries"""
+    def _parse_typescript_errors(self, output: str) -> tuple[list[str], set[str]]:
+        """Parse TypeScript compiler output to extract error summaries and failing files"""
         error_lines = []
+        failing_files = set()
 
         for line in output.split('\n'):
             line = line.strip()
             if line and ': error TS' in line:
                 # Format: "file(line,col): error TSxxxx: message"
                 try:
+                    # Extract the filename from the beginning of the error
+                    file_part = line.split('(')[0] if '(' in line else line.split(':')[0]
+                    if file_part:
+                        failing_files.add(file_part)
+
                     parts = line.split(': error TS', 1)
                     if len(parts) >= 2:
                         error_part = parts[1]
@@ -363,43 +372,51 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                     # If parsing fails, use the original line
                     error_lines.append(line)
 
-        return error_lines
+        return error_lines, failing_files
 
-    def _run_type_check(self) -> tuple[str, list[str]]:
-        """Run TypeScript compiler and return (full_output, error_summary)"""
+    def _run_type_check(self) -> tuple[str, list[str], set[str]]:
+        """Run TypeScript compiler and return (full_output, error_summary, failing_files)"""
         print("Installing TypeScript dependencies...")
         try:
             self._run_subprocess('npm', ['install'], check=True)
         except (CommandNotFoundError, subprocess.CalledProcessError) as e:
             error = f"ERROR: Could not install TypeScript dependencies: {e}"
-            return error, [error]
+            return error, [error], set()
 
         print("Running type check...")
         try:
             result = self._run_subprocess('npx', ['tsc'])
             if result.returncode == 0:
-                return "✅ All examples type check successfully!", []
+                return "✅ All examples type check successfully!", [], set()
             else:
                 full_output = f"❌ Type checking failed:\n{result.stdout}"
                 if result.stderr:
                     full_output += f"\n{result.stderr}"
 
-                error_summary = self._parse_typescript_errors(result.stdout)
+                error_summary, failing_files = self._parse_typescript_errors(result.stdout)
                 if not error_summary:
                     error_summary = ["Type checking failed - see test_all.txt for details"]
 
-                return full_output, error_summary
+                return full_output, error_summary, failing_files
 
         except CommandNotFoundError as e:
             error = f"ERROR: {e}"
-            return error, [error]
+            return error, [error], set()
+
+    def _should_include_example(self, example: TypeScriptExample, failing_files: set[str]) -> bool:
+        """Determine if an example should be included in the output"""
+        if self.config.include_all_examples:
+            return True
+
+        # Only include examples that have errors
+        return example.filename in failing_files
 
     def create_consolidated_file(self) -> list[str]:
         """Create consolidated file with all examples and type check results"""
         output_path = Path("test_all.txt")
 
         print("Running type check...")
-        type_check_output, error_summary = self._run_type_check()
+        type_check_output, error_summary, failing_files = self._run_type_check()
 
         # Write consolidated file
         with open(output_path, 'w', encoding='utf-8') as f:
@@ -409,6 +426,11 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             f.write("=" * 80 + "\n\n")
             f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"Total examples: {len(self.examples)}\n")
+
+            if self.config.include_all_examples:
+                f.write("Mode: All examples included\n")
+            else:
+                f.write("Mode: Error examples only\n")
 
             if self.config.specific_chapters:
                 chapters_str = ', '.join(map(str, self.config.specific_chapters))
@@ -422,18 +444,34 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             f.write(type_check_output)
             f.write("\n\n")
 
-            # Examples by chapter
+            # Examples by chapter (filtered based on mode)
             chapters: dict[str, list[TypeScriptExample]] = {}
+            included_count = 0
+
             for example in self.examples:
-                if example.chapter not in chapters:
-                    chapters[example.chapter] = []
-                chapters[example.chapter].append(example)
+                if self._should_include_example(example, failing_files):
+                    if example.chapter not in chapters:
+                        chapters[example.chapter] = []
+                    chapters[example.chapter].append(example)
+                    included_count += 1
+
+            if not self.config.include_all_examples and included_count < len(self.examples):
+                f.write(
+                    f"Note: Showing {included_count} examples with errors out of {len(self.examples)} total examples.\n")
+                f.write("Use --everything flag to include all examples.\n\n")
 
             for chapter_name in sorted(chapters.keys()):
                 chapter_examples = chapters[chapter_name]
                 f.write("=" * 80 + "\n")
                 f.write(f"CHAPTER: {chapter_name.upper()}\n")
-                f.write(f"Examples: {len(chapter_examples)}\n")
+                f.write(f"Examples: {len(chapter_examples)}")
+
+                if not self.config.include_all_examples:
+                    total_in_chapter = sum(1 for ex in self.examples if ex.chapter == chapter_name)
+                    if len(chapter_examples) < total_in_chapter:
+                        f.write(f" (showing errors only, {total_in_chapter} total)")
+
+                f.write("\n")
                 f.write("=" * 80 + "\n\n")
 
                 for i, example in enumerate(chapter_examples, 1):
@@ -441,11 +479,24 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                     f.write(f"Example {i:02d} (Original #{example.number})\n")
                     f.write(f"File: {example.filename}\n")
                     f.write(f"Source: {example.source_file}\n")
+
+                    # Mark examples with errors
+                    if example.filename in failing_files:
+                        f.write("Status: ❌ HAS ERRORS\n")
+                    elif self.config.include_all_examples:
+                        f.write("Status: ✅ No errors\n")
+
                     f.write("-" * 40 + "\n")
                     f.write(example.code)
                     f.write("\n\n")
 
         print(f"📝 Created consolidated file: {output_path}")
+
+        if not self.config.include_all_examples and len(self.examples) > 0:
+            included_count = sum(1 for ex in self.examples if self._should_include_example(ex, failing_files))
+            if included_count < len(self.examples):
+                print(f"📊 Included {included_count} examples with errors (out of {len(self.examples)} total)")
+
         return error_summary
 
     def cleanup(self) -> None:
@@ -514,8 +565,9 @@ def main() -> None:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python test_examples.py                    # Test all chapters
-  python test_examples.py --chapters 1 2 3  # Test specific chapters
+  python test_examples.py                    # Test all chapters (errors only)
+  python test_examples.py --everything       # Test all chapters (include all examples)
+  python test_examples.py --chapters 1 2 3  # Test specific chapters (errors only)
   python test_examples.py --no-cleanup      # Keep temporary files
         """
     )
@@ -526,6 +578,8 @@ Examples:
                         help='Directory for test files (default: ./test)')
     parser.add_argument('--no-cleanup', action='store_true',
                         help='Keep node_modules directory after testing')
+    parser.add_argument('--everything', action='store_true',
+                        help='Include all examples in output (default: only show examples with errors)')
     parser.add_argument('--chapters', type=int, nargs='+',
                         help='Test only specific chapters (e.g., --chapters 1 2 5)')
 
@@ -535,7 +589,8 @@ Examples:
         book_dir=args.book_dir,
         temp_dir=args.temp_dir,
         specific_chapters=args.chapters,
-        cleanup=not args.no_cleanup
+        cleanup=not args.no_cleanup,
+        include_all_examples=args.everything
     )
 
     tester = ExampleTester(config)
