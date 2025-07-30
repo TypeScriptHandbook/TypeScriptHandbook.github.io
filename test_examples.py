@@ -54,11 +54,25 @@ class ExampleTester:
 
         return examples
 
-    def find_markdown_files(self):
-        """Find all markdown files in the book directory"""
-        return list(self.book_dir.glob("*.md"))
+    def find_markdown_files(self, specific_chapters=None):
+        """Find markdown files, optionally filtered by chapter numbers"""
+        all_files = list(self.book_dir.glob("*.md"))
 
-    def create_test_files(self):
+        if specific_chapters:
+            # Filter files based on chapter numbers
+            filtered_files = []
+            for chapter_num in specific_chapters:
+                # Look for files that start with the chapter number (e.g., "01.md", "1.md")
+                chapter_files = [
+                    f for f in all_files
+                    if f.stem == f"{chapter_num:02d}" or f.stem == str(chapter_num)
+                ]
+                filtered_files.extend(chapter_files)
+            return filtered_files
+
+        return all_files
+
+    def create_test_files(self, specific_chapters=None):
         """Create TypeScript files from extracted examples"""
         # Remove and recreate test directory
         if self.temp_dir.exists():
@@ -67,6 +81,9 @@ class ExampleTester:
 
         self.temp_dir.mkdir(exist_ok=True)
         print(f"📁 Created test directory: {self.temp_dir}")
+
+        if specific_chapters:
+            print(f"📋 Testing chapters: {', '.join(map(str, specific_chapters))}")
 
         # Create package.json for TypeScript support at root of test directory
         package_json = {
@@ -148,7 +165,7 @@ This directory is automatically recreated each time the test script runs.
             f.write(readme_content)
 
         # Extract examples from all markdown files
-        markdown_files = self.find_markdown_files()
+        markdown_files = self.find_markdown_files(specific_chapters)
 
         for md_file in markdown_files:
             examples = self.extract_code_blocks(md_file)
@@ -321,7 +338,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         print(f"\n📊 Results: {success_count}/{len(self.examples)} examples ran successfully")
         return success_count == len(self.examples)
 
-    def create_consolidated_file(self, include_errors=False):
+    def create_consolidated_file(self, include_errors=False, specific_chapters=None):
         """Create a single file containing all extracted examples for easy review"""
         consolidated_path = Path(".") / "test_all.txt"
 
@@ -361,7 +378,10 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             f.write("=" * 80 + "\n\n")
             f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"Total examples: {len(self.examples)}\n")
-            f.write(f"Include errors: {include_errors}\n\n")
+            f.write(f"Include errors: {include_errors}\n")
+            if specific_chapters:
+                f.write(f"Chapters tested: {', '.join(map(str, specific_chapters))}\n")
+            f.write("\n")
 
             # Add type check results if requested
             if include_errors and type_check_output:
@@ -408,19 +428,19 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         else:
             print(f"📁 Test directory preserved: {self.temp_dir}")
 
-    def test_all(self, cleanup=True, create_consolidated=False, include_errors=False):
+    def test_all(self, cleanup=True, create_consolidated=False, include_errors=False, specific_chapters=None):
         """Run the complete test suite"""
         print(f"🔍 Extracting examples from: {self.book_dir}")
         print(f"📁 Using test directory: {self.temp_dir}")
 
         try:
             # Step 1: Extract and create test files
-            self.create_test_files()
+            self.create_test_files(specific_chapters)
             print(f"📄 Extracted {len(self.examples)} examples")
 
             # Step 1.5: Create consolidated file if requested
             if create_consolidated:
-                self.create_consolidated_file(include_errors)
+                self.create_consolidated_file(include_errors, specific_chapters)
                 return True  # Just create the file and exit
 
             # Step 2: Install dependencies
@@ -451,6 +471,7 @@ def main():
     parser.add_argument('--consolidated', action='store_true', help='Create consolidated test_all.txt file and exit')
     parser.add_argument('--include-errors', action='store_true',
                         help='Include TypeScript error output in consolidated file')
+    parser.add_argument('--chapters', type=int, nargs='+', help='Test only specific chapters (e.g., --chapters 1 2 5)')
 
     args = parser.parse_args()
 
@@ -458,15 +479,15 @@ def main():
 
     try:
         if args.consolidated:
-            tester.create_test_files()
-            tester.create_consolidated_file(args.include_errors)
+            tester.create_test_files(args.chapters)
+            tester.create_consolidated_file(args.include_errors, args.chapters)
             success = True
         elif args.type_check_only:
-            tester.create_test_files()
+            tester.create_test_files(args.chapters)
             tester.install_dependencies()
             success = tester.type_check_examples()
         else:
-            success = tester.test_all(cleanup=not args.no_cleanup)
+            success = tester.test_all(cleanup=not args.no_cleanup, specific_chapters=args.chapters)
 
         sys.exit(0 if success else 1)
 
