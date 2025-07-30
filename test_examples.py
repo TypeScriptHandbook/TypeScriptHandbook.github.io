@@ -36,14 +36,12 @@ class TestConfig:
     temp_dir: Path
     specific_chapters: list[int] | None = None
     cleanup: bool = True
-    include_errors: bool = False
 
     @classmethod
     def create(cls, book_dir: str | Path = r".\docs\Chapters",
                temp_dir: str | Path | None = None,
                specific_chapters: list[int] | None = None,
-               cleanup: bool = True,
-               include_errors: bool = False) -> "TestConfig":
+               cleanup: bool = True) -> "TestConfig":
         """Create TestConfig with path resolution"""
         book_path = Path(book_dir)
 
@@ -57,8 +55,7 @@ class TestConfig:
             book_dir=book_path,
             temp_dir=temp_path,
             specific_chapters=specific_chapters,
-            cleanup=cleanup,
-            include_errors=include_errors
+            cleanup=cleanup
         )
 
 
@@ -346,16 +343,13 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         except RuntimeError as e:
             return f"ERROR: Could not run TypeScript compiler: {e}"
 
-    def create_consolidated_file(self, include_errors: bool = False,
-                                 specific_chapters: list[int] | None = None) -> Path:
+    def create_consolidated_file(self, specific_chapters: list[int] | None = None) -> Path:
         """Create a single file containing all extracted examples for easy review"""
         consolidated_path = Path(".") / "test_all.txt"
 
-        # Get type check output if requested
-        type_check_output = ""
-        if include_errors:
-            print("Running type check to capture errors...")
-            type_check_output = self._get_type_check_output()
+        # Always get type check output
+        print("Running type check to capture errors...")
+        type_check_output = self._get_type_check_output()
 
         # Write consolidated file
         with open(consolidated_path, 'w', encoding='utf-8') as f:
@@ -365,18 +359,16 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             f.write("=" * 80 + "\n\n")
             f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"Total examples: {len(self.examples)}\n")
-            f.write(f"Include errors: {include_errors}\n")
             if specific_chapters:
                 f.write(f"Chapters tested: {', '.join(map(str, specific_chapters))}\n")
             f.write("\n")
 
             # Type check results
-            if include_errors and type_check_output:
-                f.write("=" * 80 + "\n")
-                f.write("TYPE CHECK RESULTS\n")
-                f.write("=" * 80 + "\n")
-                f.write(type_check_output)
-                f.write("\n\n")
+            f.write("=" * 80 + "\n")
+            f.write("TYPE CHECK RESULTS\n")
+            f.write("=" * 80 + "\n")
+            f.write(type_check_output)
+            f.write("\n\n")
 
             # Examples by chapter
             chapters: dict[str, list[TypeScriptExample]] = {}
@@ -425,7 +417,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             print(f"📄 Extracted {len(self.examples)} examples")
 
             # Always create consolidated file
-            self.create_consolidated_file(self.config.include_errors, self.config.specific_chapters)
+            self.create_consolidated_file(self.config.specific_chapters)
 
             return TestResults(
                 total_examples=len(self.examples),
@@ -447,8 +439,6 @@ def main() -> None:
     parser.add_argument('--book-dir', default=r'.\docs\Chapters', help='Directory containing markdown files')
     parser.add_argument('--temp-dir', help='Directory for test files (default: ./test)')
     parser.add_argument('--no-cleanup', action='store_true', help='Keep node_modules directory')
-    parser.add_argument('--include-errors', action='store_true',
-                        help='Include TypeScript error output in consolidated file')
     parser.add_argument('--chapters', type=int, nargs='+', help='Test only specific chapters (e.g., --chapters 1 2 5)')
 
     args = parser.parse_args()
@@ -457,8 +447,7 @@ def main() -> None:
         book_dir=args.book_dir,
         temp_dir=args.temp_dir,
         specific_chapters=args.chapters,
-        cleanup=not args.no_cleanup,
-        include_errors=args.include_errors
+        cleanup=not args.no_cleanup
     )
 
     tester = ExampleTester(config)
