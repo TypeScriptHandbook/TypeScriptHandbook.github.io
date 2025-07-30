@@ -14,7 +14,6 @@ test/
 - chapter02/           # Examples from Chapter 2
   - example_01.ts
   - ...
-- ...
 
 ## Usage
 Run the test script from the project root:

@@ -1,3 +1,9 @@
 - Make all examples complete so they can be copied and run
-- Active voice
+- Use active voice in prose
 - Watch for phrases like "let you" that can be removed
+- When writing Python code, use the most modern idioms:
+  - Prefer dataclasses 
+  - Prefer pattern matching to chains of `if`s
+  - Use modern Python 3.13 type annotations everywhere
+  - Use builtins e.g., `list` rather than importing `List`
+  - Use `| None` instead of `Optional`
