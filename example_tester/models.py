@@ -48,13 +48,15 @@ class TestConfig:
     specific_chapters: list[int] | None = None
     cleanup: bool = True
     include_all_examples: bool = False
+    show_successes: bool = False
 
     @classmethod
     def from_args(cls, book_dir: str | Path = r".\docs\Chapters",
                   temp_dir: str | Path | None = None,
                   specific_chapters: list[int] | None = None,
                   cleanup: bool = True,
-                  include_all_examples: bool = False) -> "TestConfig":
+                  include_all_examples: bool = False,
+                  show_successes: bool = False) -> "TestConfig":
         """Create TestConfig with path resolution"""
         book_path = Path(book_dir)
 
@@ -69,7 +71,8 @@ class TestConfig:
             temp_dir=temp_path,
             specific_chapters=specific_chapters,
             cleanup=cleanup,
-            include_all_examples=include_all_examples
+            include_all_examples=include_all_examples,
+            show_successes=show_successes
         )
 
 

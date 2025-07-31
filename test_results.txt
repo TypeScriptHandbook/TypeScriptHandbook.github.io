@@ -2,7 +2,7 @@
 TYPESCRIPT/JAVASCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE
 ================================================================================
 
-Generated: 2025-07-31 15:49:43
+Generated: 2025-07-31 15:59:36
 Total examples: 36
 TypeScript examples: 29
 JavaScript examples: 7
@@ -14,30 +14,14 @@ TYPESCRIPT CHECK RESULTS
 ================================================================================
 ❌ TypeScript checking failed:
 
-Checking example_08.ts: ✅ OK
-
-Checking example_09.ts: ✅ OK
-
-Checking example_10.ts: ✅ OK
-
-Checking example_11.ts: ✅ OK
-
-Checking example_12.ts: ✅ OK
-
 Checking example_13.ts: ❌ FAILED
 03/example_13.ts(13,16): error TS2304: Cannot find name 'generateId'.
 03/example_13.ts(17,34): error TS2307: Cannot find module './user' or its corresponding type declarations.
 
 
-Checking example_14.ts: ✅ OK
-
 Checking example_15.ts: ❌ FAILED
 03/example_15.ts(23,51): error TS2339: Property 'type' does not exist on type 'never'.
 
-
-Checking example_16.ts: ✅ OK
-
-Checking example_17.ts: ✅ OK
 
 Checking example_18.ts: ❌ FAILED
 03/example_18.ts(6,13): error TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
@@ -61,8 +45,6 @@ Checking example_22.ts: ❌ FAILED
 03/example_22.ts(9,25): error TS2552: Cannot find name 'numbers'. Did you mean 'Number'?
 
 
-Checking example_23.ts: ✅ OK
-
 Checking example_24.ts: ❌ FAILED
 03/example_24.ts(6,25): error TS2304: Cannot find name 'Config'.
 03/example_24.ts(8,41): error TS2304: Cannot find name 'Config'.
@@ -70,54 +52,22 @@ Checking example_24.ts: ❌ FAILED
 03/example_24.ts(9,10): error TS2304: Cannot find name 'config'.
 
 
-Checking example_25.ts: ✅ OK
-
-Checking example_26.ts: ✅ OK
-
-Checking example_27.ts: ✅ OK
-
-Checking example_28.ts: ✅ OK
-
-Checking example_29.ts: ✅ OK
-
-Checking example_30.ts: ✅ OK
-
 Checking example_31.ts: ❌ FAILED
 03/example_31.ts(6,6): error TS2300: Duplicate identifier 'Partial'.
 03/example_31.ts(10,28): error TS2304: Cannot find name 'User'.
 node_modules/typescript/lib/lib.es5.d.ts(1585,6): error TS2300: Duplicate identifier 'Partial'.
 
 
-Checking example_32.ts: ✅ OK
-
 Checking example_33.ts: ❌ FAILED
 03/example_33.ts(6,51): error TS2304: Cannot find name 'User'.
 
-
-Checking example_34.ts: ✅ OK
-
-Checking example_35.ts: ✅ OK
-
-Checking example_36.ts: ✅ OK
 
 ================================================================================
 JAVASCRIPT CHECK RESULTS
 ================================================================================
 ✅ All 7 JavaScript files passed syntax check!
 
-Checking example_01.js: ✅ OK
 
-Checking example_02.js: ✅ OK
-
-Checking example_03.js: ✅ OK
-
-Checking example_04.js: ✅ OK
-
-Checking example_05.js: ✅ OK
-
-Checking example_06.js: ✅ OK
-
-Checking example_07.js: ✅ OK
 
 Note: Showing 10 examples with errors out of 36 total examples.
 Use --everything flag to include all examples.

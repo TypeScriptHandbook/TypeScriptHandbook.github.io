@@ -137,6 +137,26 @@ class TypeChecker:
             relative_path = str(ts_file.relative_to(self.config.temp_dir)).replace('\\', '/')
             return error_msg, [error_msg], relative_path
 
+    def _filter_output_by_successes(self, output: str) -> str:
+        """Filter output to show only errors if show_successes is False."""
+        if self.config.show_successes:
+            return output
+
+        # Split into sections by double newlines
+        sections = output.split('\n\n')
+        filtered_sections = []
+
+        for section in sections:
+            # Keep sections that contain failures or are summary lines
+            if ('❌ FAILED' in section or
+                '❌' in section and 'failed:' in section or
+                '✅ All' in section and 'passed' in section or
+                'Installing dependencies' in section or
+                'Error:' in section):
+                filtered_sections.append(section)
+
+        return '\n\n'.join(filtered_sections)
+
     def _parallel_file_check(
         self,
         files: list[Path],
@@ -172,8 +192,19 @@ class TypeChecker:
                     error_msg = f"Error processing {file.name}: {e}"
                     all_output.append(error_msg)
                     all_errors.append(error_msg)
+
         all_output.sort(key=lambda x: x.split(':')[0] if ':' in x else x)
+
+        # Filter out successful checks if show_successes is False
+        if not self.config.show_successes:
+            filtered_output = []
+            for output_section in all_output:
+                if '❌ FAILED' in output_section or 'Error' in output_section:
+                    filtered_output.append(output_section)
+            all_output = filtered_output
+
         full_output = '\n\n'.join(all_output)
+
         if not all_errors:
             return (
                 f"✅ All {len(files)} {file_type} files passed "

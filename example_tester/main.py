@@ -6,10 +6,10 @@ Extracts code blocks from markdown files and tests them with appropriate tools
 
 import sys
 
-from models import TestConfig, TestResults, CodeType
 from extractor import CodeExtractor
-from type_checker import TypeChecker
 from file_generator import FileGenerator
+from models import TestConfig, TestResults
+from type_checker import TypeChecker
 from utils import CommandDiscovery
 
 
@@ -105,6 +105,7 @@ def main() -> None:
 Examples:
   python main.py                         # Test all chapters (errors only)
   python main.py --everything            # Test all chapters (include all examples)
+  python main.py --show-successes        # Test all chapters (show successful checks)
   python main.py --chapters 1 2 3       # Test specific chapters (errors only)
   python main.py --no-cleanup           # Keep temporary files
 
@@ -112,6 +113,7 @@ Note:
   - TypeScript (.ts) examples are checked with the TypeScript compiler
   - JavaScript (.js) examples are checked with Node.js syntax validation
   - Examples maintain the order they appear in the markdown files
+  - Use --show-successes to see successful file checks in the output
         """
     )
 
@@ -123,6 +125,8 @@ Note:
                         help='Keep node_modules directory after testing')
     parser.add_argument('--everything', action='store_true',
                         help='Include all examples in output (default: only show examples with errors)')
+    parser.add_argument('--show-successes', action='store_true',
+                        help='Show successful file checks in TypeScript/JavaScript results sections')
     parser.add_argument('--chapters', type=int, nargs='+',
                         help='Test only specific chapters (e.g., --chapters 1 2 5)')
 
@@ -133,7 +137,8 @@ Note:
         temp_dir=args.temp_dir,
         specific_chapters=args.chapters,
         cleanup=not args.no_cleanup,
-        include_all_examples=args.everything
+        include_all_examples=args.everything,
+        show_successes=args.show_successes
     )
 
     tester = ExampleTester(config)
