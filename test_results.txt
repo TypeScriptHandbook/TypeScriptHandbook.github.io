@@ -11,12 +11,12 @@ Chapters tested: 1
 TYPE CHECK RESULTS
 ================================================================================
 ❌ Type checking failed:
-01/example_03.ts(5,13): error TS2365: Operator '+' cannot be applied to types 'never[]' and 'never[]'.
-01/example_03.ts(6,13): error TS2365: Operator '+' cannot be applied to types 'never[]' and '{}'.
-01/example_03.ts(7,13): error TS2365: Operator '+' cannot be applied to types '{}' and 'never[]'.
-01/example_03.ts(9,13): error TS2367: This comparison appears to be unintentional because the types 'boolean' and 'number' have no overlap.
-01/example_03.ts(10,13): error TS2367: This comparison appears to be unintentional because the types 'boolean' and 'number' have no overlap.
-01/example_03.ts(11,13): error TS2845: This condition will always return 'false'.
+01/example_03.js(5,13): error TS2365: Operator '+' cannot be applied to types 'never[]' and 'never[]'.
+01/example_03.js(6,13): error TS2365: Operator '+' cannot be applied to types 'never[]' and '{}'.
+01/example_03.js(7,13): error TS2365: Operator '+' cannot be applied to types '{}' and 'never[]'.
+01/example_03.js(9,13): error TS2367: This comparison appears to be unintentional because the types 'boolean' and 'number' have no overlap.
+01/example_03.js(10,13): error TS2367: This comparison appears to be unintentional because the types 'boolean' and 'number' have no overlap.
+01/example_03.js(11,13): error TS2845: This condition will always return 'false'.
 
 
 ================================================================================
@@ -50,7 +50,7 @@ type ProductId = string & { readonly brand: unique symbol }
 
 ----------------------------------------
 Example 03 (Original #3)
-File: 01\example_03.ts
+File: 01\example_03.js
 Source: docs\Chapters\01.md
 Status: ✅ No errors
 ----------------------------------------
@@ -62,4 +62,3 @@ console.log(false == 0)   // true
 console.log(false === 0)  // false
 console.log(NaN === NaN)  // false
 console.log(typeof null)  // "object"
-
