@@ -2,259 +2,322 @@
 TYPESCRIPT/JAVASCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE
 ================================================================================
 
-Generated: 2025-07-31 14:36:08
-Total examples: 3
-TypeScript examples: 2
-JavaScript examples: 1
-Mode: All examples included
-Chapters tested: 1
+Generated: 2025-07-31 14:53:35
+Total examples: 38
+TypeScript examples: 31
+JavaScript examples: 7
+Mode: Error examples only
+Chapters tested: 3
 
 ================================================================================
 TYPESCRIPT CHECK RESULTS
 ================================================================================
-✅ All TypeScript examples type check successfully!
+❌ TypeScript checking failed:
+03/example_08.ts(6,10): error TS2393: Duplicate function implementation.
+03/example_09.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'total'.
+03/example_09.ts(12,10): error TS2393: Duplicate function implementation.
+03/example_15.ts(13,16): error TS2304: Cannot find name 'generateId'.
+03/example_15.ts(17,34): error TS2307: Cannot find module './user' or its corresponding type declarations.
+03/example_17.ts(23,51): error TS2339: Property 'type' does not exist on type 'never'.
+03/example_18.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'numbers'.
+03/example_18.ts(19,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+03/example_19.ts(9,7): error TS2451: Cannot redeclare block-scoped variable 'total'.
+03/example_20.ts(6,13): error TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
+03/example_20.ts(7,13): error TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
+03/example_21.ts(17,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+03/example_21.ts(21,7): error TS2451: Cannot redeclare block-scoped variable 'config'.
+03/example_21.ts(22,21): error TS2339: Property 'port' does not exist on type '{ timeout: number; }'.
+03/example_22.ts(20,6): error TS2339: Property 'processPayment' does not exist on type '{ name: string; age: number; }'.
+03/example_23.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+03/example_23.ts(7,9): error TS2451: Cannot redeclare block-scoped variable 'name'.
+03/example_23.ts(9,7): error TS2451: Cannot redeclare block-scoped variable 'numbers'.
+03/example_23.ts(10,8): error TS2451: Cannot redeclare block-scoped variable 'first'.
+03/example_25.ts(6,7): error TS2451: Cannot redeclare block-scoped variable 'config'.
+03/example_26.ts(12,28): error TS2345: Argument of type '"apiUrl"' is not assignable to parameter of type '"timeout"'.
+03/example_30.ts(7,7): error TS2451: Cannot redeclare block-scoped variable 'first'.
+03/example_31.ts(7,7): error TS2451: Cannot redeclare block-scoped variable 'user'.
+03/example_31.ts(8,15): error TS7053: Element implicitly has an 'any' type because expression of type '"score"' can't be used to index type '{ name: string; age: number; }'.
+  Property 'score' does not exist on type '{ name: string; age: number; }'.
+03/example_33.ts(6,6): error TS2300: Duplicate identifier 'Partial'.
+
 
 ================================================================================
 JAVASCRIPT CHECK RESULTS
 ================================================================================
-✅ All 96 JavaScript files passed syntax check!
+✅ All 7 JavaScript files passed syntax check!
 
 Checking example_01.js: ✅ OK
 
-Checking index.js: ✅ OK
+Checking example_02.js: ✅ OK
 
-Checking create-require.js: ✅ OK
+Checking example_03.js: ✅ OK
 
-Checking runtime.js: ✅ OK
+Checking example_04.js: ✅ OK
 
-Checking index.js: ✅ OK
+Checking example_05.js: ✅ OK
 
-Checking v8-compile-cache.js: ✅ OK
+Checking example_06.js: ✅ OK
 
-Checking index.js: ✅ OK
+Checking example_07.js: ✅ OK
 
-Checking lenient.js: ✅ OK
-
-Checking tsc.js: ✅ OK
-
-Checking tsserver.js: ✅ OK
-
-Checking tsserverlibrary.js: ✅ OK
-
-Checking typescript.js: ✅ OK
-
-Checking typingsInstaller.js: ✅ OK
-
-Checking watchGuard.js: ✅ OK
-
-Checking _tsc.js: ✅ OK
-
-Checking _tsserver.js: ✅ OK
-
-Checking _typingsInstaller.js: ✅ OK
-
-Checking bin-cwd.js: ✅ OK
-
-Checking bin-esm.js: ✅ OK
-
-Checking bin-script-deprecated.js: ✅ OK
-
-Checking bin-script.js: ✅ OK
-
-Checking bin-transpile.js: ✅ OK
-
-Checking bin.js: ✅ OK
-
-Checking cjs-resolve-hooks.js: ✅ OK
-
-Checking configuration.js: ✅ OK
-
-Checking esm.js: ✅ OK
-
-Checking file-extensions.js: ✅ OK
-
-Checking index.js: ✅ OK
-
-Checking module-type-classifier.js: ✅ OK
-
-Checking node-module-type-classifier.js: ✅ OK
-
-Checking repl.js: ✅ OK
-
-Checking resolver-functions.js: ✅ OK
-
-Checking ts-compiler-types.js: ✅ OK
-
-Checking ts-internals.js: ✅ OK
-
-Checking ts-transpile-module.js: ✅ OK
-
-Checking tsconfig-schema.js: ✅ OK
-
-Checking tsconfigs.js: ✅ OK
-
-Checking util.js: ✅ OK
-
-Checking node-internal-constants.js: ✅ OK
-
-Checking node-internal-errors.js: ✅ OK
-
-Checking node-internal-modules-cjs-helpers.js: ✅ OK
-
-Checking node-internal-modules-cjs-loader.js: ✅ OK
-
-Checking node-internal-modules-esm-get_format.js: ✅ OK
-
-Checking node-internal-modules-esm-resolve.js: ✅ OK
-
-Checking node-internal-modules-package_json_reader.js: ✅ OK
-
-Checking node-internal-repl-await.js: ✅ OK
-
-Checking node-internalBinding-fs.js: ✅ OK
-
-Checking node-nativemodule.js: ✅ OK
-
-Checking node-options.js: ✅ OK
-
-Checking node-primordials.js: ✅ OK
-
-Checking runmain-hack.js: ✅ OK
-
-Checking files.js: ✅ OK
-
-Checking index.js: ✅ OK
-
-Checking transpile-only.js: ✅ OK
-
-Checking type-check.js: ✅ OK
-
-Checking swc-experimental.js: ✅ OK
-
-Checking swc.js: ✅ OK
-
-Checking argv-payload.js: ✅ OK
-
-Checking child-entrypoint.js: ✅ OK
-
-Checking child-loader.js: ✅ OK
-
-Checking child-require.js: ✅ OK
-
-Checking spawn-child.js: ✅ OK
-
-Checking swc.js: ✅ OK
-
-Checking types.js: ✅ OK
-
-Checking make-error.js: ✅ OK
-
-Checking diff.js: ✅ OK
-
-Checking diff.min.js: ✅ OK
-
-Checking index.es6.js: ✅ OK
-
-Checking index.js: ✅ OK
-
-Checking dmp.js: ✅ OK
-
-Checking xml.js: ✅ OK
-
-Checking array.js: ✅ OK
-
-Checking base.js: ✅ OK
-
-Checking character.js: ✅ OK
-
-Checking css.js: ✅ OK
-
-Checking json.js: ✅ OK
-
-Checking line.js: ✅ OK
-
-Checking sentence.js: ✅ OK
-
-Checking word.js: ✅ OK
-
-Checking apply.js: ✅ OK
-
-Checking create.js: ✅ OK
-
-Checking merge.js: ✅ OK
-
-Checking parse.js: ✅ OK
-
-Checking array.js: ✅ OK
-
-Checking distance-iterator.js: ✅ OK
-
-Checking params.js: ✅ OK
-
-Checking walk.js: ✅ OK
-
-Checking acorn.js: ✅ OK
-
-Checking bin.js: ✅ OK
-
-Checking trace-mapping.umd.js: ✅ OK
-
-Checking sourcemap-codec.umd.js: ✅ OK
-
-Checking resolve-uri.umd.js: ✅ OK
-
-Checking browser-source-map-support.js: ✅ OK
-
-Checking register-hook-require.js: ✅ OK
-
-Checking register.js: ✅ OK
-
-Checking source-map-support.js: ✅ OK
+Note: Showing 15 examples with errors out of 38 total examples.
+Use --everything flag to include all examples.
 
 ================================================================================
-CHAPTER: 01
-Examples: 3
+CHAPTER: 03
+Examples: 15 (showing errors only, 38 total)
 ================================================================================
 
 ----------------------------------------
-Example 01 (Original #1)
-File: 01\example_01.js
-Language: JavaScript
-Source: docs\Chapters\01.md
-Status: ✅ No errors
-----------------------------------------
-console.log([] + [])  // ""
-console.log([] + {})  // "[object Object]"
-console.log({} + [])  // 0
-
-console.log(false == 0)   // true
-console.log(false === 0)  // false
-console.log(NaN === NaN)  // false
-console.log(typeof null)  // "object"
-
-----------------------------------------
-Example 02 (Original #2)
-File: 01\example_02.ts
+Example 01 (Original #8)
+File: 03\example_08.ts
 Language: TypeScript
-Source: docs\Chapters\01.md
-Status: ✅ No errors
+Source: docs\Chapters\03.md
 ----------------------------------------
-type Point2D = { x: number; y: number }
-
-function logPoint(p: Point2D) {
-  console.log(`${p.x}, ${p.y}`)
+function calculateTax(amount: number, rate: number): number {
+  return amount * rate
 }
 
-const coordinates = { x: 10, y: 20, z: 30 }
-logPoint(coordinates) // OK! `z` is just extra
+----------------------------------------
+Example 02 (Original #9)
+File: 03\example_09.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+const total = calculateTotal(100, 0.08) // Works
+
+function calculateTotal(subtotal: number, taxRate: number): number {
+  return subtotal + calculateTax(subtotal, taxRate)
+}
+
+function calculateTax(amount: number, rate: number): number {
+  return amount * rate
+}
 
 ----------------------------------------
-Example 03 (Original #3)
-File: 01\example_03.ts
+Example 03 (Original #15)
+File: 03\example_15.ts
 Language: TypeScript
-Source: docs\Chapters\01.md
-Status: ✅ No errors
+Source: docs\Chapters\03.md
 ----------------------------------------
-type UserId = string & { readonly brand: unique symbol }
-type ProductId = string & { readonly brand: unique symbol }
+// user.ts
+export interface User {
+  id: number
+  name: string
+}
+
+export function createUser(name: string): User {
+  return { id: generateId(), name }
+}
+
+// main.ts
+import { User, createUser } from "./user"
+
+const newUser: User = createUser("Alice")
+
+----------------------------------------
+Example 04 (Original #17)
+File: 03\example_17.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+type UserAction = 
+  | { type: "login"; credentials: string }
+  | { type: "logout"; userId: string }
+  | { type: "updateProfile"; userId: string; data: any }
+
+function handleUserAction(action: UserAction): void {
+  switch (action.type) {
+    case "login":
+      console.log(`Authenticating with ${action.credentials}`)
+      break
+    case "logout":
+      console.log(`Clearing session for user ${action.userId}`)
+      break
+    case "updateProfile":
+      console.log(`Updating profile for user ${action.userId}`)
+      break
+    default:
+      throw new Error(`Unhandled action: ${action.type}`)
+  }
+}
+
+----------------------------------------
+Example 05 (Original #18)
+File: 03\example_18.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+const numbers = [1, 2, 3, 4, 5]
+
+// Traditional for loop
+for (let i = 0; i < numbers.length; i++) {
+  console.log(numbers[i])
+}
+
+// for...of iterates over values
+for (const number of numbers) {
+  console.log(number)
+}
+
+// for...in iterates over keys (avoid with arrays)
+const user = { name: "Alice", age: 30 }
+for (const key in user) {
+  console.log(`${key}: ${user[key as keyof typeof user]}`)
+}
+
+// while and do-while loops
+let count = 0
+while (count < 5) {
+  console.log(count)
+  count++
+}
+
+----------------------------------------
+Example 06 (Original #19)
+File: 03\example_19.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+const subtotal = 100
+const taxRate = 0.08
+const tax = subtotal * taxRate
+const total = subtotal + tax
+
+let balance = 1000
+balance += 250  // balance = balance + 250
+balance *= 1.02 // apply 2% interest
+
+----------------------------------------
+Example 07 (Original #20)
+File: 03\example_20.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+console.log(5 == "5")  // true (type coercion)
+console.log(5 === "5") // false (strict equality)
+
+// Always prefer strict equality
+function isValidId(id: unknown): id is number {
+  return typeof id === "number" && id > 0
+}
+
+----------------------------------------
+Example 08 (Original #21)
+File: 03\example_21.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+// Add missing helper function
+function checkUserPermission(): boolean {
+  return Math.random() > 0.5 // Simulate permission check
+}
+
+// Boolean logic
+const isAuthenticated = true
+const hasPermission = checkUserPermission()
+const canAccess = isAuthenticated && hasPermission
+
+// Short-circuit evaluation for default values
+const user = { name: "", age: 30 }
+const username = user.name || "Anonymous"
+
+// Nullish coalescing for more precise defaults
+const config = { timeout: 5000 }
+const port = config.port ?? 3000 // Only replaces null/undefined, not 0 or ""
+
+----------------------------------------
+Example 09 (Original #22)
+File: 03\example_22.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+interface User {
+  profile?: {
+    address?: {
+      street: string
+      city: string
+    }
+  }
+}
+
+function getCity(user: User): string | undefined {
+  return user.profile?.address?.city
+}
+
+// Works with method calls too
+user.processPayment?.()
+
+----------------------------------------
+Example 10 (Original #23)
+File: 03\example_23.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+const user = { name: "Alice", age: 30, email: "alice@example.com" }
+const { name, ...otherProps } = user
+
+const numbers = [1, 2, 3, 4, 5]
+const [first, second, ...rest] = numbers
+
+----------------------------------------
+Example 11 (Original #25)
+File: 03\example_25.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+const config = {
+  apiUrl: "https://api.example.com",
+  timeout: 5000,
+  retries: 3
+}
+
+type Config = typeof config
+// Equivalent to: { apiUrl: string; timeout: number; retries: number }
+
+----------------------------------------
+Example 12 (Original #26)
+File: 03\example_26.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+type ConfigKeys = keyof Config // "apiUrl" | "timeout" | "retries"
+
+function getConfigValue<K extends keyof Config>(key: K): Config[K] {
+  return config[key]
+}
+
+const url = getConfigValue("apiUrl") // TypeScript knows this is string
+
+----------------------------------------
+Example 13 (Original #30)
+File: 03\example_30.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+const fruits = ["apple", "banana", "cherry"]
+const first = fruits[0]
+
+----------------------------------------
+Example 14 (Original #31)
+File: 03\example_31.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+const propertyName = "score"
+const user = { name: "Alice", score: 95 }
+const value = user[propertyName] // 95
+
+----------------------------------------
+Example 15 (Original #33)
+File: 03\example_33.ts
+Language: TypeScript
+Source: docs\Chapters\03.md
+----------------------------------------
+type Partial<T> = {
+  [K in keyof T]?: T[K]
+}
+
+type PartialUser = Partial<User>
+// All properties become optional
 
