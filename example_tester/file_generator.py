@@ -166,23 +166,29 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             return True
 
         # Check if this example's filename matches any of the failing files
+        # Normalize both paths to use forward slashes for comparison
         example_file = example.filename.replace('\\', '/')
 
         for failing_file in failing_files:
-            # Direct match
-            if example_file == failing_file:
+            # Normalize the failing file path too
+            normalized_failing_file = failing_file.replace('\\', '/')
+
+            # Exact match
+            if example_file == normalized_failing_file:
                 return True
-            # Check if the failing file ends with the example filename (relative path match)
-            if failing_file.endswith('/' + example_file.split('/')[-1]):
+
+            # Check if failing file is a relative path that matches the end of example file
+            if example_file.endswith('/' + normalized_failing_file):
                 return True
-            # Check if the example file ends with the failing file (in case paths are reversed)
-            if example_file.endswith('/' + failing_file.split('/')[-1]):
+
+            # Check if example file is a relative path that matches the end of failing file
+            if normalized_failing_file.endswith('/' + example_file):
                 return True
 
         return False
 
     def create_consolidated_file(self, examples: list[TypeScriptExample],
-                                 type_check_output: str, failing_files: set[str]) -> None:
+                               type_check_output: str, failing_files: set[str]) -> None:
         """Create consolidated file with all examples and type check results"""
         output_path = Path("test_all.txt")
 
