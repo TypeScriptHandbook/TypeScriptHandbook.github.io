@@ -1,0 +1,37 @@
+================================================================================
+TYPESCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE
+================================================================================
+
+Generated: 2025-07-31 09:44:54
+Total examples: 220
+Mode: Error examples only
+
+================================================================================
+TYPE CHECK RESULTS
+================================================================================
+❌ Type checking failed:
+01/example_01.ts(6,2): error TS1011: An element access expression should take an argument.
+
+
+Note: Showing 1 examples with errors out of 220 total examples.
+Use --everything flag to include all examples.
+
+================================================================================
+CHAPTER: 01
+Examples: 1 (showing errors only, 3 total)
+================================================================================
+
+----------------------------------------
+Example 01 (Original #1)
+File: 01\example_01.ts
+Source: docs\Chapters\01.md
+----------------------------------------
+[] + []     // ""
+[] + {}     // "[object Object]"
+{} + []     // 0
+
+false == 0         // true
+false === 0        // false
+NaN === NaN        // false
+typeof null        // "object"
+

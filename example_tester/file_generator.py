@@ -83,7 +83,7 @@ This directory contains automatically extracted TypeScript examples from the boo
 
 ## Usage
 This directory is automatically recreated each time the test script runs.
-See `test_all.txt` in the parent directory for consolidated results.
+See `test_results.txt` in the parent directory for consolidated results.
 """
         with open(self.config.temp_dir / "README.md", 'w', encoding='utf-8') as f:
             f.write(readme_content)
@@ -190,7 +190,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
     def create_consolidated_file(self, examples: list[TypeScriptExample],
                                type_check_output: str, failing_files: set[str]) -> None:
         """Create consolidated file with all examples and type check results"""
-        output_path = Path("test_all.txt")
+        output_path = Path("test_results.txt")
 
         # Write consolidated file
         with open(output_path, 'w', encoding='utf-8') as f:

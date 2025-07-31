@@ -74,7 +74,7 @@ def print_results(results: TestResults) -> None:
                 # Truncate very long errors for console display
                 display_error = error[:100] + "..." if len(error) > 100 else error
                 print(f"   {i:2d}. {display_error}")
-            print(f"\n📄 See test_all.txt for complete details")
+            print(f"\n📄 See test_results.txt for complete details")
 
 
 def main() -> None:

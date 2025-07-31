@@ -1,6 +1,6 @@
 # TypeScript Book Examples Test Directory
 
-Generated on 2025-07-31 09:41:21
+Generated on 2025-07-31 09:44:51
 
 This directory contains automatically extracted TypeScript examples from the book chapters.
 
@@ -12,4 +12,4 @@ This directory contains automatically extracted TypeScript examples from the boo
 
 ## Usage
 This directory is automatically recreated each time the test script runs.
-See `test_all.txt` in the parent directory for consolidated results.
+See `test_results.txt` in the parent directory for consolidated results.

@@ -67,7 +67,7 @@ class TypeChecker:
 
                 error_summary, failing_files = self.parse_typescript_errors(result.stdout)
                 if not error_summary:
-                    error_summary = ["Type checking failed - see test_all.txt for details"]
+                    error_summary = ["Type checking failed - see test_results.txt for details"]
 
                 return full_output, error_summary, failing_files
 
