@@ -72,7 +72,7 @@ class TestResults:
     @property
     def success(self) -> bool:
         """Check if the test run was successful"""
-        return self.type_check_passed and not self.errors
+        return self.type_check_passed and len(self.errors) == 0
 
 
 class CommandNotFoundError(Exception):
@@ -104,13 +104,36 @@ class ExampleTester:
         if not self._npm_cmd:
             print("❌ npm not found. Please ensure Node.js and npm are properly installed.")
             return False
+        return False
 
-        if not self._npx_cmd:
-            print("❌ npx not found. Please ensure Node.js and npm are properly installed.")
-            return False
+    def _run_type_check(self) -> tuple[str, list[str], set[str]]:
+        """Run TypeScript compiler and return (full_output, error_summary, failing_files)"""
+        print("Installing TypeScript dependencies...")
+        try:
+            self._run_subprocess('npm', ['install'], check=True)
+        except (CommandNotFoundError, subprocess.CalledProcessError) as e:
+            error = f"ERROR: Could not install TypeScript dependencies: {e}"
+            return error, [error], set()
 
-        print(f"🔧 Using npm: {self._npm_cmd}, npx: {self._npx_cmd}")
-        return True
+        print("Running type check...")
+        try:
+            result = self._run_subprocess('npx', ['tsc'])
+            if result.returncode == 0:
+                return "✅ All examples type check successfully!", [], set()
+            else:
+                full_output = f"❌ Type checking failed:\n{result.stdout}"
+                if result.stderr:
+                    full_output += f"\n{result.stderr}"
+
+                error_summary, failing_files = self._parse_typescript_errors(result.stdout)
+                if not error_summary:
+                    error_summary = ["Type checking failed - see test_all.txt for details"]
+
+                return full_output, error_summary, failing_files
+
+        except CommandNotFoundError as e:
+            error = f"ERROR: {e}"
+            return error, [error], set()
 
     def _find_working_command(self, variants: list[str]) -> str | None:
         """Find the first working command from a list of variants"""
@@ -358,7 +381,10 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                     # Extract the filename from the beginning of the error
                     file_part = line.split('(')[0] if '(' in line else line.split(':')[0]
                     if file_part:
-                        failing_files.add(file_part)
+                        # Normalize the path - TypeScript might output with forward slashes
+                        # and we need to match against the stored filename format
+                        normalized_file = file_part.replace('\\', '/').strip()
+                        failing_files.add(normalized_file)
 
                     parts = line.split(': error TS', 1)
                     if len(parts) >= 2:
@@ -374,42 +400,27 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
 
         return error_lines, failing_files
 
-    def _run_type_check(self) -> tuple[str, list[str], set[str]]:
-        """Run TypeScript compiler and return (full_output, error_summary, failing_files)"""
-        print("Installing TypeScript dependencies...")
-        try:
-            self._run_subprocess('npm', ['install'], check=True)
-        except (CommandNotFoundError, subprocess.CalledProcessError) as e:
-            error = f"ERROR: Could not install TypeScript dependencies: {e}"
-            return error, [error], set()
-
-        print("Running type check...")
-        try:
-            result = self._run_subprocess('npx', ['tsc'])
-            if result.returncode == 0:
-                return "✅ All examples type check successfully!", [], set()
-            else:
-                full_output = f"❌ Type checking failed:\n{result.stdout}"
-                if result.stderr:
-                    full_output += f"\n{result.stderr}"
-
-                error_summary, failing_files = self._parse_typescript_errors(result.stdout)
-                if not error_summary:
-                    error_summary = ["Type checking failed - see test_all.txt for details"]
-
-                return full_output, error_summary, failing_files
-
-        except CommandNotFoundError as e:
-            error = f"ERROR: {e}"
-            return error, [error], set()
-
     def _should_include_example(self, example: TypeScriptExample, failing_files: set[str]) -> bool:
         """Determine if an example should be included in the output"""
         if self.config.include_all_examples:
             return True
 
-        # Only include examples that have errors
-        return example.filename in failing_files
+        # Check if this example's filename matches any of the failing files
+        # We need to handle different path formats
+        example_file = example.filename.replace('\\', '/')
+
+        for failing_file in failing_files:
+            # Direct match
+            if example_file == failing_file:
+                return True
+            # Check if the failing file ends with the example filename (relative path match)
+            if failing_file.endswith('/' + example_file.split('/')[-1]):
+                return True
+            # Check if the example file ends with the failing file (in case paths are reversed)
+            if example_file.endswith('/' + failing_file.split('/')[-1]):
+                return True
+
+        return False
 
     def create_consolidated_file(self) -> list[str]:
         """Create consolidated file with all examples and type check results"""
