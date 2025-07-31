@@ -211,6 +211,41 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
 
         return False
 
+    def extract_errors_for_file(self, filename: str, type_check_output: str, js_check_output: str) -> list[str]:
+        """Extract specific error messages for a given file"""
+        errors = []
+
+        # Normalize the filename for comparison
+        normalized_filename = filename.replace('\\', '/')
+
+        # Extract TypeScript errors
+        for line in type_check_output.split('\n'):
+            if ': error TS' in line and normalized_filename in line:
+                # Try to extract just the error message part
+                try:
+                    if '): error TS' in line:
+                        error_part = line.split('): error TS', 1)[1]
+                        if ':' in error_part:
+                            error_code, message = error_part.split(':', 1)
+                            errors.append(f"TS{error_code.strip()}: {message.strip()}")
+                        else:
+                            errors.append(f"TS{error_part.strip()}")
+                    else:
+                        errors.append(line.strip())
+                except (IndexError, ValueError):
+                    errors.append(line.strip())
+
+        # Extract JavaScript errors
+        for line in js_check_output.split('\n'):
+            if ('SyntaxError:' in line or 'ReferenceError:' in line or
+                'TypeError:' in line or 'Error:' in line):
+                # Check if this error is related to our file
+                file_basename = Path(filename).name
+                if file_basename in line or normalized_filename in line:
+                    errors.append(f"JS: {line.strip()}")
+
+        return errors
+
     def create_consolidated_file(self, examples: list[CodeExample],
                                type_check_output: str, js_check_output: str, failing_files: set[str]) -> None:
         """Create consolidated file with all examples and check results"""
@@ -291,9 +326,14 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                     f.write(f"Language: {'TypeScript' if example.is_typescript else 'JavaScript'}\n")
                     f.write(f"Source: {example.source_file}\n")
 
-                    # Mark examples with errors
-                    if example.filename in failing_files:
+                    # Extract and display specific errors for this example
+                    example_errors = self.extract_errors_for_file(example.filename, type_check_output, js_check_output)
+
+                    if example_errors:
                         f.write("Status: ❌ HAS ERRORS\n")
+                        f.write("Errors:\n")
+                        for error in example_errors:
+                            f.write(f"  • {error}\n")
                     elif self.config.include_all_examples:
                         f.write("Status: ✅ No errors\n")
 

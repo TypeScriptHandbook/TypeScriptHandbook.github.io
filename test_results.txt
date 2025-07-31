@@ -2,7 +2,7 @@
 TYPESCRIPT/JAVASCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE
 ================================================================================
 
-Generated: 2025-07-31 14:53:35
+Generated: 2025-07-31 15:01:48
 Total examples: 38
 TypeScript examples: 31
 JavaScript examples: 7
@@ -73,6 +73,9 @@ Example 01 (Original #8)
 File: 03\example_08.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2393: Duplicate function implementation.
 ----------------------------------------
 function calculateTax(amount: number, rate: number): number {
   return amount * rate
@@ -83,6 +86,10 @@ Example 02 (Original #9)
 File: 03\example_09.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2451: Cannot redeclare block-scoped variable 'total'.
+  • TS2393: Duplicate function implementation.
 ----------------------------------------
 const total = calculateTotal(100, 0.08) // Works
 
@@ -99,6 +106,10 @@ Example 03 (Original #15)
 File: 03\example_15.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2304: Cannot find name 'generateId'.
+  • TS2307: Cannot find module './user' or its corresponding type declarations.
 ----------------------------------------
 // user.ts
 export interface User {
@@ -120,6 +131,9 @@ Example 04 (Original #17)
 File: 03\example_17.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2339: Property 'type' does not exist on type 'never'.
 ----------------------------------------
 type UserAction = 
   | { type: "login"; credentials: string }
@@ -147,6 +161,10 @@ Example 05 (Original #18)
 File: 03\example_18.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2451: Cannot redeclare block-scoped variable 'numbers'.
+  • TS2451: Cannot redeclare block-scoped variable 'user'.
 ----------------------------------------
 const numbers = [1, 2, 3, 4, 5]
 
@@ -178,6 +196,9 @@ Example 06 (Original #19)
 File: 03\example_19.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2451: Cannot redeclare block-scoped variable 'total'.
 ----------------------------------------
 const subtotal = 100
 const taxRate = 0.08
@@ -193,6 +214,10 @@ Example 07 (Original #20)
 File: 03\example_20.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
+  • TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
 ----------------------------------------
 console.log(5 == "5")  // true (type coercion)
 console.log(5 === "5") // false (strict equality)
@@ -207,6 +232,11 @@ Example 08 (Original #21)
 File: 03\example_21.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2451: Cannot redeclare block-scoped variable 'user'.
+  • TS2451: Cannot redeclare block-scoped variable 'config'.
+  • TS2339: Property 'port' does not exist on type '{ timeout: number; }'.
 ----------------------------------------
 // Add missing helper function
 function checkUserPermission(): boolean {
@@ -231,6 +261,9 @@ Example 09 (Original #22)
 File: 03\example_22.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2339: Property 'processPayment' does not exist on type '{ name: string; age: number; }'.
 ----------------------------------------
 interface User {
   profile?: {
@@ -253,6 +286,12 @@ Example 10 (Original #23)
 File: 03\example_23.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2451: Cannot redeclare block-scoped variable 'user'.
+  • TS2451: Cannot redeclare block-scoped variable 'name'.
+  • TS2451: Cannot redeclare block-scoped variable 'numbers'.
+  • TS2451: Cannot redeclare block-scoped variable 'first'.
 ----------------------------------------
 const user = { name: "Alice", age: 30, email: "alice@example.com" }
 const { name, ...otherProps } = user
@@ -265,6 +304,9 @@ Example 11 (Original #25)
 File: 03\example_25.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2451: Cannot redeclare block-scoped variable 'config'.
 ----------------------------------------
 const config = {
   apiUrl: "https://api.example.com",
@@ -280,6 +322,9 @@ Example 12 (Original #26)
 File: 03\example_26.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2345: Argument of type '"apiUrl"' is not assignable to parameter of type '"timeout"'.
 ----------------------------------------
 type ConfigKeys = keyof Config // "apiUrl" | "timeout" | "retries"
 
@@ -294,6 +339,9 @@ Example 13 (Original #30)
 File: 03\example_30.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2451: Cannot redeclare block-scoped variable 'first'.
 ----------------------------------------
 const fruits = ["apple", "banana", "cherry"]
 const first = fruits[0]
@@ -303,6 +351,10 @@ Example 14 (Original #31)
 File: 03\example_31.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2451: Cannot redeclare block-scoped variable 'user'.
+  • TS7053: Element implicitly has an 'any' type because expression of type '"score"' can't be used to index type '{ name: string; age: number; }'.
 ----------------------------------------
 const propertyName = "score"
 const user = { name: "Alice", score: 95 }
@@ -313,6 +365,9 @@ Example 15 (Original #33)
 File: 03\example_33.ts
 Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2300: Duplicate identifier 'Partial'.
 ----------------------------------------
 type Partial<T> = {
   [K in keyof T]?: T[K]

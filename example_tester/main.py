@@ -6,10 +6,10 @@ Extracts code blocks from markdown files and tests them with appropriate tools
 
 import sys
 
+from models import TestConfig, TestResults, CodeType
 from extractor import CodeExtractor
-from file_generator import FileGenerator
-from models import TestConfig, TestResults
 from type_checker import TypeChecker
+from file_generator import FileGenerator
 from utils import CommandDiscovery
 
 
@@ -155,3 +155,4 @@ Note:
 
 if __name__ == '__main__':
     main()
+    
