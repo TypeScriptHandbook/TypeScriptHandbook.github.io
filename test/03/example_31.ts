@@ -3,6 +3,9 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-const propertyName = "score"
-const user = { name: "Alice", score: 95 }
-const value = user[propertyName] // 95
+type Partial<T> = {
+  [K in keyof T]?: T[K]
+}
+
+type PartialUser = Partial<User>
+// All properties become optional

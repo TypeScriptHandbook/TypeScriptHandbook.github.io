@@ -3,12 +3,6 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-type Colors = "red" | "green" | "blue"
-
-const palette = {
-  primary: "red",
-  secondary: "green",
-  accent: "blue"
-} satisfies Record<string, Colors>
-
-// palette.primary is still inferred as "red", not Colors
+const propertyName = "score"
+const user = { name: "Alice", score: 95 }
+const value = user[propertyName] // 95

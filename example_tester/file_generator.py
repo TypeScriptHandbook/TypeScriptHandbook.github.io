@@ -215,34 +215,47 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         """Extract specific error messages for a given file"""
         errors = []
 
-        # Normalize the filename for comparison
-        normalized_filename = filename.replace('\\', '/')
+        # Get just the filename for comparison
+        file_basename = Path(filename).name
 
-        # Extract TypeScript errors
-        for line in type_check_output.split('\n'):
-            if ': error TS' in line and normalized_filename in line:
-                # Try to extract just the error message part
-                try:
-                    if '): error TS' in line:
-                        error_part = line.split('): error TS', 1)[1]
-                        if ':' in error_part:
-                            error_code, message = error_part.split(':', 1)
-                            errors.append(f"TS{error_code.strip()}: {message.strip()}")
-                        else:
-                            errors.append(f"TS{error_part.strip()}")
-                    else:
-                        errors.append(line.strip())
-                except (IndexError, ValueError):
-                    errors.append(line.strip())
+        # Extract TypeScript errors from individual file checking output
+        # Look for sections that start with "Checking filename:" and contain "❌ FAILED"
+        sections = type_check_output.split('\n\n')
+        for section in sections:
+            if f"Checking {file_basename}:" in section and "❌ FAILED" in section:
+                # Extract error lines from this section
+                lines = section.split('\n')
+                for line in lines:
+                    if ': error TS' in line:
+                        try:
+                            if '): error TS' in line:
+                                error_part = line.split('): error TS', 1)[1]
+                                if ':' in error_part:
+                                    error_code, message = error_part.split(':', 1)
+                                    errors.append(f"TS{error_code.strip()}: {message.strip()}")
+                                else:
+                                    errors.append(f"TS{error_part.strip()}")
+                            else:
+                                # Fallback for different error formats
+                                if 'error TS' in line:
+                                    error_part = line.split('error TS', 1)[1]
+                                    if ':' in error_part:
+                                        error_code, message = error_part.split(':', 1)
+                                        errors.append(f"TS{error_code.strip()}: {message.strip()}")
+                        except (IndexError, ValueError):
+                            # If parsing fails, include the line as-is
+                            if 'error TS' in line:
+                                errors.append(line.strip())
 
         # Extract JavaScript errors
-        for line in js_check_output.split('\n'):
-            if ('SyntaxError:' in line or 'ReferenceError:' in line or
-                'TypeError:' in line or 'Error:' in line):
-                # Check if this error is related to our file
-                file_basename = Path(filename).name
-                if file_basename in line or normalized_filename in line:
-                    errors.append(f"JS: {line.strip()}")
+        js_sections = js_check_output.split('\n\n')
+        for section in js_sections:
+            if f"Checking {file_basename}:" in section and "❌ FAILED" in section:
+                lines = section.split('\n')
+                for line in lines:
+                    if ('SyntaxError:' in line or 'ReferenceError:' in line or
+                        'TypeError:' in line or 'Error:' in line):
+                        errors.append(f"JS: {line.strip()}")
 
         return errors
 

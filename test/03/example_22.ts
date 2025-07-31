@@ -3,18 +3,7 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-interface User {
-  profile?: {
-    address?: {
-      street: string
-      city: string
-    }
-  }
-}
+const originalUser = { name: "Alice", age: 30 }
+const updatedUser = { ...originalUser, age: 31 }
 
-function getCity(user: User): string | undefined {
-  return user.profile?.address?.city
-}
-
-// Works with method calls too
-user.processPayment?.()
+const moreNumbers = [...numbers, 6, 7, 8]

@@ -3,23 +3,11 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-type UserAction = 
-  | { type: "login"; credentials: string }
-  | { type: "logout"; userId: string }
-  | { type: "updateProfile"; userId: string; data: any }
+const subtotal = 100
+const taxRate = 0.08
+const tax = subtotal * taxRate
+const total = subtotal + tax
 
-function handleUserAction(action: UserAction): void {
-  switch (action.type) {
-    case "login":
-      console.log(`Authenticating with ${action.credentials}`)
-      break
-    case "logout":
-      console.log(`Clearing session for user ${action.userId}`)
-      break
-    case "updateProfile":
-      console.log(`Updating profile for user ${action.userId}`)
-      break
-    default:
-      throw new Error(`Unhandled action: ${action.type}`)
-  }
-}
+let balance = 1000
+balance += 250  // balance = balance + 250
+balance *= 1.02 // apply 2% interest

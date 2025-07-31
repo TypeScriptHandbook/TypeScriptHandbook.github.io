@@ -22,3 +22,18 @@ class BankAccount {
 const account = new BankAccount(1000)
 account.deposit(250)
 console.log(account.getBalance()) // 1250
+
+// Classes support inheritance through `extends`:
+class SavingsAccount extends BankAccount {
+  private interestRate: number
+  
+  constructor(initialBalance: number, rate: number) {
+    super(initialBalance) // Call parent constructor
+    this.interestRate = rate
+  }
+  
+  applyInterest(): void {
+    const interest = this.getBalance() * this.interestRate
+    this.deposit(interest)
+  }
+}

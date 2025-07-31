@@ -3,12 +3,13 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-interface User {
-  id: number
-  name: string
-  email: string
+enum OrderStatus {
+  Pending,
+  Processing,
+  Shipped,
+  Delivered
 }
 
-function createUser(userData: User): User {
-  return { ...userData, id: Math.floor(Math.random() * 10000) }
+function updateOrder(orderId: string, status: OrderStatus): void {
+  console.log(`Order ${orderId} is now ${OrderStatus[status]}`)
 }

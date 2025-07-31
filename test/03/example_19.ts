@@ -3,11 +3,20 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-const subtotal = 100
-const taxRate = 0.08
-const tax = subtotal * taxRate
-const total = subtotal + tax
+// Add missing helper function
+function checkUserPermission(): boolean {
+  return Math.random() > 0.5 // Simulate permission check
+}
 
-let balance = 1000
-balance += 250  // balance = balance + 250
-balance *= 1.02 // apply 2% interest
+// Boolean logic
+const isAuthenticated = true
+const hasPermission = checkUserPermission()
+const canAccess = isAuthenticated && hasPermission
+
+// Short-circuit evaluation for default values
+const user = { name: "", age: 30 }
+const username = user.name || "Anonymous"
+
+// Nullish coalescing for more precise defaults
+const config = { timeout: 5000 }
+const port = config.port ?? 3000 // Only replaces null/undefined, not 0 or ""

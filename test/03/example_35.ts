@@ -3,17 +3,15 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-async function fetchUserData(id: string): Promise<User> {
-  try {
-    const response = await fetch(`/api/users/${id}`)
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+function findFirstEven(numbers: number[]): number | undefined {
+  for (const num of numbers) {
+    if (num % 2 !== 0) {
+      continue // Skip odd numbers
     }
-    return await response.json()
-  } catch (error) {
-    console.error("Failed to fetch user:", error)
-    throw error // Re-throw for caller to handle
-  } finally {
-    console.log("Fetch attempt completed")
+    if (num > 100) {
+      break // Stop if we find a large even number
+    }
+    return num // Return first small even number
   }
+  return undefined
 }

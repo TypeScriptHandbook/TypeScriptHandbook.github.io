@@ -3,8 +3,11 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-type Coordinates = [number, number]
-type RGB = [red: number, green: number, blue: number]
-
-const point: Coordinates = [10, 20]
-const color: RGB = [255, 128, 0]
+function processUser(user: { isActive: boolean }): void {
+  if (!user.isActive) {
+    return // Early exit for inactive users
+  }
+  // Continue processing active user
+  console.log("Updating last seen...")
+  console.log("Sending welcome email...")
+}

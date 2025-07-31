@@ -3,10 +3,12 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-type ConfigKeys = keyof Config // "apiUrl" | "timeout" | "retries"
-
-function getConfigValue<K extends keyof Config>(key: K): Config[K] {
-  return config[key]
+function isString(value: unknown): value is string {
+  return typeof value === "string"
 }
 
-const url = getConfigValue("apiUrl") // TypeScript knows this is string
+function processValue(value: unknown): void {
+  if (isString(value)) {
+    console.log(value.toUpperCase()) // TypeScript knows value is string
+  }
+}

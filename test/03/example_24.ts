@@ -3,7 +3,10 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-const originalUser = { name: "Alice", age: 30 }
-const updatedUser = { ...originalUser, age: 31 }
+type ConfigKeys = keyof Config // "apiUrl" | "timeout" | "retries"
 
-const moreNumbers = [...numbers, 6, 7, 8]
+function getConfigValue<K extends keyof Config>(key: K): Config[K] {
+  return config[key]
+}
+
+const url = getConfigValue("apiUrl") // TypeScript knows this is string

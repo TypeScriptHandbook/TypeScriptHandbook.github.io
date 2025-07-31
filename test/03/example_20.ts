@@ -3,10 +3,18 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-console.log(5 == "5")  // true (type coercion)
-console.log(5 === "5") // false (strict equality)
-
-// Always prefer strict equality
-function isValidId(id: unknown): id is number {
-  return typeof id === "number" && id > 0
+interface User {
+  profile?: {
+    address?: {
+      street: string
+      city: string
+    }
+  }
 }
+
+function getCity(user: User): string | undefined {
+  return user.profile?.address?.city
+}
+
+// Works with method calls too
+user.processPayment?.()

@@ -3,5 +3,12 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-const element = document.getElementById("myInput") as HTMLInputElement
-element.value = "new value" // TypeScript knows this is an input element
+type Colors = "red" | "green" | "blue"
+
+const palette = {
+  primary: "red",
+  secondary: "green",
+  accent: "blue"
+} satisfies Record<string, Colors>
+
+// palette.primary is still inferred as "red", not Colors

@@ -3,11 +3,8 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-interface StringDictionary {
-  [key: string]: string
-}
+type Coordinates = [number, number]
+type RGB = [red: number, green: number, blue: number]
 
-const translations: StringDictionary = {
-  hello: "hola",
-  goodbye: "adiós"
-}
+const point: Coordinates = [10, 20]
+const color: RGB = [255, 128, 0]

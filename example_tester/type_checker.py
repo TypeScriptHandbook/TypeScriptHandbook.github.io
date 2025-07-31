@@ -144,26 +144,64 @@ class TypeChecker:
             return f"❌ JavaScript syntax check failed:\n\n{full_output}", all_errors, all_failing_files
 
     def run_typescript_check(self) -> tuple[str, list[str], set[str]]:
-        """Run TypeScript compiler on .ts files only"""
+        """Run TypeScript compiler on .ts files individually to avoid scope conflicts"""
         print("Running TypeScript check...")
+
+        # Find all TypeScript files
+        ts_files = []
         try:
-            result = self.cmd_discovery.run_subprocess('npx', ['tsc'], self.config.temp_dir)
-            if result.returncode == 0:
-                return "✅ All TypeScript examples type check successfully!", [], set()
-            else:
-                full_output = f"❌ TypeScript checking failed:\n{result.stdout}"
-                if result.stderr:
-                    full_output += f"\n{result.stderr}"
+            for item in self.config.temp_dir.iterdir():
+                if item.is_dir() and not item.name.startswith('.') and item.name != 'node_modules':
+                    ts_files.extend(item.glob("*.ts"))
+        except OSError:
+            pass
 
-                error_summary, failing_files = self.parse_typescript_errors(result.stdout)
-                if not error_summary:
-                    error_summary = ["TypeScript checking failed - see test_results.txt for details"]
+        if not ts_files:
+            return "✅ No TypeScript files to check", [], set()
 
-                return full_output, error_summary, failing_files
+        print(f"Checking {len(ts_files)} TypeScript files individually...")
 
-        except CommandNotFoundError as e:
-            error = f"ERROR: {e}"
-            return error, [error], set()
+        all_output = []
+        all_errors = []
+        all_failing_files = set()
+
+        for ts_file in ts_files:
+            try:
+                # Check each TypeScript file individually with --noEmit flag
+                result = self.cmd_discovery.run_subprocess(
+                    'npx',
+                    ['tsc', '--noEmit', '--strict', str(ts_file.relative_to(self.config.temp_dir))],
+                    self.config.temp_dir
+                )
+
+                file_output = f"Checking {ts_file.name}:"
+                if result.returncode == 0:
+                    file_output += " ✅ OK"
+                else:
+                    file_output += f" ❌ FAILED\n{result.stdout}"
+                    # Add to failing files
+                    relative_path = str(ts_file.relative_to(self.config.temp_dir)).replace('\\', '/')
+                    all_failing_files.add(relative_path)
+
+                    # Parse errors for this specific file
+                    file_errors, _ = self.parse_typescript_errors(result.stdout)
+                    all_errors.extend(file_errors)
+
+                all_output.append(file_output)
+
+            except (CommandNotFoundError, subprocess.CalledProcessError) as e:
+                error_msg = f"Error checking {ts_file.name}: {e}"
+                all_output.append(error_msg)
+                all_errors.append(error_msg)
+                relative_path = str(ts_file.relative_to(self.config.temp_dir)).replace('\\', '/')
+                all_failing_files.add(relative_path)
+
+        full_output = '\n\n'.join(all_output)
+
+        if not all_errors:
+            return f"✅ All {len(ts_files)} TypeScript files passed type checking!\n\n{full_output}", [], set()
+        else:
+            return f"❌ TypeScript checking failed:\n\n{full_output}", all_errors, all_failing_files
 
     def run_checks(self) -> tuple[str, str, list[str], set[str]]:
         """Run both TypeScript and JavaScript checks and return combined results"""

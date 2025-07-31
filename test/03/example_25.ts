@@ -3,11 +3,5 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-const config = {
-  apiUrl: "https://api.example.com",
-  timeout: 5000,
-  retries: 3
-}
-
-type Config = typeof config
-// Equivalent to: { apiUrl: string; timeout: number; retries: number }
+const element = document.getElementById("myInput") as HTMLInputElement
+element.value = "new value" // TypeScript knows this is an input element

@@ -3,8 +3,11 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-const user = { name: "Alice", age: 30, email: "alice@example.com" }
-const { name, ...otherProps } = user
+const config = {
+  apiUrl: "https://api.example.com",
+  timeout: 5000,
+  retries: 3
+}
 
-const numbers = [1, 2, 3, 4, 5]
-const [first, second, ...rest] = numbers
+type Config = typeof config
+// Equivalent to: { apiUrl: string; timeout: number; retries: number }

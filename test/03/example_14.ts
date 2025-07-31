@@ -3,13 +3,12 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-enum OrderStatus {
-  Pending,
-  Processing,
-  Shipped,
-  Delivered
-}
-
-function updateOrder(orderId: string, status: OrderStatus): void {
-  console.log(`Order ${orderId} is now ${OrderStatus[status]}`)
+function processOrder(order: { status: string }): void {
+  if (order.status === "pending") {
+    console.log("Validating order...")
+  } else if (order.status === "approved") {
+    console.log("Fulfilling order...")
+  } else {
+    console.log(`Unknown status: ${order.status}`)
+  }
 }

@@ -3,16 +3,17 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-class SavingsAccount extends BankAccount {
-  private interestRate: number
-  
-  constructor(initialBalance: number, rate: number) {
-    super(initialBalance) // Call parent constructor
-    this.interestRate = rate
-  }
-  
-  applyInterest(): void {
-    const interest = this.getBalance() * this.interestRate
-    this.deposit(interest)
-  }
+interface User {
+  id: number
+  name: string
+  email: string
 }
+
+function createUser(userData: User): User {
+  return { ...userData, id: Math.floor(Math.random() * 10000) }
+}
+
+type Status = "pending" | "approved" | "rejected"
+type UserWithStatus = User & { status: Status }
+
+type EventHandler<T> = (event: T) => void

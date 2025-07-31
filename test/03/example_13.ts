@@ -3,7 +3,17 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-type Status = "pending" | "approved" | "rejected"
-type UserWithStatus = User & { status: Status }
+// user.ts
+export interface User {
+  id: number
+  name: string
+}
 
-type EventHandler<T> = (event: T) => void
+export function createUser(name: string): User {
+  return { id: generateId(), name }
+}
+
+// main.ts
+import { User, createUser } from "./user"
+
+const newUser: User = createUser("Alice")

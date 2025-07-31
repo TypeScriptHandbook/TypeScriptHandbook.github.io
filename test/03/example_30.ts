@@ -3,5 +3,11 @@
 // Language: TypeScript
 // Auto-generated - do not edit directly
 
-const fruits = ["apple", "banana", "cherry"]
-const first = fruits[0]
+interface StringDictionary {
+  [key: string]: string
+}
+
+const translations: StringDictionary = {
+  hello: "hola",
+  goodbye: "adiós"
+}
