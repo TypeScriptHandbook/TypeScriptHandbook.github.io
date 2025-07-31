@@ -31,7 +31,6 @@ class TypeChecker:
                         # Normalize the path - TypeScript might output with forward slashes
                         normalized_file = file_part.replace('\\', '/').strip()
                         failing_files.add(normalized_file)
-                        print(f"DEBUG: Added failing file: '{normalized_file}'")  # Debug output
 
                     parts = line.split(': error TS', 1)
                     if len(parts) >= 2:
@@ -45,7 +44,6 @@ class TypeChecker:
                     # If parsing fails, use the original line
                     error_lines.append(line)
 
-        print(f"DEBUG: Total failing files detected: {len(failing_files)}")  # Debug output
         return error_lines, failing_files
 
     def run_type_check(self) -> tuple[str, list[str], set[str]]:

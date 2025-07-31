@@ -1,6 +1,6 @@
 # TypeScript Book Examples Test Directory
 
-Generated on 2025-07-31 09:38:35
+Generated on 2025-07-31 09:41:21
 
 This directory contains automatically extracted TypeScript examples from the book chapters.
 
