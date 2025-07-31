@@ -1,0 +1,80 @@
+"""
+TypeScript code extraction from markdown files
+"""
+
+import re
+from pathlib import Path
+
+from models import TypeScriptExample, TestConfig
+
+
+class CodeExtractor:
+    """Handles extraction of TypeScript code from markdown files"""
+
+    def __init__(self, config: TestConfig) -> None:
+        self.config = config
+
+    def extract_typescript_blocks(self, content: str) -> list[str]:
+        """Extract TypeScript code blocks from markdown content"""
+        pattern = r'```ts\n(.*?)\n```'
+        matches = re.findall(pattern, content, re.DOTALL)
+        return [code.strip() for code in matches if code.strip()]
+
+    def extract_code_blocks(self, markdown_file: Path) -> list[TypeScriptExample]:
+        """Extract TypeScript code blocks from a markdown file"""
+        try:
+            with open(markdown_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+        except (OSError, UnicodeDecodeError) as e:
+            print(f"⚠️  Warning: Could not read {markdown_file}: {e}")
+            return []
+
+        code_blocks = self.extract_typescript_blocks(content)
+        chapter_name = markdown_file.stem
+        examples = []
+
+        for i, code in enumerate(code_blocks, 1):
+            examples.append(TypeScriptExample(
+                chapter=chapter_name,
+                number=i,
+                code=code,
+                source_file=str(markdown_file)
+            ))
+
+        return examples
+
+    def find_markdown_files(self) -> list[Path]:
+        """Find markdown files, optionally filtered by chapter numbers"""
+        try:
+            all_files = list(self.config.book_dir.glob("*.md"))
+        except OSError as e:
+            print(f"❌ Error accessing directory {self.config.book_dir}: {e}")
+            return []
+
+        if not self.config.specific_chapters:
+            return all_files
+
+        filtered_files = []
+        for chapter_num in self.config.specific_chapters:
+            chapter_files = [
+                f for f in all_files
+                if f.stem == f"{chapter_num:02d}" or f.stem == str(chapter_num)
+            ]
+            filtered_files.extend(chapter_files)
+
+        return filtered_files
+
+    def extract_all_examples(self) -> list[TypeScriptExample]:
+        """Extract all TypeScript examples from markdown files"""
+        examples = []
+        markdown_files = self.find_markdown_files()
+
+        if not markdown_files:
+            print("⚠️  No markdown files found")
+            return []
+
+        for md_file in markdown_files:
+            file_examples = self.extract_code_blocks(md_file)
+            examples.extend(file_examples)
+
+        return examples
