@@ -2,5 +2,11 @@
 // Original example number: 3
 // Auto-generated - do not edit directly
 
-type UserId = string & { readonly brand: unique symbol }
-type ProductId = string & { readonly brand: unique symbol }
+console.log([] + [])  // ""
+console.log([] + {})  // "[object Object]"
+console.log({} + [])  // 0
+
+console.log(false == 0)   // true
+console.log(false === 0)  // false
+console.log(NaN === NaN)  // false
+console.log(typeof null)  // "object"

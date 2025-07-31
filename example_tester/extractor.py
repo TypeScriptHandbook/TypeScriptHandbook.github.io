@@ -14,14 +14,21 @@ class CodeExtractor:
     def __init__(self, config: TestConfig) -> None:
         self.config = config
 
-    def extract_typescript_blocks(self, content: str) -> list[str]:
-        """Extract TypeScript code blocks from markdown content"""
-        pattern = r'```ts\n(.*?)\n```'
-        matches = re.findall(pattern, content, re.DOTALL)
-        return [code.strip() for code in matches if code.strip()]
+    def extract_code_blocks_content(self, content: str) -> list[str]:
+        """Extract TypeScript and JavaScript code blocks from markdown content"""
+        # Match both ts and js code blocks
+        ts_pattern = r'```ts\n(.*?)\n```'
+        js_pattern = r'```js\n(.*?)\n```'
+
+        ts_matches = re.findall(ts_pattern, content, re.DOTALL)
+        js_matches = re.findall(js_pattern, content, re.DOTALL)
+
+        # Combine both types of code blocks
+        all_matches = ts_matches + js_matches
+        return [code.strip() for code in all_matches if code.strip()]
 
     def extract_code_blocks(self, markdown_file: Path) -> list[TypeScriptExample]:
-        """Extract TypeScript code blocks from a markdown file"""
+        """Extract TypeScript and JavaScript code blocks from a markdown file"""
         try:
             with open(markdown_file, 'r', encoding='utf-8') as f:
                 content = f.read()
@@ -29,7 +36,7 @@ class CodeExtractor:
             print(f"⚠️  Warning: Could not read {markdown_file}: {e}")
             return []
 
-        code_blocks = self.extract_typescript_blocks(content)
+        code_blocks = self.extract_code_blocks_content(content)
         chapter_name = markdown_file.stem
         examples = []
 

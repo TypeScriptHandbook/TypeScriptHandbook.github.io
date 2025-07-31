@@ -2,11 +2,11 @@
 // Original example number: 1
 // Auto-generated - do not edit directly
 
-[] + []     // ""
-[] + {}     // "[object Object]"
-{} + []     // 0
+type Point2D = { x: number; y: number }
 
-false == 0         // true
-false === 0        // false
-NaN === NaN        // false
-typeof null        // "object"
+function logPoint(p: Point2D) {
+  console.log(`${p.x}, ${p.y}`)
+}
+
+const coordinates = { x: 10, y: 20, z: 30 }
+logPoint(coordinates) // OK! `z` is just extra
