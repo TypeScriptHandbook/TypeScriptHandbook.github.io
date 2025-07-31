@@ -2,10 +2,10 @@
 TYPESCRIPT/JAVASCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE
 ================================================================================
 
-Generated: 2025-07-31 15:24:11
+Generated: 2025-07-31 15:44:39
 Total examples: 36
-TypeScript examples: 28
-JavaScript examples: 8
+TypeScript examples: 29
+JavaScript examples: 7
 Mode: Error examples only
 Chapters tested: 3
 
@@ -38,6 +38,11 @@ Checking example_15.ts: ❌ FAILED
 Checking example_16.ts: ✅ OK
 
 Checking example_17.ts: ✅ OK
+
+Checking example_18.ts: ❌ FAILED
+03/example_18.ts(6,13): error TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
+03/example_18.ts(7,13): error TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
+
 
 Checking example_19.ts: ❌ FAILED
 03/example_19.ts(22,21): error TS2339: Property 'port' does not exist on type '{ timeout: number; }'.
@@ -98,7 +103,7 @@ Checking example_36.ts: ✅ OK
 ================================================================================
 JAVASCRIPT CHECK RESULTS
 ================================================================================
-❌ JavaScript syntax check failed:
+✅ All 7 JavaScript files passed syntax check!
 
 Checking example_01.js: ✅ OK
 
@@ -113,17 +118,6 @@ Checking example_05.js: ✅ OK
 Checking example_06.js: ✅ OK
 
 Checking example_07.js: ✅ OK
-
-Checking example_18.js: ❌ FAILED
-C:\git\TypeScriptHandbook.github.io\test\03\example_18.js:10
-function isValidId(id: unknown): id is number {
-                     ^
-
-SyntaxError: Unexpected token ':'
-    at checkSyntax (node:internal/main/check_syntax:72:5)
-
-Node.js v23.7.0
-
 
 Note: Showing 10 examples with errors out of 36 total examples.
 Use --everything flag to include all examples.
@@ -190,9 +184,13 @@ function handleUserAction(action: UserAction): void {
 
 ----------------------------------------
 Example 03 (Original #18)
-File: 03\example_18.js
-Language: JavaScript
+File: 03\example_18.ts
+Language: TypeScript
 Source: docs\Chapters\03.md
+Status: ❌ HAS ERRORS
+Errors:
+  • TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
+  • TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
 ----------------------------------------
 console.log(5 == "5")  // true (type coercion)
 console.log(5 === "5") // false (strict equality)

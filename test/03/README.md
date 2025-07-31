@@ -1,8 +1,8 @@
 # 03 Examples
 
 This directory contains 36 examples extracted from 03.md
-- TypeScript examples: 28
-- JavaScript examples: 8
+- TypeScript examples: 29
+- JavaScript examples: 7
 
 ## Examples (in order of appearance):
 - `example_01.js` - Example 1 from the source (JS)
@@ -22,7 +22,7 @@ This directory contains 36 examples extracted from 03.md
 - `example_15.ts` - Example 15 from the source (TS)
 - `example_16.ts` - Example 16 from the source (TS)
 - `example_17.ts` - Example 17 from the source (TS)
-- `example_18.js` - Example 18 from the source (JS)
+- `example_18.ts` - Example 18 from the source (TS)
 - `example_19.ts` - Example 19 from the source (TS)
 - `example_20.ts` - Example 20 from the source (TS)
 - `example_21.ts` - Example 21 from the source (TS)
