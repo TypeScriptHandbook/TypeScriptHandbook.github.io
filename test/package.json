@@ -1,6 +1,7 @@
 {
-  "name": "typescript-book-examples",
+  "name": "typescript-javascript-book-examples",
   "version": "1.0.0",
+  "type": "module",
   "devDependencies": {
     "typescript": "^5.0.0",
     "@types/node": "^20.0.0",

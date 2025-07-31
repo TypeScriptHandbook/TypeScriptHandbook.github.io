@@ -7,7 +7,7 @@ import shutil
 from datetime import datetime
 from pathlib import Path
 
-from models import TypeScriptExample, TestConfig
+from models import CodeExample, TestConfig
 
 
 class FileGenerator:
@@ -17,10 +17,11 @@ class FileGenerator:
         self.config = config
 
     def create_package_json(self) -> None:
-        """Create package.json for TypeScript dependencies"""
+        """Create package.json for TypeScript and JavaScript dependencies"""
         package_json = {
-            "name": "typescript-book-examples",
+            "name": "typescript-javascript-book-examples",
             "version": "1.0.0",
+            "type": "module",  # Support ES modules for JavaScript
             "devDependencies": {
                 "typescript": "^5.0.0",
                 "@types/node": "^20.0.0",
@@ -45,9 +46,12 @@ class FileGenerator:
                 "forceConsistentCasingInFileNames": True,
                 "noEmit": True,
                 "allowUnreachableCode": True,
-                "allowUnusedLabels": True
+                "allowUnusedLabels": True,
+                "allowJs": True,  # Allow JavaScript files to be processed
+                "checkJs": False  # Don't type-check JavaScript files with TypeScript
             },
-            "include": ["**/*.ts"]
+            "include": ["**/*.ts"],  # Only include TypeScript files for type checking
+            "exclude": ["**/*.js"]   # Explicitly exclude JavaScript files from TypeScript checking
         }
 
         tsconfig_path = self.config.temp_dir / "tsconfig.json"
@@ -69,17 +73,22 @@ package-lock.json
             f.write(gitignore_content)
 
         # README.md
-        readme_content = f"""# TypeScript Book Examples Test Directory
+        readme_content = f"""# TypeScript and JavaScript Book Examples Test Directory
 
 Generated on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
-This directory contains automatically extracted TypeScript examples from the book chapters.
+This directory contains automatically extracted TypeScript and JavaScript examples from the book chapters.
 
 ## Structure
-- `package.json` - TypeScript dependencies
-- `tsconfig.json` - TypeScript compiler configuration
+- `package.json` - Dependencies for both TypeScript and JavaScript
+- `tsconfig.json` - TypeScript compiler configuration (excludes .js files)
 - `chapter*/` - Example directories organized by chapter
-- Each chapter contains numbered TypeScript files
+- Each chapter contains numbered files with appropriate extensions (.ts or .js)
+
+## Testing Approach
+- TypeScript files (.ts) are checked with the TypeScript compiler
+- JavaScript files (.js) are checked with Node.js syntax validation
+- Examples maintain the order they appear in the markdown files
 
 ## Usage
 This directory is automatically recreated each time the test script runs.
@@ -94,31 +103,41 @@ See `test_results.txt` in the parent directory for consolidated results.
         self.create_tsconfig()
         self.create_support_files()
 
-    def create_chapter_files(self, chapters: dict[str, list[TypeScriptExample]]) -> None:
-        """Create TypeScript files organized by chapter"""
+    def create_chapter_files(self, chapters: dict[str, list[CodeExample]]) -> None:
+        """Create TypeScript and JavaScript files organized by chapter"""
         for chapter_name, chapter_examples in chapters.items():
             chapter_dir = self.config.temp_dir / chapter_name
             chapter_dir.mkdir(exist_ok=True)
+
+            # Count examples by type
+            ts_count = sum(1 for ex in chapter_examples if ex.is_typescript)
+            js_count = sum(1 for ex in chapter_examples if ex.is_javascript)
 
             # Create chapter README
             readme_content = f"""# {chapter_name.title()} Examples
 
 This directory contains {len(chapter_examples)} examples extracted from {chapter_name}.md
+- TypeScript examples: {ts_count}
+- JavaScript examples: {js_count}
 
-## Examples:
+## Examples (in order of appearance):
 """
             for i, example in enumerate(chapter_examples, 1):
-                readme_content += f"- `example_{i:02d}.ts` - Example {example.number} from the source\n"
+                extension = example.code_type.value
+                readme_content += f"- `example_{i:02d}.{extension}` - Example {example.number} from the source ({extension.upper()})\n"
 
             with open(chapter_dir / "README.md", 'w', encoding='utf-8') as f:
                 f.write(readme_content)
 
-            # Create TypeScript files
+            # Create code files with appropriate extensions
             for i, example in enumerate(chapter_examples, 1):
-                file_path = chapter_dir / f"example_{i:02d}.ts"
+                extension = example.code_type.value
+                file_path = chapter_dir / f"example_{i:02d}.{extension}"
 
+                language_name = "TypeScript" if example.is_typescript else "JavaScript"
                 header = f"""// Extracted from: {example.source_file}
 // Original example number: {example.number}
+// Language: {language_name}
 // Auto-generated - do not edit directly
 
 """
@@ -141,17 +160,22 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
             chapters_str = ', '.join(map(str, self.config.specific_chapters))
             print(f"📋 Testing chapters: {chapters_str}")
 
-    def create_test_files(self, examples: list[TypeScriptExample]) -> None:
+    def create_test_files(self, examples: list[CodeExample]) -> None:
         """Create all test files from examples"""
         self.setup_test_directory()
         self.create_config_files()
 
         if not examples:
-            print("⚠️  No TypeScript examples found")
+            print("⚠️  No code examples found")
             return
 
-        # Group examples by chapter
-        chapters: dict[str, list[TypeScriptExample]] = {}
+        # Count examples by type
+        ts_count = sum(1 for ex in examples if ex.is_typescript)
+        js_count = sum(1 for ex in examples if ex.is_javascript)
+        print(f"📊 Found {ts_count} TypeScript and {js_count} JavaScript examples")
+
+        # Group examples by chapter (maintaining order)
+        chapters: dict[str, list[CodeExample]] = {}
         for example in examples:
             if example.chapter not in chapters:
                 chapters[example.chapter] = []
@@ -160,7 +184,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
         # Create chapter directories and files
         self.create_chapter_files(chapters)
 
-    def should_include_example(self, example: TypeScriptExample, failing_files: set[str]) -> bool:
+    def should_include_example(self, example: CodeExample, failing_files: set[str]) -> bool:
         """Determine if an example should be included in the output"""
         if self.config.include_all_examples:
             return True
@@ -187,19 +211,25 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
 
         return False
 
-    def create_consolidated_file(self, examples: list[TypeScriptExample],
-                               type_check_output: str, failing_files: set[str]) -> None:
-        """Create consolidated file with all examples and type check results"""
+    def create_consolidated_file(self, examples: list[CodeExample],
+                               type_check_output: str, js_check_output: str, failing_files: set[str]) -> None:
+        """Create consolidated file with all examples and check results"""
         output_path = Path("test_results.txt")
+
+        # Count examples by type
+        ts_count = sum(1 for ex in examples if ex.is_typescript)
+        js_count = sum(1 for ex in examples if ex.is_javascript)
 
         # Write consolidated file
         with open(output_path, 'w', encoding='utf-8') as f:
             # Header
             f.write("=" * 80 + "\n")
-            f.write("TYPESCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE\n")
+            f.write("TYPESCRIPT/JAVASCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE\n")
             f.write("=" * 80 + "\n\n")
             f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"Total examples: {len(examples)}\n")
+            f.write(f"TypeScript examples: {ts_count}\n")
+            f.write(f"JavaScript examples: {js_count}\n")
 
             if self.config.include_all_examples:
                 f.write("Mode: All examples included\n")
@@ -211,15 +241,22 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                 f.write(f"Chapters tested: {chapters_str}\n")
             f.write("\n")
 
-            # Type check results
+            # TypeScript check results
             f.write("=" * 80 + "\n")
-            f.write("TYPE CHECK RESULTS\n")
+            f.write("TYPESCRIPT CHECK RESULTS\n")
             f.write("=" * 80 + "\n")
             f.write(type_check_output)
             f.write("\n\n")
 
+            # JavaScript check results
+            f.write("=" * 80 + "\n")
+            f.write("JAVASCRIPT CHECK RESULTS\n")
+            f.write("=" * 80 + "\n")
+            f.write(js_check_output)
+            f.write("\n\n")
+
             # Examples by chapter (filtered based on mode)
-            chapters: dict[str, list[TypeScriptExample]] = {}
+            chapters: dict[str, list[CodeExample]] = {}
             included_count = 0
 
             for example in examples:
@@ -251,6 +288,7 @@ This directory contains {len(chapter_examples)} examples extracted from {chapter
                     f.write("-" * 40 + "\n")
                     f.write(f"Example {i:02d} (Original #{example.number})\n")
                     f.write(f"File: {example.filename}\n")
+                    f.write(f"Language: {'TypeScript' if example.is_typescript else 'JavaScript'}\n")
                     f.write(f"Source: {example.source_file}\n")
 
                     # Mark examples with errors

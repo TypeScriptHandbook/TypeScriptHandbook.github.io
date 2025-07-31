@@ -9,9 +9,14 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "allowUnreachableCode": true,
-    "allowUnusedLabels": true
+    "allowUnusedLabels": true,
+    "allowJs": true,
+    "checkJs": false
   },
   "include": [
     "**/*.ts"
+  ],
+  "exclude": [
+    "**/*.js"
   ]
 }

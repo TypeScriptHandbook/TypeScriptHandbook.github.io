@@ -9,32 +9,42 @@ from models import CommandNotFoundError
 
 
 class CommandDiscovery:
-    """Handles discovery and caching of npm/npx commands"""
+    """Handles discovery and caching of npm/npx/node commands"""
 
     def __init__(self) -> None:
         self._npm_cmd: str | None = None
         self._npx_cmd: str | None = None
+        self._node_cmd: str | None = None
 
     def discover_commands(self) -> bool:
-        """Discover and cache npm and npx commands"""
-        if self._npm_cmd is not None and self._npx_cmd is not None:
+        """Discover and cache npm, npx, and node commands"""
+        if (self._npm_cmd is not None and
+            self._npx_cmd is not None and
+            self._node_cmd is not None):
             return True
 
         npm_variants = ['npm', 'npm.cmd', 'npm.exe']
         npx_variants = ['npx', 'npx.cmd', 'npx.exe']
+        node_variants = ['node', 'node.cmd', 'node.exe']
 
         self._npm_cmd = self._find_working_command(npm_variants)
         self._npx_cmd = self._find_working_command(npx_variants)
+        self._node_cmd = self._find_working_command(node_variants)
 
+        missing_commands = []
         if self._npm_cmd is None:
-            print("❌ npm not found. Please ensure Node.js and npm are properly installed.")
-            return False
-
+            missing_commands.append('npm')
         if self._npx_cmd is None:
-            print("❌ npx not found. Please ensure Node.js and npm are properly installed.")
+            missing_commands.append('npx')
+        if self._node_cmd is None:
+            missing_commands.append('node')
+
+        if missing_commands:
+            print(f"❌ Missing commands: {', '.join(missing_commands)}")
+            print("Please ensure Node.js and npm are properly installed.")
             return False
 
-        print(f"🔧 Using npm: {self._npm_cmd}, npx: {self._npx_cmd}")
+        print(f"🔧 Using npm: {self._npm_cmd}, npx: {self._npx_cmd}, node: {self._node_cmd}")
         return True
 
     def _find_working_command(self, variants: list[str]) -> str | None:
@@ -52,13 +62,20 @@ class CommandDiscovery:
                 continue
         return None
 
-    def run_subprocess(self, cmd_type: str, args: list[str], temp_dir: Path, **kwargs) -> subprocess.CompletedProcess[
-        str]:
+    def run_subprocess(self, cmd_type: str, args: list[str], temp_dir: Path, **kwargs) -> subprocess.CompletedProcess[str]:
         """Run subprocess with guaranteed non-None command"""
         if not self.discover_commands():
-            raise CommandNotFoundError("Could not discover npm/npx commands")
+            raise CommandNotFoundError("Could not discover npm/npx/node commands")
 
-        command = self._npm_cmd if cmd_type == 'npm' else self._npx_cmd
+        if cmd_type == 'npm':
+            command = self._npm_cmd
+        elif cmd_type == 'npx':
+            command = self._npx_cmd
+        elif cmd_type == 'node':
+            command = self._node_cmd
+        else:
+            raise ValueError(f"Unknown command type: {cmd_type}")
+
         assert command is not None  # Guaranteed by discover_commands success
 
         return subprocess.run([command] + args,

@@ -1,24 +1,43 @@
 """
-Data models for the TypeScript Example Tester
+Data models for the TypeScript/JavaScript Example Tester
 """
 
 from dataclasses import dataclass
 from pathlib import Path
+from enum import Enum
+
+
+class CodeType(Enum):
+    """Enum for distinguishing between JavaScript and TypeScript code"""
+    JAVASCRIPT = "js"
+    TYPESCRIPT = "ts"
 
 
 @dataclass
-class TypeScriptExample:
-    """Represents a single TypeScript code example extracted from markdown"""
+class CodeExample:
+    """Represents a single code example extracted from markdown"""
     chapter: str
     number: int
     code: str
     source_file: str
+    code_type: CodeType
     filename: str = ""
 
     def __post_init__(self) -> None:
         """Set default filename if not provided"""
         if not self.filename:
-            self.filename = f"{self.chapter}_example_{self.number:02d}.ts"
+            extension = self.code_type.value
+            self.filename = f"{self.chapter}_example_{self.number:02d}.{extension}"
+
+    @property
+    def is_typescript(self) -> bool:
+        """Check if this is a TypeScript example"""
+        return self.code_type == CodeType.TYPESCRIPT
+
+    @property
+    def is_javascript(self) -> bool:
+        """Check if this is a JavaScript example"""
+        return self.code_type == CodeType.JAVASCRIPT
 
 
 @dataclass
@@ -58,13 +77,16 @@ class TestConfig:
 class TestResults:
     """Results from running the test suite"""
     total_examples: int
+    typescript_examples: int
+    javascript_examples: int
     type_check_passed: bool
+    js_check_passed: bool
     errors: list[str]
 
     @property
     def success(self) -> bool:
         """Check if the test run was successful"""
-        return self.type_check_passed and len(self.errors) == 0
+        return self.type_check_passed and self.js_check_passed and len(self.errors) == 0
 
 
 class CommandNotFoundError(Exception):

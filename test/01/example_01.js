@@ -1,5 +1,6 @@
 // Extracted from: docs\Chapters\01.md
-// Original example number: 3
+// Original example number: 1
+// Language: JavaScript
 // Auto-generated - do not edit directly
 
 console.log([] + [])  // ""

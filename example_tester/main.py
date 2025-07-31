@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-TypeScript Example Tester - Main Entry Point
-Extracts code blocks from markdown files and tests them with TypeScript compiler
+TypeScript/JavaScript Example Tester - Main Entry Point
+Extracts code blocks from markdown files and tests them with appropriate tools
 """
 
 import sys
 
-from models import TestConfig, TestResults
 from extractor import CodeExtractor
-from type_checker import TypeChecker
 from file_generator import FileGenerator
+from models import TestConfig, TestResults
+from type_checker import TypeChecker
 from utils import CommandDiscovery
 
 
 class ExampleTester:
-    """Main orchestrator for the TypeScript example testing process"""
+    """Main orchestrator for the TypeScript/JavaScript example testing process"""
 
     def __init__(self, config: TestConfig) -> None:
         self.config = config
@@ -34,25 +34,39 @@ class ExampleTester:
             if not examples:
                 return TestResults(
                     total_examples=0,
+                    typescript_examples=0,
+                    javascript_examples=0,
                     type_check_passed=False,
-                    errors=["No TypeScript examples found"]
+                    js_check_passed=False,
+                    errors=["No code examples found"]
                 )
 
-            print(f"📄 Extracted {len(examples)} examples")
+            # Count examples by type
+            ts_count = sum(1 for ex in examples if ex.is_typescript)
+            js_count = sum(1 for ex in examples if ex.is_javascript)
+
+            print(f"📄 Extracted {len(examples)} examples ({ts_count} TypeScript, {js_count} JavaScript)")
 
             # Create test files
             self.file_generator.create_test_files(examples)
 
-            # Run type checking and create consolidated file
-            print("Running type check...")
-            type_check_output, error_summary, failing_files = self.type_checker.run_type_check()
+            # Run checks and create consolidated file
+            print("Running syntax and type checks...")
+            ts_output, js_output, all_errors, failing_files = self.type_checker.run_checks()
 
-            self.file_generator.create_consolidated_file(examples, type_check_output, failing_files)
+            self.file_generator.create_consolidated_file(examples, ts_output, js_output, failing_files)
+
+            # Determine if checks passed
+            ts_passed = len([e for e in all_errors if e.startswith('TS')]) == 0
+            js_passed = len([e for e in all_errors if e.startswith('JS')]) == 0
 
             return TestResults(
                 total_examples=len(examples),
-                type_check_passed=len(error_summary) == 0,
-                errors=error_summary
+                typescript_examples=ts_count,
+                javascript_examples=js_count,
+                type_check_passed=ts_passed,
+                js_check_passed=js_passed,
+                errors=all_errors
             )
 
         finally:
@@ -64,9 +78,12 @@ def print_results(results: TestResults) -> None:
     """Print test results to console"""
     if results.success:
         print(f"✅ Successfully processed {results.total_examples} examples")
+        print(f"   TypeScript: {results.typescript_examples} examples")
+        print(f"   JavaScript: {results.javascript_examples} examples")
     else:
         print(f"⚠️  Processed {results.total_examples} examples with issues:")
-        print(f"   Type check passed: {results.type_check_passed}")
+        print(f"   TypeScript: {results.typescript_examples} examples (passed: {results.type_check_passed})")
+        print(f"   JavaScript: {results.javascript_examples} examples (passed: {results.js_check_passed})")
 
         if results.errors:
             print(f"\n❌ Found {len(results.errors)} error(s):")
@@ -82,7 +99,7 @@ def main() -> None:
     import argparse
 
     parser = argparse.ArgumentParser(
-        description='Extract TypeScript examples from markdown files and test them',
+        description='Extract TypeScript and JavaScript examples from markdown files and test them',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -90,6 +107,11 @@ Examples:
   python main.py --everything            # Test all chapters (include all examples)
   python main.py --chapters 1 2 3       # Test specific chapters (errors only)
   python main.py --no-cleanup           # Keep temporary files
+
+Note: 
+  - TypeScript (.ts) examples are checked with the TypeScript compiler
+  - JavaScript (.js) examples are checked with Node.js syntax validation
+  - Examples maintain the order they appear in the markdown files
         """
     )
 
