@@ -72,16 +72,26 @@ class TypeChecker:
                         error_lines.append(f"JS Error: {line.strip()}")
         return error_lines, failing_files
 
-    def find_javascript_files(self) -> list[Path]:
-        """Find JavaScript files in chapter directories only (exclude node_modules)."""
-        js_files: list[Path] = []
+    def find_language_files(self, pattern: str) -> list[Path]:
+        """
+        Find files matching the given pattern in chapter directories (excluding node_modules).
+        """
+        files: list[Path] = []
         try:
             for item in self.config.temp_dir.iterdir():
                 if item.is_dir() and not item.name.startswith('.') and item.name != 'node_modules':
-                    js_files.extend(item.glob("*.js"))
+                    files.extend(item.glob(pattern))
         except OSError:
             pass
-        return js_files
+        return files
+
+    def find_javascript_files(self) -> list[Path]:
+        """Find JavaScript files in chapter directories only (exclude node_modules)."""
+        return self.find_language_files("*.js")
+
+    def find_typescript_files(self) -> list[Path]:
+        """Find TypeScript files in chapter directories only (exclude node_modules)."""
+        return self.find_language_files("*.ts")
 
     def check_single_javascript_file(self, js_file: Path) -> tuple[str, list[str], str]:
         """Check a single JavaScript file and return results."""
@@ -191,19 +201,12 @@ class TypeChecker:
     def run_typescript_check(self) -> tuple[str, list[str], set[str]]:
         """Run TypeScript compiler on .ts files individually using parallel processing."""
         print("Running TypeScript check...")
-        ts_files: list[Path] = []
-        try:
-            for item in self.config.temp_dir.iterdir():
-                if item.is_dir() and not item.name.startswith('.') and item.name != 'node_modules':
-                    ts_files.extend(item.glob("*.ts"))
-        except OSError:
-            pass
+        ts_files = self.find_typescript_files()
         return self._parallel_file_check(
             ts_files,
             self.check_single_typescript_file,
             "TypeScript"
         )
-
     def run_checks(self) -> tuple[str, str, list[str], set[str]]:
         """Run both TypeScript and JavaScript checks and return combined results."""
         print("Installing dependencies...")

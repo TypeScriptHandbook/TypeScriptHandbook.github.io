@@ -2,7 +2,7 @@
 TYPESCRIPT/JAVASCRIPT BOOK EXAMPLES - CONSOLIDATED TEST FILE
 ================================================================================
 
-Generated: 2025-07-31 15:44:39
+Generated: 2025-07-31 15:49:43
 Total examples: 36
 TypeScript examples: 29
 JavaScript examples: 7
