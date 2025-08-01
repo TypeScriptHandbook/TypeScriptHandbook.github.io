@@ -1,6 +1,8 @@
 - Make all examples complete so they can be copied and run
 - Use active voice in prose
 - Watch for phrases like "let you" that can be removed
+- When writing TypeScript/JavaScript code:
+  - Do not use semicolons unless necessary
 - When writing Python code, use the most modern idioms:
   - Prefer dataclasses 
   - Prefer pattern matching to chains of `if`s
