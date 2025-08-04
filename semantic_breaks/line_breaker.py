@@ -2,11 +2,10 @@
 Semantic line breaking logic using NLTK for sentence segmentation.
 """
 
-import sys
-from typing import List, Optional
+from typing import Optional
+
 import nltk
 from nltk.tokenize import sent_tokenize
-
 
 from .config import LONG_SENTENCE_THRESHOLD, TRANSITION_WORDS
 
@@ -54,8 +53,38 @@ class SemanticLineBreaker:
         if not text.strip():
             return text
 
-        # Use NLTK to split into sentences
-        sentences = sent_tokenize(text)
+        # Use NLTK to split into sentences, but be more careful about abbreviations
+        # First, protect common abbreviations that shouldn't trigger sentence breaks
+        protected_text = text
+        replacements = []
+
+        # Protect common abbreviations
+        abbrev_patterns = [
+            (r'\betc\.', 'ETCPERIOD'),
+            (r'\be\.g\.', 'EGPERIOD'),
+            (r'\bi\.e\.', 'IEPERIOD'),
+            (r'\bvs\.', 'VSPERIOD'),
+            (r'\bMr\.', 'MRPERIOD'),
+            (r'\bMrs\.', 'MRSPERIOD'),
+            (r'\bDr\.', 'DRPERIOD'),
+        ]
+
+        for pattern, replacement in abbrev_patterns:
+            import re
+            matches = list(re.finditer(pattern, protected_text))
+            for match in reversed(matches):  # Process in reverse to maintain indices
+                original = match.group()
+                replacements.append((replacement, original))
+                protected_text = protected_text[:match.start()] + replacement + protected_text[match.end():]
+
+        # Now use NLTK sentence tokenization
+        sentences = sent_tokenize(protected_text)
+
+        # Restore the original abbreviations
+        for i, sentence in enumerate(sentences):
+            for replacement, original in replacements:
+                sentence = sentence.replace(replacement, original)
+            sentences[i] = sentence
 
         if len(sentences) <= 1:
             return text
