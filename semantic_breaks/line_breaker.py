@@ -7,7 +7,7 @@ from typing import Optional
 import nltk
 from nltk.tokenize import sent_tokenize
 
-from .config import LONG_SENTENCE_THRESHOLD, TRANSITION_WORDS
+from config import LONG_SENTENCE_THRESHOLD, TRANSITION_WORDS
 
 
 class SemanticLineBreaker:

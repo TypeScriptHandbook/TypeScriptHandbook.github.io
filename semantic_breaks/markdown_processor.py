@@ -3,7 +3,7 @@ Markdown processing logic for identifying and handling different markdown elemen
 """
 
 import re
-from .line_breaker import SemanticLineBreaker
+from line_breaker import SemanticLineBreaker
 
 
 class MarkdownProcessor:
