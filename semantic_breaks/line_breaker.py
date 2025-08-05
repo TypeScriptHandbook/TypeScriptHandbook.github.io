@@ -3,6 +3,7 @@ Semantic line breaking logic using NLTK for sentence segmentation.
 """
 
 from typing import Optional
+import re
 
 import nltk
 from nltk.tokenize import sent_tokenize
@@ -54,7 +55,7 @@ class SemanticLineBreaker:
             return text
 
         # Use NLTK to split into sentences, but be more careful about abbreviations
-        # First, protect common abbreviations that shouldn't trigger sentence breaks
+        # and markdown formatting
         protected_text = text
         replacements = []
 
@@ -69,18 +70,42 @@ class SemanticLineBreaker:
             (r'\bDr\.', 'DRPERIOD'),
         ]
 
+        # Protect periods inside markdown formatting
+        markdown_patterns = [
+            # Bold text with periods: **text with period.**
+            (r'\*\*([^*]+\.+[^*]*)\*\*', lambda m: f"**{m.group(1).replace('.', 'MDPERIOD')}**"),
+            # Italic text with periods: *text with period.*
+            (r'\*([^*]+\.+[^*]*)\*', lambda m: f"*{m.group(1).replace('.', 'MDPERIOD')}*"),
+            # Code spans with periods: `code.method()`
+            (r'`([^`]+\.+[^`]*)`', lambda m: f"`{m.group(1).replace('.', 'MDPERIOD')}`"),
+            # Links with periods in text: [text with period.](url)
+            (r'\[([^\]]+\.+[^\]]*)\]\([^)]+\)', lambda m: f"[{m.group(1).replace('.', 'MDPERIOD')}]({m.group(0).split('](')[1]}"),
+        ]
+
+        # Apply abbreviation protections
         for pattern, replacement in abbrev_patterns:
-            import re
             matches = list(re.finditer(pattern, protected_text))
             for match in reversed(matches):  # Process in reverse to maintain indices
                 original = match.group()
                 replacements.append((replacement, original))
                 protected_text = protected_text[:match.start()] + replacement + protected_text[match.end():]
 
+        # Apply markdown protections
+        for pattern, replacement_func in markdown_patterns:
+            def replace_match(match):
+                result = replacement_func(match)
+                # Track what we replaced
+                original_periods = match.group().count('.')
+                for _ in range(original_periods):
+                    replacements.append(('MDPERIOD', '.'))
+                return result
+
+            protected_text = re.sub(pattern, replace_match, protected_text)
+
         # Now use NLTK sentence tokenization
         sentences = sent_tokenize(protected_text)
 
-        # Restore the original abbreviations
+        # Restore the original text
         for i, sentence in enumerate(sentences):
             for replacement, original in replacements:
                 sentence = sentence.replace(replacement, original)
