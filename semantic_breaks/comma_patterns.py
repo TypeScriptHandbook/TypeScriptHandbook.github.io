@@ -29,8 +29,9 @@ COMMA_NO_BREAK_PATTERNS = [
     # Numbers with commas
     r'\d+,\d+',
 
-    # Series/lists (a, b, c, and d pattern) - matches 2 or more items
-    r'\w+(?:,\s*\w+)*,\s*(?:and|or)\s+\w+',
+    # Series/lists - matches items in a series but stops at major clause boundaries
+    # Matches: "A, B, C, and D" but tries to avoid extending too far
+    r'(?:^|[^.!?]\s+)[A-Za-z0-9#+.-]+(?:,\s*[A-Za-z0-9#+.-]+){1,},\s*(?:and|or)\s+[A-Za-z0-9#+.-]+(?=\s*[,.!?]|$)',
 
     # Dates
     r'[A-Za-z]+\s+\d+,\s+\d{4}',
