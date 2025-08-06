@@ -17,7 +17,7 @@ Usage:
 import argparse
 from pathlib import Path
 
-from markdown_processor import MarkdownProcessor
+from markdown_processing import process_markdown_content
 
 
 def expand_wildcards(file_patterns):
@@ -92,8 +92,6 @@ Examples:
         print("Error: No valid input files found")
         return 1
 
-    processor = MarkdownProcessor()
-
     processed_count = 0
     error_count = 0
 
@@ -108,7 +106,7 @@ Examples:
                 content = f.read()
 
             # Process content
-            processed_content = processor.process_markdown(content)
+            processed_content = process_markdown_content(content)
 
             # Determine output file
             if args.in_place:
