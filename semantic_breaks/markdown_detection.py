@@ -3,7 +3,7 @@ Functions for detecting and classifying markdown elements.
 """
 
 import re
-from config import MARKDOWN_PATTERNS
+from markdown_patterns import MARKDOWN_PATTERNS
 
 # Compile patterns once for efficiency
 _compiled_patterns = {}
@@ -91,14 +91,16 @@ def is_prose_paragraph(text: str) -> bool:
         return False
 
     # Check each type of non-prose content
-    if (is_header(text) or
+    if (
+        is_header(text) or
         is_list_item(text) or
         is_blockquote(text) or
         is_table_row(text) or
         is_horizontal_rule(text) or
         is_link_reference(text) or
         is_code_block(text) or
-        has_excessive_inline_code(text)):
+        has_excessive_inline_code(text)
+    ):
         return False
 
     # If none of the above, it's likely a prose paragraph

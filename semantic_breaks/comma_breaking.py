@@ -5,12 +5,9 @@ Functions for breaking sentences at commas and other punctuation.
 import re
 from typing import List
 
-from config import (
-    LONG_SENTENCE_THRESHOLD,
-    LONG_CLAUSE_THRESHOLD,
-    COMMA_BREAK_PATTERNS,
-    COMMA_NO_BREAK_PATTERNS
-)
+from config import LONG_SENTENCE_THRESHOLD, LONG_CLAUSE_THRESHOLD
+from comma_patterns import COMMA_BREAK_PATTERNS, COMMA_NO_BREAK_PATTERNS
+
 
 # Compile patterns once for efficiency
 _comma_break_patterns = [re.compile(pattern, re.IGNORECASE) for pattern in COMMA_BREAK_PATTERNS]
@@ -21,9 +18,9 @@ def should_break_at_comma(text: str, comma_pos: int) -> bool:
     """Determine if we should break at a specific comma position."""
     # Check if this comma is in a context where we shouldn't break
     for pattern in _comma_no_break_patterns:
-        # Look for pattern around the comma position
-        start = max(0, comma_pos - 20)
-        end = min(len(text), comma_pos + 20)
+        # Look for pattern around the comma position (wider context for series)
+        start = max(0, comma_pos - 50)
+        end = min(len(text), comma_pos + 50)
         context = text[start:end]
 
         if pattern.search(context):

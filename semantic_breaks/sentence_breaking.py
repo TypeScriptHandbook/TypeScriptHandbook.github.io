@@ -8,7 +8,8 @@ from typing import Optional
 import nltk
 from nltk.tokenize import sent_tokenize
 
-from config import LONG_SENTENCE_THRESHOLD, TRANSITION_WORDS, ABBREVIATION_PATTERNS, MARKDOWN_PROTECTION_PATTERNS
+from config import LONG_SENTENCE_THRESHOLD, TRANSITION_WORDS
+from text_protection_patterns import ABBREVIATION_PATTERNS, MARKDOWN_PROTECTION_PATTERNS
 
 
 def ensure_nltk_data():
