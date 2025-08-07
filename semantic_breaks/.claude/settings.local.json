@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python test_spacy_integration.py)"
+    ],
+    "deny": []
+  }
+}

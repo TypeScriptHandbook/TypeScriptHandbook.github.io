@@ -8,6 +8,12 @@ from typing import List
 from config import LONG_SENTENCE_THRESHOLD, LONG_CLAUSE_THRESHOLD
 from comma_patterns import COMMA_BREAK_PATTERNS, COMMA_NO_BREAK_PATTERNS
 
+try:
+    from spacy_integration import find_comma_break_positions_spacy
+    SPACY_AVAILABLE = True
+except ImportError:
+    SPACY_AVAILABLE = False
+
 
 # Compile patterns once for efficiency
 _comma_break_patterns = [re.compile(pattern, re.IGNORECASE) for pattern in COMMA_BREAK_PATTERNS]
@@ -59,6 +65,13 @@ def should_break_at_comma(text: str, comma_pos: int) -> bool:
 
 def find_comma_break_positions(sentence: str) -> List[int]:
     """Find all comma positions where we should break."""
+    # Use spaCy analysis if available
+    if SPACY_AVAILABLE:
+        try:
+            return find_comma_break_positions_spacy(sentence)
+        except Exception:
+            pass  # Fall back to regex-based approach
+    
     # Find all comma positions
     comma_positions = [i for i, char in enumerate(sentence) if char == ',']
 

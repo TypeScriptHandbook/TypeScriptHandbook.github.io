@@ -6,6 +6,15 @@ from sentence_reassembly import reassemble_broken_sentences
 from sentence_breaking import split_into_sentences, should_break_after_sentence
 from comma_breaking import break_sentence_at_commas
 
+try:
+    from spacy_integration import (
+        find_sentence_boundaries_spacy,
+        should_break_after_sentence_spacy
+    )
+    SPACY_AVAILABLE = True
+except ImportError:
+    SPACY_AVAILABLE = False
+
 
 def apply_semantic_breaks(text: str) -> str:
     """Apply semantic line breaks to a paragraph of text."""
@@ -15,8 +24,15 @@ def apply_semantic_breaks(text: str) -> str:
     # First, reassemble any previously broken sentences
     reassembled_text = reassemble_broken_sentences(text)
 
-    # Split into sentences using NLTK with protection for abbreviations/markdown
-    sentences = split_into_sentences(reassembled_text)
+    # Split into sentences using spaCy (preferred) or NLTK fallback
+    if SPACY_AVAILABLE:
+        try:
+            sentences = find_sentence_boundaries_spacy(reassembled_text)
+        except Exception:
+            # Fallback to NLTK if spaCy fails
+            sentences = split_into_sentences(reassembled_text)
+    else:
+        sentences = split_into_sentences(reassembled_text)
 
     if len(sentences) <= 1:
         # Even if it's a single sentence, we might want to break it at commas
@@ -37,7 +53,17 @@ def apply_semantic_breaks(text: str) -> str:
 
         # Check if we should add a line break after this sentence
         next_sent = sentences[i + 1] if i + 1 < len(sentences) else None
-        if should_break_after_sentence(sentence, next_sent) and next_sent:
+        
+        # Use spaCy-enhanced breaking logic if available
+        if SPACY_AVAILABLE:
+            try:
+                should_break = should_break_after_sentence_spacy(sentence, next_sent)
+            except Exception:
+                should_break = should_break_after_sentence(sentence, next_sent)
+        else:
+            should_break = should_break_after_sentence(sentence, next_sent)
+        
+        if should_break and next_sent:
             result_parts.append('\n')
         else:
             # Add space if there's a next sentence and no line break

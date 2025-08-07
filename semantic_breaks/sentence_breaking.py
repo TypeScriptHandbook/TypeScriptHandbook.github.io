@@ -11,6 +11,12 @@ from nltk.tokenize import sent_tokenize
 from config import LONG_SENTENCE_THRESHOLD, TRANSITION_WORDS
 from text_protection_patterns import ABBREVIATION_PATTERNS, MARKDOWN_PROTECTION_PATTERNS
 
+try:
+    from spacy_integration import find_sentence_boundaries_spacy, protect_entities_spacy
+    SPACY_AVAILABLE = True
+except ImportError:
+    SPACY_AVAILABLE = False
+
 
 def ensure_nltk_data():
     """Ensure required NLTK data is available."""
@@ -55,6 +61,31 @@ def protect_text_elements(text: str):
     protected_text = text
     replacements = []
 
+    # Use spaCy NER protection if available (more accurate)
+    if SPACY_AVAILABLE:
+        try:
+            protected_spans = protect_entities_spacy(text)
+            # Convert protected spans to replacement tokens
+            offset = 0
+            for start, end, entity_text in sorted(protected_spans):
+                # Adjust positions based on previous replacements
+                adjusted_start = start + offset
+                adjusted_end = end + offset
+                
+                # Create a unique token for this entity
+                protected_token = f"ENTITY{len(replacements)}"
+                replacements.append((protected_token, entity_text))
+                
+                # Replace the entity text with the token
+                protected_text = (protected_text[:adjusted_start] + 
+                                protected_token + 
+                                protected_text[adjusted_end:])
+                
+                # Update offset for next replacement
+                offset += len(protected_token) - (end - start)
+        except Exception:
+            pass  # Fall back to regex-based protection
+
     # Apply abbreviation protections
     for pattern, replacement in ABBREVIATION_PATTERNS:
         matches = list(re.finditer(pattern, protected_text))
@@ -88,7 +119,15 @@ def restore_text_elements(sentences, replacements):
 
 
 def split_into_sentences(text: str):
-    """Split text into sentences using NLTK, protecting abbreviations and markdown."""
+    """Split text into sentences using spaCy (preferred) or NLTK, protecting abbreviations and markdown."""
+    # Try spaCy first if available
+    if SPACY_AVAILABLE:
+        try:
+            return find_sentence_boundaries_spacy(text)
+        except Exception:
+            pass  # Fall back to NLTK
+    
+    # NLTK fallback
     ensure_nltk_data()
 
     protected_text, replacements = protect_text_elements(text)

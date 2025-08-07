@@ -2,6 +2,12 @@ version = 1
 revision = 3
 requires-python = ">=3.14"
 
+[manifest]
+members = [
+    "semantic-breaks",
+    "typescripthandbook-github-io",
+]
+
 [[package]]
 name = "click"
 version = "8.2.1"
@@ -68,6 +74,17 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/74/52/a7e92d02fa1fdef59d113098cb9f02c5d03289a0e9f9e5d4d6acccd10677/regex-2025.7.34-cp314-cp314-win_amd64.whl", hash = "sha256:4b7dc33b9b48fb37ead12ffc7bdb846ac72f99a80373c4da48f64b373a7abeae", size = 278640, upload-time = "2025-07-31T00:20:44.42Z" },
     { url = "https://files.pythonhosted.org/packages/d1/78/a815529b559b1771080faa90c3ab401730661f99d495ab0071649f139ebd/regex-2025.7.34-cp314-cp314-win_arm64.whl", hash = "sha256:4b8c4d39f451e64809912c82392933d80fe2e4a87eeef8859fcc5380d0173c64", size = 271757, upload-time = "2025-07-31T00:20:46.355Z" },
 ]
+
+[[package]]
+name = "semantic-breaks"
+version = "0.1.0"
+source = { virtual = "semantic_breaks" }
+dependencies = [
+    { name = "nltk" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "nltk", specifier = ">=3.9.1" }]
 
 [[package]]
 name = "tqdm"
