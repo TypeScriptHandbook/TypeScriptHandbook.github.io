@@ -14,6 +14,8 @@ Translate all tabs to spaces.
 Remove double blank lines, and replace them with a single blank line.
 Ensure that the file ends with a single blank line.
 Translate all non-plain characters to their plain equivalents; for example, round quotes should be converted to straight quotes, and em dashes should be converted to --, etc.
+Normalize multiple spaces within sentences to single spaces
+
 The command line should take one of:
 - A directory name
 - A file name
